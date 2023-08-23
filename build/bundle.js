@@ -1748,9 +1748,11 @@ uniform `+P+" "+z+" u_"+k+`;
 `),K=d.createShader(d.FRAGMENT_SHADER);if(d.isContextLost())this.failedToCreate=!0;else {d.shaderSource(K,N),d.compileShader(K),d.attachShader(this.program,K);var tt=d.createShader(d.VERTEX_SHADER);if(d.isContextLost())this.failedToCreate=!0;else {d.shaderSource(tt,G),d.compileShader(tt),d.attachShader(this.program,tt),this.attributes={};var Q={};this.numAttributes=S.length;for(var et=0;et<this.numAttributes;et++)S[et]&&(d.bindAttribLocation(this.program,et,S[et]),this.attributes[S[et]]=et);d.linkProgram(this.program),d.deleteShader(tt),d.deleteShader(K);for(var ot=0;ot<k.length;ot++){var ht=k[ot];if(ht&&!Q[ht]){var pt=d.getUniformLocation(this.program,ht);pt&&(Q[ht]=pt);}}this.fixedUniforms=p(i,Q),this.binderUniforms=s?s.getUniforms(i,Q):[];}}};function kl(i,o,n){var s=1/Te(n,1,o.transform.tileZoom),p=Math.pow(2,n.tileID.overscaledZ),f=n.tileSize*Math.pow(2,o.transform.tileZoom)/p,d=f*(n.tileID.canonical.x+n.tileID.wrap*p),y=f*n.tileID.canonical.y;return {u_image:0,u_texsize:n.imageAtlasTexture.size,u_scale:[s,i.fromScale,i.toScale],u_fade:i.t,u_pixel_coord_upper:[d>>16,y>>16],u_pixel_coord_lower:[65535&d,65535&y]}}Cl.prototype.draw=function(i,o,n,s,p,f,d,y,v,S,P,z,k,F,R,j){var D,N=i.gl;if(!this.failedToCreate){for(var G in i.program.set(this.program),i.setDepthMode(n),i.setStencilMode(s),i.setColorMode(p),i.setCullFace(f),this.fixedUniforms)this.fixedUniforms[G].set(d[G]);F&&F.setUniforms(i,this.binderUniforms,z,{zoom:k});for(var K=(D={},D[N.LINES]=2,D[N.TRIANGLES]=3,D[N.LINE_STRIP]=1,D)[o],tt=0,Q=P.get();tt<Q.length;tt+=1){var et=Q[tt],ot=et.vaos||(et.vaos={});(ot[y]||(ot[y]=new Aa)).bind(i,this,v,F?F.getPaintVertexBuffers():[],S,et.vertexOffset,R,j),N.drawElements(o,et.primitiveLength*K,N.UNSIGNED_SHORT,et.primitiveOffset*K*2);}}};var Ml=function(i,o,n,s){var p=o.style.light,f=p.properties.get("position"),d=[f.x,f.y,f.z],y=u.create$1();p.properties.get("anchor")==="viewport"&&u.fromRotation(y,-o.transform.angle),u.transformMat3(d,d,y);var v=p.properties.get("color");return {u_matrix:i,u_lightpos:d,u_lightintensity:p.properties.get("intensity"),u_lightcolor:[v.r,v.g,v.b],u_vertical_gradient:+n,u_opacity:s}},Bn=function(i,o,n,s,p,f,d){return u.extend(Ml(i,o,n,s),kl(f,o,d),{u_height_factor:-Math.pow(2,p.overscaledZ)/d.tileSize/8})},an=function(i){return {u_matrix:i}},Rn=function(i,o,n,s){return u.extend(an(i),kl(n,o,s))},Dl=function(i,o){return {u_matrix:i,u_world:o}},Ll=function(i,o,n,s,p){return u.extend(Rn(i,o,n,s),{u_world:p})},Cs=function(i,o,n,s){var p,f,d=i.transform;if(s.paint.get("circle-pitch-alignment")==="map"){var y=Te(n,1,d.zoom);p=!0,f=[y,y];}else p=!1,f=d.pixelsToGLUnits;return {u_camera_to_center_distance:d.cameraToCenterDistance,u_scale_with_map:+(s.paint.get("circle-pitch-scale")==="map"),u_matrix:i.translatePosMatrix(o.posMatrix,n,s.paint.get("circle-translate"),s.paint.get("circle-translate-anchor")),u_pitch_with_map:+p,u_device_pixel_ratio:u.browser.devicePixelRatio,u_extrude_scale:f}},Fn=function(i,o,n){var s=Te(n,1,o.zoom),p=Math.pow(2,o.zoom-n.tileID.overscaledZ),f=n.tileID.overscaleFactor();return {u_matrix:i,u_camera_to_center_distance:o.cameraToCenterDistance,u_pixels_to_tile_units:s,u_extrude_scale:[o.pixelsToGLUnits[0]/(s*p),o.pixelsToGLUnits[1]/(s*p)],u_overscale_factor:f}},Bl=function(i,o,n){return {u_matrix:i,u_inv_matrix:o,u_camera_to_center_distance:n.cameraToCenterDistance,u_viewport_size:[n.width,n.height]}},On=function(i,o,n){return n===void 0&&(n=1),{u_matrix:i,u_color:o,u_overlay:0,u_overlay_scale:n}},Un=function(i){return {u_matrix:i}},Rl=function(i,o,n,s){return {u_matrix:i,u_extrude_scale:Te(o,1,n),u_intensity:s}},Xo=function(i,o,n){var s=i.transform;return {u_matrix:Fl(i,o,n),u_ratio:1/Te(o,1,s.zoom),u_device_pixel_ratio:u.browser.devicePixelRatio,u_units_to_pixels:[1/s.pixelsToGLUnits[0],1/s.pixelsToGLUnits[1]]}},xe=function(i,o,n,s){return u.extend(Xo(i,o,n),{u_image:0,u_image_height:s})},Pa=function(i,o,n,s){var p=i.transform,f=fo(o,p);return {u_matrix:Fl(i,o,n),u_texsize:o.imageAtlasTexture.size,u_ratio:1/Te(o,1,p.zoom),u_device_pixel_ratio:u.browser.devicePixelRatio,u_image:0,u_scale:[f,s.fromScale,s.toScale],u_fade:s.t,u_units_to_pixels:[1/p.pixelsToGLUnits[0],1/p.pixelsToGLUnits[1]]}},Uu=function(i,o,n,s,p){var f=i.lineAtlas,d=fo(o,i.transform),y=n.layout.get("line-cap")==="round",v=f.getDash(s.from,y),S=f.getDash(s.to,y),P=v.width*p.fromScale,z=S.width*p.toScale;return u.extend(Xo(i,o,n),{u_patternscale_a:[d/P,-v.height/2],u_patternscale_b:[d/z,-S.height/2],u_sdfgamma:f.width/(256*Math.min(P,z)*u.browser.devicePixelRatio)/2,u_image:0,u_tex_y_a:v.y,u_tex_y_b:S.y,u_mix:p.t})};function fo(i,o){return 1/Te(i,1,o.tileZoom)}function Fl(i,o,n){return i.translatePosMatrix(o.tileID.posMatrix,o,n.paint.get("line-translate"),n.paint.get("line-translate-anchor"))}var Vu=function(i,o,n,s,p){return {u_matrix:i,u_tl_parent:o,u_scale_parent:n,u_buffer_scale:1,u_fade_t:s.mix,u_opacity:s.opacity*p.paint.get("raster-opacity"),u_image0:0,u_image1:1,u_brightness_low:p.paint.get("raster-brightness-min"),u_brightness_high:p.paint.get("raster-brightness-max"),u_saturation_factor:(d=p.paint.get("raster-saturation"),d>0?1-1/(1.001-d):-d),u_contrast_factor:(f=p.paint.get("raster-contrast"),f>0?1/(1-f):1+f),u_spin_weights:Ol(p.paint.get("raster-hue-rotate"))};var f,d;};function Ol(i){i*=Math.PI/180;var o=Math.sin(i),n=Math.cos(i);return [(2*n+1)/3,(-Math.sqrt(3)*o-n+1)/3,(Math.sqrt(3)*o-n+1)/3]}var za,mo=function(i,o,n,s,p,f,d,y,v,S){var P=p.transform;return {u_is_size_zoom_constant:+(i==="constant"||i==="source"),u_is_size_feature_constant:+(i==="constant"||i==="camera"),u_size_t:o?o.uSizeT:0,u_size:o?o.uSize:0,u_camera_to_center_distance:P.cameraToCenterDistance,u_pitch:P.pitch/360*2*Math.PI,u_rotate_symbol:+n,u_aspect_ratio:P.width/P.height,u_fade_change:p.options.fadeDuration?p.symbolFadeChange:1,u_matrix:f,u_label_plane_matrix:d,u_coord_matrix:y,u_is_text:+v,u_pitch_with_map:+s,u_texsize:S,u_texture:0}},Wo=function(i,o,n,s,p,f,d,y,v,S,P){var z=p.transform;return u.extend(mo(i,o,n,s,p,f,d,y,v,S),{u_gamma_scale:s?Math.cos(z._pitch)*z.cameraToCenterDistance:1,u_device_pixel_ratio:u.browser.devicePixelRatio,u_is_halo:+P})},Ca=function(i,o,n,s,p,f,d,y,v,S){return u.extend(Wo(i,o,n,s,p,f,d,y,!0,v,!0),{u_texsize_icon:S,u_texture_icon:1})},Ko=function(i,o,n){return {u_matrix:i,u_opacity:o,u_color:n}},yo=function(i,o,n,s,p,f){return u.extend(function(d,y,v,S){var P=v.imageManager.getPattern(d.from.toString()),z=v.imageManager.getPattern(d.to.toString()),k=v.imageManager.getPixelSize(),F=k.width,R=k.height,j=Math.pow(2,S.tileID.overscaledZ),D=S.tileSize*Math.pow(2,v.transform.tileZoom)/j,N=D*(S.tileID.canonical.x+S.tileID.wrap*j),G=D*S.tileID.canonical.y;return {u_image:0,u_pattern_tl_a:P.tl,u_pattern_br_a:P.br,u_pattern_tl_b:z.tl,u_pattern_br_b:z.br,u_texsize:[F,R],u_mix:y.t,u_pattern_size_a:P.displaySize,u_pattern_size_b:z.displaySize,u_scale_a:y.fromScale,u_scale_b:y.toScale,u_tile_units_to_pixels:1/Te(S,1,v.transform.tileZoom),u_pixel_coord_upper:[N>>16,G>>16],u_pixel_coord_lower:[65535&N,65535&G]}}(s,f,n,p),{u_matrix:i,u_opacity:o})},Ul={fillExtrusion:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_lightpos:new u.Uniform3f(i,o.u_lightpos),u_lightintensity:new u.Uniform1f(i,o.u_lightintensity),u_lightcolor:new u.Uniform3f(i,o.u_lightcolor),u_vertical_gradient:new u.Uniform1f(i,o.u_vertical_gradient),u_opacity:new u.Uniform1f(i,o.u_opacity)}},fillExtrusionPattern:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_lightpos:new u.Uniform3f(i,o.u_lightpos),u_lightintensity:new u.Uniform1f(i,o.u_lightintensity),u_lightcolor:new u.Uniform3f(i,o.u_lightcolor),u_vertical_gradient:new u.Uniform1f(i,o.u_vertical_gradient),u_height_factor:new u.Uniform1f(i,o.u_height_factor),u_image:new u.Uniform1i(i,o.u_image),u_texsize:new u.Uniform2f(i,o.u_texsize),u_pixel_coord_upper:new u.Uniform2f(i,o.u_pixel_coord_upper),u_pixel_coord_lower:new u.Uniform2f(i,o.u_pixel_coord_lower),u_scale:new u.Uniform3f(i,o.u_scale),u_fade:new u.Uniform1f(i,o.u_fade),u_opacity:new u.Uniform1f(i,o.u_opacity)}},fill:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix)}},fillPattern:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_image:new u.Uniform1i(i,o.u_image),u_texsize:new u.Uniform2f(i,o.u_texsize),u_pixel_coord_upper:new u.Uniform2f(i,o.u_pixel_coord_upper),u_pixel_coord_lower:new u.Uniform2f(i,o.u_pixel_coord_lower),u_scale:new u.Uniform3f(i,o.u_scale),u_fade:new u.Uniform1f(i,o.u_fade)}},fillOutline:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_world:new u.Uniform2f(i,o.u_world)}},fillOutlinePattern:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_world:new u.Uniform2f(i,o.u_world),u_image:new u.Uniform1i(i,o.u_image),u_texsize:new u.Uniform2f(i,o.u_texsize),u_pixel_coord_upper:new u.Uniform2f(i,o.u_pixel_coord_upper),u_pixel_coord_lower:new u.Uniform2f(i,o.u_pixel_coord_lower),u_scale:new u.Uniform3f(i,o.u_scale),u_fade:new u.Uniform1f(i,o.u_fade)}},circle:function(i,o){return {u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_scale_with_map:new u.Uniform1i(i,o.u_scale_with_map),u_pitch_with_map:new u.Uniform1i(i,o.u_pitch_with_map),u_extrude_scale:new u.Uniform2f(i,o.u_extrude_scale),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_matrix:new u.UniformMatrix4f(i,o.u_matrix)}},collisionBox:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_pixels_to_tile_units:new u.Uniform1f(i,o.u_pixels_to_tile_units),u_extrude_scale:new u.Uniform2f(i,o.u_extrude_scale),u_overscale_factor:new u.Uniform1f(i,o.u_overscale_factor)}},collisionCircle:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_inv_matrix:new u.UniformMatrix4f(i,o.u_inv_matrix),u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_viewport_size:new u.Uniform2f(i,o.u_viewport_size)}},debug:function(i,o){return {u_color:new u.UniformColor(i,o.u_color),u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_overlay:new u.Uniform1i(i,o.u_overlay),u_overlay_scale:new u.Uniform1f(i,o.u_overlay_scale)}},clippingMask:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix)}},heatmap:function(i,o){return {u_extrude_scale:new u.Uniform1f(i,o.u_extrude_scale),u_intensity:new u.Uniform1f(i,o.u_intensity),u_matrix:new u.UniformMatrix4f(i,o.u_matrix)}},heatmapTexture:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_world:new u.Uniform2f(i,o.u_world),u_image:new u.Uniform1i(i,o.u_image),u_color_ramp:new u.Uniform1i(i,o.u_color_ramp),u_opacity:new u.Uniform1f(i,o.u_opacity)}},hillshade:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_image:new u.Uniform1i(i,o.u_image),u_latrange:new u.Uniform2f(i,o.u_latrange),u_light:new u.Uniform2f(i,o.u_light),u_shadow:new u.UniformColor(i,o.u_shadow),u_highlight:new u.UniformColor(i,o.u_highlight),u_accent:new u.UniformColor(i,o.u_accent)}},hillshadePrepare:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_image:new u.Uniform1i(i,o.u_image),u_dimension:new u.Uniform2f(i,o.u_dimension),u_zoom:new u.Uniform1f(i,o.u_zoom),u_unpack:new u.Uniform4f(i,o.u_unpack)}},line:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_ratio:new u.Uniform1f(i,o.u_ratio),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_units_to_pixels:new u.Uniform2f(i,o.u_units_to_pixels)}},lineGradient:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_ratio:new u.Uniform1f(i,o.u_ratio),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_units_to_pixels:new u.Uniform2f(i,o.u_units_to_pixels),u_image:new u.Uniform1i(i,o.u_image),u_image_height:new u.Uniform1f(i,o.u_image_height)}},linePattern:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_texsize:new u.Uniform2f(i,o.u_texsize),u_ratio:new u.Uniform1f(i,o.u_ratio),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_image:new u.Uniform1i(i,o.u_image),u_units_to_pixels:new u.Uniform2f(i,o.u_units_to_pixels),u_scale:new u.Uniform3f(i,o.u_scale),u_fade:new u.Uniform1f(i,o.u_fade)}},lineSDF:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_ratio:new u.Uniform1f(i,o.u_ratio),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_units_to_pixels:new u.Uniform2f(i,o.u_units_to_pixels),u_patternscale_a:new u.Uniform2f(i,o.u_patternscale_a),u_patternscale_b:new u.Uniform2f(i,o.u_patternscale_b),u_sdfgamma:new u.Uniform1f(i,o.u_sdfgamma),u_image:new u.Uniform1i(i,o.u_image),u_tex_y_a:new u.Uniform1f(i,o.u_tex_y_a),u_tex_y_b:new u.Uniform1f(i,o.u_tex_y_b),u_mix:new u.Uniform1f(i,o.u_mix)}},raster:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_tl_parent:new u.Uniform2f(i,o.u_tl_parent),u_scale_parent:new u.Uniform1f(i,o.u_scale_parent),u_buffer_scale:new u.Uniform1f(i,o.u_buffer_scale),u_fade_t:new u.Uniform1f(i,o.u_fade_t),u_opacity:new u.Uniform1f(i,o.u_opacity),u_image0:new u.Uniform1i(i,o.u_image0),u_image1:new u.Uniform1i(i,o.u_image1),u_brightness_low:new u.Uniform1f(i,o.u_brightness_low),u_brightness_high:new u.Uniform1f(i,o.u_brightness_high),u_saturation_factor:new u.Uniform1f(i,o.u_saturation_factor),u_contrast_factor:new u.Uniform1f(i,o.u_contrast_factor),u_spin_weights:new u.Uniform3f(i,o.u_spin_weights)}},symbolIcon:function(i,o){return {u_is_size_zoom_constant:new u.Uniform1i(i,o.u_is_size_zoom_constant),u_is_size_feature_constant:new u.Uniform1i(i,o.u_is_size_feature_constant),u_size_t:new u.Uniform1f(i,o.u_size_t),u_size:new u.Uniform1f(i,o.u_size),u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_pitch:new u.Uniform1f(i,o.u_pitch),u_rotate_symbol:new u.Uniform1i(i,o.u_rotate_symbol),u_aspect_ratio:new u.Uniform1f(i,o.u_aspect_ratio),u_fade_change:new u.Uniform1f(i,o.u_fade_change),u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_label_plane_matrix:new u.UniformMatrix4f(i,o.u_label_plane_matrix),u_coord_matrix:new u.UniformMatrix4f(i,o.u_coord_matrix),u_is_text:new u.Uniform1i(i,o.u_is_text),u_pitch_with_map:new u.Uniform1i(i,o.u_pitch_with_map),u_texsize:new u.Uniform2f(i,o.u_texsize),u_texture:new u.Uniform1i(i,o.u_texture)}},symbolSDF:function(i,o){return {u_is_size_zoom_constant:new u.Uniform1i(i,o.u_is_size_zoom_constant),u_is_size_feature_constant:new u.Uniform1i(i,o.u_is_size_feature_constant),u_size_t:new u.Uniform1f(i,o.u_size_t),u_size:new u.Uniform1f(i,o.u_size),u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_pitch:new u.Uniform1f(i,o.u_pitch),u_rotate_symbol:new u.Uniform1i(i,o.u_rotate_symbol),u_aspect_ratio:new u.Uniform1f(i,o.u_aspect_ratio),u_fade_change:new u.Uniform1f(i,o.u_fade_change),u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_label_plane_matrix:new u.UniformMatrix4f(i,o.u_label_plane_matrix),u_coord_matrix:new u.UniformMatrix4f(i,o.u_coord_matrix),u_is_text:new u.Uniform1i(i,o.u_is_text),u_pitch_with_map:new u.Uniform1i(i,o.u_pitch_with_map),u_texsize:new u.Uniform2f(i,o.u_texsize),u_texture:new u.Uniform1i(i,o.u_texture),u_gamma_scale:new u.Uniform1f(i,o.u_gamma_scale),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_is_halo:new u.Uniform1i(i,o.u_is_halo)}},symbolTextAndIcon:function(i,o){return {u_is_size_zoom_constant:new u.Uniform1i(i,o.u_is_size_zoom_constant),u_is_size_feature_constant:new u.Uniform1i(i,o.u_is_size_feature_constant),u_size_t:new u.Uniform1f(i,o.u_size_t),u_size:new u.Uniform1f(i,o.u_size),u_camera_to_center_distance:new u.Uniform1f(i,o.u_camera_to_center_distance),u_pitch:new u.Uniform1f(i,o.u_pitch),u_rotate_symbol:new u.Uniform1i(i,o.u_rotate_symbol),u_aspect_ratio:new u.Uniform1f(i,o.u_aspect_ratio),u_fade_change:new u.Uniform1f(i,o.u_fade_change),u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_label_plane_matrix:new u.UniformMatrix4f(i,o.u_label_plane_matrix),u_coord_matrix:new u.UniformMatrix4f(i,o.u_coord_matrix),u_is_text:new u.Uniform1i(i,o.u_is_text),u_pitch_with_map:new u.Uniform1i(i,o.u_pitch_with_map),u_texsize:new u.Uniform2f(i,o.u_texsize),u_texsize_icon:new u.Uniform2f(i,o.u_texsize_icon),u_texture:new u.Uniform1i(i,o.u_texture),u_texture_icon:new u.Uniform1i(i,o.u_texture_icon),u_gamma_scale:new u.Uniform1f(i,o.u_gamma_scale),u_device_pixel_ratio:new u.Uniform1f(i,o.u_device_pixel_ratio),u_is_halo:new u.Uniform1i(i,o.u_is_halo)}},background:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_opacity:new u.Uniform1f(i,o.u_opacity),u_color:new u.UniformColor(i,o.u_color)}},backgroundPattern:function(i,o){return {u_matrix:new u.UniformMatrix4f(i,o.u_matrix),u_opacity:new u.Uniform1f(i,o.u_opacity),u_image:new u.Uniform1i(i,o.u_image),u_pattern_tl_a:new u.Uniform2f(i,o.u_pattern_tl_a),u_pattern_br_a:new u.Uniform2f(i,o.u_pattern_br_a),u_pattern_tl_b:new u.Uniform2f(i,o.u_pattern_tl_b),u_pattern_br_b:new u.Uniform2f(i,o.u_pattern_br_b),u_texsize:new u.Uniform2f(i,o.u_texsize),u_mix:new u.Uniform1f(i,o.u_mix),u_pattern_size_a:new u.Uniform2f(i,o.u_pattern_size_a),u_pattern_size_b:new u.Uniform2f(i,o.u_pattern_size_b),u_scale_a:new u.Uniform1f(i,o.u_scale_a),u_scale_b:new u.Uniform1f(i,o.u_scale_b),u_pixel_coord_upper:new u.Uniform2f(i,o.u_pixel_coord_upper),u_pixel_coord_lower:new u.Uniform2f(i,o.u_pixel_coord_lower),u_tile_units_to_pixels:new u.Uniform1f(i,o.u_tile_units_to_pixels)}}};function go(i,o,n,s,p,f,d){for(var y=i.context,v=y.gl,S=i.useProgram("collisionBox"),P=[],z=0,k=0,F=0;F<s.length;F++){var R=s[F],j=o.getTile(R),D=j.getBucket(n);if(D){var N=R.posMatrix;p[0]===0&&p[1]===0||(N=i.translatePosMatrix(R.posMatrix,j,p,f));var G=d?D.textCollisionBox:D.iconCollisionBox,K=D.collisionCircleArray;if(K.length>0){var tt=u.create(),Q=N;u.mul(tt,D.placementInvProjMatrix,i.transform.glCoordMatrix),u.mul(tt,tt,D.placementViewportMatrix),P.push({circleArray:K,circleOffset:k,transform:Q,invTransform:tt}),k=z+=K.length/4;}G&&S.draw(y,v.LINES,M.disabled,O.disabled,i.colorModeForRenderPass(),X.disabled,Fn(N,i.transform,j),n.id,G.layoutVertexBuffer,G.indexBuffer,G.segments,null,i.transform.zoom,null,null,G.collisionVertexBuffer);}}if(d&&P.length){var et=i.useProgram("collisionCircle"),ot=new u.StructArrayLayout2f1f2i16;ot.resize(4*z),ot._trim();for(var ht=0,pt=0,bt=P;pt<bt.length;pt+=1)for(var kt=bt[pt],Bt=0;Bt<kt.circleArray.length/4;Bt++){var Lt=4*Bt,ne=kt.circleArray[Lt+0],wt=kt.circleArray[Lt+1],Nt=kt.circleArray[Lt+2],Gt=kt.circleArray[Lt+3];ot.emplace(ht++,ne,wt,Nt,Gt,0),ot.emplace(ht++,ne,wt,Nt,Gt,1),ot.emplace(ht++,ne,wt,Nt,Gt,2),ot.emplace(ht++,ne,wt,Nt,Gt,3);}(!za||za.length<2*z)&&(za=function(De){var fr=2*De,nr=new u.StructArrayLayout3ui6;nr.resize(fr),nr._trim();for(var Ce=0;Ce<fr;Ce++){var Ue=6*Ce;nr.uint16[Ue+0]=4*Ce+0,nr.uint16[Ue+1]=4*Ce+1,nr.uint16[Ue+2]=4*Ce+2,nr.uint16[Ue+3]=4*Ce+2,nr.uint16[Ue+4]=4*Ce+3,nr.uint16[Ue+5]=4*Ce+0;}return nr}(z));for(var Vt=y.createIndexBuffer(za,!0),Ut=y.createVertexBuffer(ot,u.collisionCircleLayout.members,!0),Zt=0,Ot=P;Zt<Ot.length;Zt+=1){var Rt=Ot[Zt],Je=Bl(Rt.transform,Rt.invTransform,i.transform);et.draw(y,v.TRIANGLES,M.disabled,O.disabled,i.colorModeForRenderPass(),X.disabled,Je,n.id,Ut,Vt,u.SegmentVector.simpleSegment(0,2*Rt.circleOffset,Rt.circleArray.length,Rt.circleArray.length/2),null,i.transform.zoom,null,null,null);}Ut.destroy(),Vt.destroy();}}var _i=u.identity(new Float32Array(16));function Vl(i,o,n,s,p,f){var d=u.getAnchorAlignment(i),y=-(d.horizontalAlign-.5)*o,v=-(d.verticalAlign-.5)*n,S=u.evaluateVariableOffset(i,s);return new u.Point((y/p+S[0])*f,(v/p+S[1])*f)}function Nl(i,o,n,s,p,f,d,y,v,S,P){var z=i.text.placedSymbolArray,k=i.text.dynamicLayoutVertexArray,F=i.icon.dynamicLayoutVertexArray,R={};k.clear();for(var j=0;j<z.length;j++){var D=z.get(j),N=D.hidden||!D.crossTileID||i.allowVerticalPlacement&&!D.placedOrientation?null:s[D.crossTileID];if(N){var G=new u.Point(D.anchorX,D.anchorY),K=Qt(G,n?y:d),tt=ue(f.cameraToCenterDistance,K.signedDistanceFromCamera),Q=p.evaluateSizeForFeature(i.textSizeData,S,D)*tt/u.ONE_EM;n&&(Q*=i.tilePixelRatio/v);for(var et=Vl(N.anchor,N.width,N.height,N.textOffset,N.textBoxScale,Q),ot=n?Qt(G.add(et),d).point:K.point.add(o?et.rotate(-f.angle):et),ht=i.allowVerticalPlacement&&D.placedOrientation===u.WritingMode.vertical?Math.PI/2:0,pt=0;pt<D.numGlyphs;pt++)u.addDynamicAttributes(k,ot,ht);P&&D.associatedIconIndex>=0&&(R[D.associatedIconIndex]={shiftedAnchor:ot,angle:ht});}else vr(D.numGlyphs,k);}if(P){F.clear();for(var bt=i.icon.placedSymbolArray,kt=0;kt<bt.length;kt++){var Bt=bt.get(kt);if(Bt.hidden)vr(Bt.numGlyphs,F);else {var Lt=R[kt];if(Lt)for(var ne=0;ne<Bt.numGlyphs;ne++)u.addDynamicAttributes(F,Lt.shiftedAnchor,Lt.angle);else vr(Bt.numGlyphs,F);}}i.icon.dynamicLayoutVertexBuffer.updateData(F);}i.text.dynamicLayoutVertexBuffer.updateData(k);}function jl(i,o,n){return n.iconsInText&&o?"symbolTextAndIcon":i?"symbolSDF":"symbolIcon"}function Vn(i,o,n,s,p,f,d,y,v,S,P,z){for(var k=i.context,F=k.gl,R=i.transform,j=y==="map",D=v==="map",N=j&&n.layout.get("symbol-placement")!=="point",G=j&&!D&&!N,K=n.layout.get("symbol-sort-key").constantOr(1)!==void 0,tt=!1,Q=i.depthModeForSublayer(0,M.ReadOnly),et=n.layout.get("text-variable-anchor"),ot=[],ht=0,pt=s;ht<pt.length;ht+=1){var bt=pt[ht],kt=o.getTile(bt),Bt=kt.getBucket(n);if(Bt){var Lt=p?Bt.text:Bt.icon;if(Lt&&Lt.segments.get().length){var ne=Lt.programConfigurations.get(n.id),wt=p||Bt.sdfIcons,Nt=p?Bt.textSizeData:Bt.iconSizeData,Gt=D||R.pitch!==0,Vt=i.useProgram(jl(wt,p,Bt),ne),Ut=u.evaluateSizeForZoom(Nt,R.zoom),Zt=void 0,Ot=[0,0],Rt=void 0,Je=void 0,De=null,fr=void 0;if(p)Rt=kt.glyphAtlasTexture,Je=F.LINEAR,Zt=kt.glyphAtlasTexture.size,Bt.iconsInText&&(Ot=kt.imageAtlasTexture.size,De=kt.imageAtlasTexture,fr=Gt||i.options.rotating||i.options.zooming||Nt.kind==="composite"||Nt.kind==="camera"?F.LINEAR:F.NEAREST);else {var nr=n.layout.get("icon-size").constantOr(0)!==1||Bt.iconsNeedLinear;Rt=kt.imageAtlasTexture,Je=wt||i.options.rotating||i.options.zooming||nr||Gt?F.LINEAR:F.NEAREST,Zt=kt.imageAtlasTexture.size;}var Ce=Te(kt,1,i.transform.zoom),Ue=Fe(bt.posMatrix,D,j,i.transform,Ce),jr=de(bt.posMatrix,D,j,i.transform,Ce),Sr=et&&Bt.hasTextData(),hn=n.layout.get("icon-text-fit")!=="none"&&Sr&&Bt.hasIconData();N&&Vo(Bt,bt.posMatrix,i,p,Ue,jr,D,S);var Cr=i.translatePosMatrix(bt.posMatrix,kt,f,d),Si=N||p&&et||hn?_i:Ue,si=i.translatePosMatrix(jr,kt,f,d,!0),aa=wt&&n.paint.get(p?"text-halo-width":"icon-halo-width").constantOr(1)!==0,So={program:Vt,buffers:Lt,uniformValues:wt?Bt.iconsInText?Ca(Nt.kind,Ut,G,D,i,Cr,Si,si,Zt,Ot):Wo(Nt.kind,Ut,G,D,i,Cr,Si,si,p,Zt,!0):mo(Nt.kind,Ut,G,D,i,Cr,Si,si,p,Zt),atlasTexture:Rt,atlasTextureIcon:De,atlasInterpolation:Je,atlasInterpolationIcon:fr,isSDF:wt,hasHalo:aa};if(K&&Bt.canOverlap){tt=!0;for(var fn=0,To=Lt.segments.get();fn<To.length;fn+=1){var sa=To[fn];ot.push({segments:new u.SegmentVector([sa]),sortKey:sa.sortKey,state:So});}}else ot.push({segments:Lt.segments,sortKey:0,state:So});}}}tt&&ot.sort(function(dn,Xn){return dn.sortKey-Xn.sortKey});for(var ki=0,la=ot;ki<la.length;ki+=1){var Mi=la[ki],Ye=Mi.state;if(k.activeTexture.set(F.TEXTURE0),Ye.atlasTexture.bind(Ye.atlasInterpolation,F.CLAMP_TO_EDGE),Ye.atlasTextureIcon&&(k.activeTexture.set(F.TEXTURE1),Ye.atlasTextureIcon&&Ye.atlasTextureIcon.bind(Ye.atlasInterpolationIcon,F.CLAMP_TO_EDGE)),Ye.isSDF){var Zi=Ye.uniformValues;Ye.hasHalo&&(Zi.u_is_halo=1,Ho(Ye.buffers,Mi.segments,n,i,Ye.program,Q,P,z,Zi)),Zi.u_is_halo=0;}Ho(Ye.buffers,Mi.segments,n,i,Ye.program,Q,P,z,Ye.uniformValues);}}function Ho(i,o,n,s,p,f,d,y,v){var S=s.context;p.draw(S,S.gl.TRIANGLES,f,d,y,X.disabled,v,n.id,i.layoutVertexBuffer,i.indexBuffer,o,n.paint,s.transform.zoom,i.programConfigurations.get(n.id),i.dynamicLayoutVertexBuffer,i.opacityVertexBuffer);}function ka(i,o,n,s,p,f,d){var y,v,S,P,z,k=i.context.gl,F=n.paint.get("fill-pattern"),R=F&&F.constantOr(1),j=n.getCrossfadeParameters();d?(v=R&&!n.getPaintProperty("fill-outline-color")?"fillOutlinePattern":"fillOutline",y=k.LINES):(v=R?"fillPattern":"fill",y=k.TRIANGLES);for(var D=0,N=s;D<N.length;D+=1){var G=N[D],K=o.getTile(G);if(!R||K.patternsLoaded()){var tt=K.getBucket(n);if(tt){var Q=tt.programConfigurations.get(n.id),et=i.useProgram(v,Q);R&&(i.context.activeTexture.set(k.TEXTURE0),K.imageAtlasTexture.bind(k.LINEAR,k.CLAMP_TO_EDGE),Q.updatePaintBuffers(j));var ot=F.constantOr(null);if(ot&&K.imageAtlas){var ht=K.imageAtlas,pt=ht.patternPositions[ot.to.toString()],bt=ht.patternPositions[ot.from.toString()];pt&&bt&&Q.setConstantPatternPositions(pt,bt);}var kt=i.translatePosMatrix(G.posMatrix,K,n.paint.get("fill-translate"),n.paint.get("fill-translate-anchor"));if(d){P=tt.indexBuffer2,z=tt.segments2;var Bt=[k.drawingBufferWidth,k.drawingBufferHeight];S=v==="fillOutlinePattern"&&R?Ll(kt,i,j,K,Bt):Dl(kt,Bt);}else P=tt.indexBuffer,z=tt.segments,S=R?Rn(kt,i,j,K):an(kt);et.draw(i.context,y,p,i.stencilModeForClipping(G),f,X.disabled,S,n.id,tt.layoutVertexBuffer,P,z,n.paint,i.transform.zoom,Q);}}}}function ks(i,o,n,s,p,f,d){for(var y=i.context,v=y.gl,S=n.paint.get("fill-extrusion-pattern"),P=S.constantOr(1),z=n.getCrossfadeParameters(),k=n.paint.get("fill-extrusion-opacity"),F=0,R=s;F<R.length;F+=1){var j=R[F],D=o.getTile(j),N=D.getBucket(n);if(N){var G=N.programConfigurations.get(n.id),K=i.useProgram(P?"fillExtrusionPattern":"fillExtrusion",G);P&&(i.context.activeTexture.set(v.TEXTURE0),D.imageAtlasTexture.bind(v.LINEAR,v.CLAMP_TO_EDGE),G.updatePaintBuffers(z));var tt=S.constantOr(null);if(tt&&D.imageAtlas){var Q=D.imageAtlas,et=Q.patternPositions[tt.to.toString()],ot=Q.patternPositions[tt.from.toString()];et&&ot&&G.setConstantPatternPositions(et,ot);}var ht=i.translatePosMatrix(j.posMatrix,D,n.paint.get("fill-extrusion-translate"),n.paint.get("fill-extrusion-translate-anchor")),pt=n.paint.get("fill-extrusion-vertical-gradient"),bt=P?Bn(ht,i,pt,k,j,z,D):Ml(ht,i,pt,k);K.draw(y,y.gl.TRIANGLES,p,f,d,X.backCCW,bt,n.id,N.layoutVertexBuffer,N.indexBuffer,N.segments,n.paint,i.transform.zoom,G);}}}function Ma(i,o,n,s,p,f){var d=i.context,y=d.gl,v=o.fbo;if(v){var S=i.useProgram("hillshade");d.activeTexture.set(y.TEXTURE0),y.bindTexture(y.TEXTURE_2D,v.colorAttachment.get());var P=function(z,k,F){var R=F.paint.get("hillshade-shadow-color"),j=F.paint.get("hillshade-highlight-color"),D=F.paint.get("hillshade-accent-color"),N=F.paint.get("hillshade-illumination-direction")*(Math.PI/180);F.paint.get("hillshade-illumination-anchor")==="viewport"&&(N-=z.transform.angle);var G,K,tt,Q=!z.options.moving;return {u_matrix:z.transform.calculatePosMatrix(k.tileID.toUnwrapped(),Q),u_image:0,u_latrange:(G=k.tileID,K=Math.pow(2,G.canonical.z),tt=G.canonical.y,[new u.MercatorCoordinate(0,tt/K).toLngLat().lat,new u.MercatorCoordinate(0,(tt+1)/K).toLngLat().lat]),u_light:[F.paint.get("hillshade-exaggeration"),N],u_shadow:R,u_highlight:j,u_accent:D}}(i,o,n);S.draw(d,y.TRIANGLES,s,p,f,X.disabled,P,n.id,i.rasterBoundsBuffer,i.quadTriangleIndexBuffer,i.rasterBoundsSegments);}}function Nu(i,o,n,s,p,f){var d=i.context,y=d.gl,v=o.dem;if(v&&v.data){var S=v.dim,P=v.stride,z=v.getPixels();if(d.activeTexture.set(y.TEXTURE1),d.pixelStoreUnpackPremultiplyAlpha.set(!1),o.demTexture=o.demTexture||i.getTileTexture(P),o.demTexture){var k=o.demTexture;k.update(z,{premultiply:!1}),k.bind(y.NEAREST,y.CLAMP_TO_EDGE);}else o.demTexture=new u.Texture(d,z,y.RGBA,{premultiply:!1}),o.demTexture.bind(y.NEAREST,y.CLAMP_TO_EDGE);d.activeTexture.set(y.TEXTURE0);var F=o.fbo;if(!F){var R=new u.Texture(d,{width:S,height:S,data:null},y.RGBA);R.bind(y.LINEAR,y.CLAMP_TO_EDGE),(F=o.fbo=d.createFramebuffer(S,S,!0)).colorAttachment.set(R.texture);}d.bindFramebuffer.set(F.framebuffer),d.viewport.set([0,0,S,S]),i.useProgram("hillshadePrepare").draw(d,y.TRIANGLES,s,p,f,X.disabled,function(j,D){var N=D.stride,G=u.create();return u.ortho(G,0,u.EXTENT,-u.EXTENT,0,0,1),u.translate(G,G,[0,-u.EXTENT,0]),{u_matrix:G,u_image:1,u_dimension:[N,N],u_zoom:j.overscaledZ,u_unpack:D.getUnpackVector()}}(o.tileID,v),n.id,i.rasterBoundsBuffer,i.quadTriangleIndexBuffer,i.rasterBoundsSegments),o.needsHillshadePrepare=!1;}}function Da(i,o,n,s,p){var f=s.paint.get("raster-fade-duration");if(f>0){var d=u.browser.now(),y=(d-i.timeAdded)/f,v=o?(d-o.timeAdded)/f:-1,S=n.getSource(),P=p.coveringZoomLevel({tileSize:S.tileSize,roundZoom:S.roundZoom}),z=!o||Math.abs(o.tileID.overscaledZ-P)>Math.abs(i.tileID.overscaledZ-P),k=z&&i.refreshedUponExpiration?1:u.clamp(z?y:1-v,0,1);return i.refreshedUponExpiration&&y>=1&&(i.refreshedUponExpiration=!1),o?{opacity:1,mix:1-k}:{opacity:k,mix:0}}return {opacity:1,mix:0}}var Ms=new u.Color(1,0,0,1),ql=new u.Color(0,1,0,1),Zl=new u.Color(0,0,1,1),La=new u.Color(1,0,1,1),Ds=new u.Color(0,1,1,1);function Ls(i,o,n,s){Jo(i,0,o+n/2,i.transform.width,n,s);}function Bs(i,o,n,s){Jo(i,o-n/2,0,n,i.transform.height,s);}function Jo(i,o,n,s,p,f){var d=i.context,y=d.gl;y.enable(y.SCISSOR_TEST),y.scissor(o*u.browser.devicePixelRatio,n*u.browser.devicePixelRatio,s*u.browser.devicePixelRatio,p*u.browser.devicePixelRatio),d.clear({color:f}),y.disable(y.SCISSOR_TEST);}function Gl(i,o,n){var s=i.context,p=s.gl,f=n.posMatrix,d=i.useProgram("debug"),y=M.disabled,v=O.disabled,S=i.colorModeForRenderPass();s.activeTexture.set(p.TEXTURE0),i.emptyTexture.bind(p.LINEAR,p.CLAMP_TO_EDGE),d.draw(s,p.LINE_STRIP,y,v,S,X.disabled,On(f,u.Color.red),"$debug",i.debugBuffer,i.tileBorderIndexBuffer,i.debugSegments);var P=o.getTileByID(n.key).latestRawTileData,z=Math.floor((P&&P.byteLength||0)/1024),k=o.getTile(n).tileSize,F=512/Math.min(k,512)*(n.overscaledZ/i.transform.zoom)*.5,R=n.canonical.toString();n.overscaledZ!==n.canonical.z&&(R+=" => "+n.overscaledZ),function(j,D){j.initDebugOverlayCanvas();var N=j.debugOverlayCanvas,G=j.context.gl,K=j.debugOverlayCanvas.getContext("2d");K.clearRect(0,0,N.width,N.height),K.shadowColor="white",K.shadowBlur=2,K.lineWidth=1.5,K.strokeStyle="white",K.textBaseline="top",K.font="bold 36px Open Sans, sans-serif",K.fillText(D,5,5),K.strokeText(D,5,5),j.debugOverlayTexture.update(N),j.debugOverlayTexture.bind(G.LINEAR,G.CLAMP_TO_EDGE);}(i,R+" "+z+"kb"),d.draw(s,p.TRIANGLES,y,v,Z.alphaBlended,X.disabled,On(f,u.Color.transparent,F),"$debug",i.debugBuffer,i.quadTriangleIndexBuffer,i.debugSegments);}var Nn={symbol:function(i,o,n,s,p){if(i.renderPass==="translucent"){var f=O.disabled,d=i.colorModeForRenderPass();n.layout.get("text-variable-anchor")&&function(y,v,S,P,z,k,F){for(var R=v.transform,j=z==="map",D=k==="map",N=0,G=y;N<G.length;N+=1){var K=G[N],tt=P.getTile(K),Q=tt.getBucket(S);if(Q&&Q.text&&Q.text.segments.get().length){var et=u.evaluateSizeForZoom(Q.textSizeData,R.zoom),ot=Te(tt,1,v.transform.zoom),ht=Fe(K.posMatrix,D,j,v.transform,ot),pt=S.layout.get("icon-text-fit")!=="none"&&Q.hasIconData();if(et){var bt=Math.pow(2,R.zoom-tt.tileID.overscaledZ);Nl(Q,j,D,F,u.symbolSize,R,ht,K.posMatrix,bt,et,pt);}}}}(s,i,n,o,n.layout.get("text-rotation-alignment"),n.layout.get("text-pitch-alignment"),p),n.paint.get("icon-opacity").constantOr(1)!==0&&Vn(i,o,n,s,!1,n.paint.get("icon-translate"),n.paint.get("icon-translate-anchor"),n.layout.get("icon-rotation-alignment"),n.layout.get("icon-pitch-alignment"),n.layout.get("icon-keep-upright"),f,d),n.paint.get("text-opacity").constantOr(1)!==0&&Vn(i,o,n,s,!0,n.paint.get("text-translate"),n.paint.get("text-translate-anchor"),n.layout.get("text-rotation-alignment"),n.layout.get("text-pitch-alignment"),n.layout.get("text-keep-upright"),f,d),o.map.showCollisionBoxes&&(go(i,o,n,s,n.paint.get("text-translate"),n.paint.get("text-translate-anchor"),!0),go(i,o,n,s,n.paint.get("icon-translate"),n.paint.get("icon-translate-anchor"),!1));}},circle:function(i,o,n,s){if(i.renderPass==="translucent"){var p=n.paint.get("circle-opacity"),f=n.paint.get("circle-stroke-width"),d=n.paint.get("circle-stroke-opacity"),y=n.layout.get("circle-sort-key").constantOr(1)!==void 0;if(p.constantOr(1)!==0||f.constantOr(1)!==0&&d.constantOr(1)!==0){for(var v=i.context,S=v.gl,P=i.depthModeForSublayer(0,M.ReadOnly),z=O.disabled,k=i.colorModeForRenderPass(),F=[],R=0;R<s.length;R++){var j=s[R],D=o.getTile(j),N=D.getBucket(n);if(N){var G=N.programConfigurations.get(n.id),K={programConfiguration:G,program:i.useProgram("circle",G),layoutVertexBuffer:N.layoutVertexBuffer,indexBuffer:N.indexBuffer,uniformValues:Cs(i,j,D,n)};if(y)for(var tt=0,Q=N.segments.get();tt<Q.length;tt+=1){var et=Q[tt];F.push({segments:new u.SegmentVector([et]),sortKey:et.sortKey,state:K});}else F.push({segments:N.segments,sortKey:0,state:K});}}y&&F.sort(function(kt,Bt){return kt.sortKey-Bt.sortKey});for(var ot=0,ht=F;ot<ht.length;ot+=1){var pt=ht[ot],bt=pt.state;bt.program.draw(v,S.TRIANGLES,P,z,k,X.disabled,bt.uniformValues,n.id,bt.layoutVertexBuffer,bt.indexBuffer,pt.segments,n.paint,i.transform.zoom,bt.programConfiguration);}}}},heatmap:function(i,o,n,s){if(n.paint.get("heatmap-opacity")!==0)if(i.renderPass==="offscreen"){var p=i.context,f=p.gl,d=O.disabled,y=new Z([f.ONE,f.ONE],u.Color.transparent,[!0,!0,!0,!0]);!function(F,R,j){var D=F.gl;F.activeTexture.set(D.TEXTURE1),F.viewport.set([0,0,R.width/4,R.height/4]);var N=j.heatmapFbo;if(N)D.bindTexture(D.TEXTURE_2D,N.colorAttachment.get()),F.bindFramebuffer.set(N.framebuffer);else {var G=D.createTexture();D.bindTexture(D.TEXTURE_2D,G),D.texParameteri(D.TEXTURE_2D,D.TEXTURE_WRAP_S,D.CLAMP_TO_EDGE),D.texParameteri(D.TEXTURE_2D,D.TEXTURE_WRAP_T,D.CLAMP_TO_EDGE),D.texParameteri(D.TEXTURE_2D,D.TEXTURE_MIN_FILTER,D.LINEAR),D.texParameteri(D.TEXTURE_2D,D.TEXTURE_MAG_FILTER,D.LINEAR),N=j.heatmapFbo=F.createFramebuffer(R.width/4,R.height/4,!1),function(K,tt,Q,et){var ot=K.gl;ot.texImage2D(ot.TEXTURE_2D,0,ot.RGBA,tt.width/4,tt.height/4,0,ot.RGBA,K.extRenderToTextureHalfFloat?K.extTextureHalfFloat.HALF_FLOAT_OES:ot.UNSIGNED_BYTE,null),et.colorAttachment.set(Q);}(F,R,G,N);}}(p,i,n),p.clear({color:u.Color.transparent});for(var v=0;v<s.length;v++){var S=s[v];if(!o.hasRenderableParent(S)){var P=o.getTile(S),z=P.getBucket(n);if(z){var k=z.programConfigurations.get(n.id);i.useProgram("heatmap",k).draw(p,f.TRIANGLES,M.disabled,d,y,X.disabled,Rl(S.posMatrix,P,i.transform.zoom,n.paint.get("heatmap-intensity")),n.id,z.layoutVertexBuffer,z.indexBuffer,z.segments,n.paint,i.transform.zoom,k);}}}p.viewport.set([0,0,i.width,i.height]);}else i.renderPass==="translucent"&&(i.context.setColorMode(i.colorModeForRenderPass()),function(F,R){var j=F.context,D=j.gl,N=R.heatmapFbo;if(N){j.activeTexture.set(D.TEXTURE0),D.bindTexture(D.TEXTURE_2D,N.colorAttachment.get()),j.activeTexture.set(D.TEXTURE1);var G=R.colorRampTexture;G||(G=R.colorRampTexture=new u.Texture(j,R.colorRamp,D.RGBA)),G.bind(D.LINEAR,D.CLAMP_TO_EDGE),F.useProgram("heatmapTexture").draw(j,D.TRIANGLES,M.disabled,O.disabled,F.colorModeForRenderPass(),X.disabled,function(K,tt,Q,et){var ot=u.create();u.ortho(ot,0,K.width,K.height,0,0,1);var ht=K.context.gl;return {u_matrix:ot,u_world:[ht.drawingBufferWidth,ht.drawingBufferHeight],u_image:0,u_color_ramp:1,u_opacity:tt.paint.get("heatmap-opacity")}}(F,R),R.id,F.viewportBuffer,F.quadTriangleIndexBuffer,F.viewportSegments,R.paint,F.transform.zoom);}}(i,n));},line:function(i,o,n,s){if(i.renderPass==="translucent"){var p=n.paint.get("line-opacity"),f=n.paint.get("line-width");if(p.constantOr(1)!==0&&f.constantOr(1)!==0)for(var d=i.depthModeForSublayer(0,M.ReadOnly),y=i.colorModeForRenderPass(),v=n.paint.get("line-dasharray"),S=n.paint.get("line-pattern"),P=S.constantOr(1),z=n.paint.get("line-gradient"),k=n.getCrossfadeParameters(),F=P?"linePattern":v?"lineSDF":z?"lineGradient":"line",R=i.context,j=R.gl,D=!0,N=0,G=s;N<G.length;N+=1){var K=G[N],tt=o.getTile(K);if(!P||tt.patternsLoaded()){var Q=tt.getBucket(n);if(Q){var et=Q.programConfigurations.get(n.id),ot=i.context.program.get(),ht=i.useProgram(F,et),pt=D||ht.program!==ot,bt=S.constantOr(null);if(bt&&tt.imageAtlas){var kt=tt.imageAtlas,Bt=kt.patternPositions[bt.to.toString()],Lt=kt.patternPositions[bt.from.toString()];Bt&&Lt&&et.setConstantPatternPositions(Bt,Lt);}var ne=P?Pa(i,tt,n,k):v?Uu(i,tt,n,v,k):z?xe(i,tt,n,Q.lineClipsArray.length):Xo(i,tt,n);if(P)R.activeTexture.set(j.TEXTURE0),tt.imageAtlasTexture.bind(j.LINEAR,j.CLAMP_TO_EDGE),et.updatePaintBuffers(k);else if(v&&(pt||i.lineAtlas.dirty))R.activeTexture.set(j.TEXTURE0),i.lineAtlas.bind(R);else if(z){var wt=Q.gradients[n.id],Nt=wt.texture;if(n.gradientVersion!==wt.version){var Gt=256;if(n.stepInterpolant){var Vt=o.getSource().maxzoom,Ut=K.canonical.z===Vt?Math.ceil(1<<i.transform.maxZoom-K.canonical.z):1;Gt=u.clamp(u.nextPowerOfTwo(Q.maxLineLength/u.EXTENT*1024*Ut),256,R.maxTextureSize);}wt.gradient=u.renderColorRamp({expression:n.gradientExpression(),evaluationKey:"lineProgress",resolution:Gt,image:wt.gradient||void 0,clips:Q.lineClipsArray}),wt.texture?wt.texture.update(wt.gradient):wt.texture=new u.Texture(R,wt.gradient,j.RGBA),wt.version=n.gradientVersion,Nt=wt.texture;}R.activeTexture.set(j.TEXTURE0),Nt.bind(n.stepInterpolant?j.NEAREST:j.LINEAR,j.CLAMP_TO_EDGE);}ht.draw(R,j.TRIANGLES,d,i.stencilModeForClipping(K),y,X.disabled,ne,n.id,Q.layoutVertexBuffer,Q.indexBuffer,Q.segments,n.paint,i.transform.zoom,et,Q.layoutVertexBuffer2),D=!1;}}}}},fill:function(i,o,n,s){var p=n.paint.get("fill-color"),f=n.paint.get("fill-opacity");if(f.constantOr(1)!==0){var d=i.colorModeForRenderPass(),y=n.paint.get("fill-pattern"),v=i.opaquePassEnabledForLayer()&&!y.constantOr(1)&&p.constantOr(u.Color.transparent).a===1&&f.constantOr(0)===1?"opaque":"translucent";if(i.renderPass===v){var S=i.depthModeForSublayer(1,i.renderPass==="opaque"?M.ReadWrite:M.ReadOnly);ka(i,o,n,s,S,d,!1);}if(i.renderPass==="translucent"&&n.paint.get("fill-antialias")){var P=i.depthModeForSublayer(n.getPaintProperty("fill-outline-color")?2:0,M.ReadOnly);ka(i,o,n,s,P,d,!0);}}},"fill-extrusion":function(i,o,n,s){var p=n.paint.get("fill-extrusion-opacity");if(p!==0&&i.renderPass==="translucent"){var f=new M(i.context.gl.LEQUAL,M.ReadWrite,i.depthRangeFor3D);if(p!==1||n.paint.get("fill-extrusion-pattern").constantOr(1))ks(i,o,n,s,f,O.disabled,Z.disabled),ks(i,o,n,s,f,i.stencilModeFor3D(),i.colorModeForRenderPass());else {var d=i.colorModeForRenderPass();ks(i,o,n,s,f,O.disabled,d);}}},hillshade:function(i,o,n,s){if(i.renderPass==="offscreen"||i.renderPass==="translucent"){for(var p=i.context,f=i.depthModeForSublayer(0,M.ReadOnly),d=i.colorModeForRenderPass(),y=i.renderPass==="translucent"?i.stencilConfigForOverlap(s):[{},s],v=y[0],S=0,P=y[1];S<P.length;S+=1){var z=P[S],k=o.getTile(z);k.needsHillshadePrepare&&i.renderPass==="offscreen"?Nu(i,k,n,f,O.disabled,d):i.renderPass==="translucent"&&Ma(i,k,n,f,v[z.overscaledZ],d);}p.viewport.set([0,0,i.width,i.height]);}},raster:function(i,o,n,s){if(i.renderPass==="translucent"&&n.paint.get("raster-opacity")!==0&&s.length)for(var p=i.context,f=p.gl,d=o.getSource(),y=i.useProgram("raster"),v=i.colorModeForRenderPass(),S=d instanceof Ii?[{},s]:i.stencilConfigForOverlap(s),P=S[0],z=S[1],k=z[z.length-1].overscaledZ,F=!i.options.moving,R=0,j=z;R<j.length;R+=1){var D=j[R],N=i.depthModeForSublayer(D.overscaledZ-k,n.paint.get("raster-opacity")===1?M.ReadWrite:M.ReadOnly,f.LESS),G=o.getTile(D),K=i.transform.calculatePosMatrix(D.toUnwrapped(),F);G.registerFadeDuration(n.paint.get("raster-fade-duration"));var tt=o.findLoadedParent(D,0),Q=Da(G,tt,o,n,i.transform),et=void 0,ot=void 0,ht=n.paint.get("raster-resampling")==="nearest"?f.NEAREST:f.LINEAR;p.activeTexture.set(f.TEXTURE0),G.texture.bind(ht,f.CLAMP_TO_EDGE,f.LINEAR_MIPMAP_NEAREST),p.activeTexture.set(f.TEXTURE1),tt?(tt.texture.bind(ht,f.CLAMP_TO_EDGE,f.LINEAR_MIPMAP_NEAREST),et=Math.pow(2,tt.tileID.overscaledZ-G.tileID.overscaledZ),ot=[G.tileID.canonical.x*et%1,G.tileID.canonical.y*et%1]):G.texture.bind(ht,f.CLAMP_TO_EDGE,f.LINEAR_MIPMAP_NEAREST);var pt=Vu(K,ot||[0,0],et||1,Q,n);d instanceof Ii?y.draw(p,f.TRIANGLES,N,O.disabled,v,X.disabled,pt,n.id,d.boundsBuffer,i.quadTriangleIndexBuffer,d.boundsSegments):y.draw(p,f.TRIANGLES,N,P[D.overscaledZ],v,X.disabled,pt,n.id,i.rasterBoundsBuffer,i.quadTriangleIndexBuffer,i.rasterBoundsSegments);}},background:function(i,o,n){var s=n.paint.get("background-color"),p=n.paint.get("background-opacity");if(p!==0){var f=i.context,d=f.gl,y=i.transform,v=y.tileSize,S=n.paint.get("background-pattern");if(!i.isPatternMissing(S)){var P=!S&&s.a===1&&p===1&&i.opaquePassEnabledForLayer()?"opaque":"translucent";if(i.renderPass===P){var z=O.disabled,k=i.depthModeForSublayer(0,P==="opaque"?M.ReadWrite:M.ReadOnly),F=i.colorModeForRenderPass(),R=i.useProgram(S?"backgroundPattern":"background"),j=y.coveringTiles({tileSize:v});S&&(f.activeTexture.set(d.TEXTURE0),i.imageManager.bind(i.context));for(var D=n.getCrossfadeParameters(),N=0,G=j;N<G.length;N+=1){var K=G[N],tt=i.transform.calculatePosMatrix(K.toUnwrapped()),Q=S?yo(tt,p,i,S,{tileID:K,tileSize:v},D):Ko(tt,p,s);R.draw(f,d.TRIANGLES,k,z,F,X.disabled,Q,n.id,i.tileExtentBuffer,i.quadTriangleIndexBuffer,i.tileExtentSegments);}}}}},debug:function(i,o,n){for(var s=0;s<n.length;s++)Gl(i,o,n[s]);},custom:function(i,o,n){var s=i.context,p=n.implementation;if(i.renderPass==="offscreen"){var f=p.prerender;f&&(i.setCustomLayerDefaults(),s.setColorMode(i.colorModeForRenderPass()),f.call(p,s.gl,i.transform.customLayerMatrix()),s.setDirty(),i.setBaseState());}else if(i.renderPass==="translucent"){i.setCustomLayerDefaults(),s.setColorMode(i.colorModeForRenderPass()),s.setStencilMode(O.disabled);var d=p.renderingMode==="3d"?new M(i.context.gl.LEQUAL,M.ReadWrite,i.depthRangeFor3D):i.depthModeForSublayer(0,M.ReadOnly);s.setDepthMode(d),p.render(s.gl,i.transform.customLayerMatrix()),s.setDirty(),i.setBaseState(),s.bindFramebuffer.set(null);}}},Ie=function(i,o){this.context=new C(i),this.transform=o,this._tileTextures={},this.setup(),this.numSublayers=U.maxUnderzooming+U.maxOverzooming+1,this.depthEpsilon=1/Math.pow(2,16),this.crossTileSymbolIndex=new Qi,this.gpuTimers={};};Ie.prototype.resize=function(i,o){if(this.width=i*u.browser.devicePixelRatio,this.height=o*u.browser.devicePixelRatio,this.context.viewport.set([0,0,this.width,this.height]),this.style)for(var n=0,s=this.style._order;n<s.length;n+=1)this.style._layers[s[n]].resize();},Ie.prototype.setup=function(){var i=this.context,o=new u.StructArrayLayout2i4;o.emplaceBack(0,0),o.emplaceBack(u.EXTENT,0),o.emplaceBack(0,u.EXTENT),o.emplaceBack(u.EXTENT,u.EXTENT),this.tileExtentBuffer=i.createVertexBuffer(o,qe.members),this.tileExtentSegments=u.SegmentVector.simpleSegment(0,0,4,2);var n=new u.StructArrayLayout2i4;n.emplaceBack(0,0),n.emplaceBack(u.EXTENT,0),n.emplaceBack(0,u.EXTENT),n.emplaceBack(u.EXTENT,u.EXTENT),this.debugBuffer=i.createVertexBuffer(n,qe.members),this.debugSegments=u.SegmentVector.simpleSegment(0,0,4,5);var s=new u.StructArrayLayout4i8;s.emplaceBack(0,0,0,0),s.emplaceBack(u.EXTENT,0,u.EXTENT,0),s.emplaceBack(0,u.EXTENT,0,u.EXTENT),s.emplaceBack(u.EXTENT,u.EXTENT,u.EXTENT,u.EXTENT),this.rasterBoundsBuffer=i.createVertexBuffer(s,fi.members),this.rasterBoundsSegments=u.SegmentVector.simpleSegment(0,0,4,2);var p=new u.StructArrayLayout2i4;p.emplaceBack(0,0),p.emplaceBack(1,0),p.emplaceBack(0,1),p.emplaceBack(1,1),this.viewportBuffer=i.createVertexBuffer(p,qe.members),this.viewportSegments=u.SegmentVector.simpleSegment(0,0,4,2);var f=new u.StructArrayLayout1ui2;f.emplaceBack(0),f.emplaceBack(1),f.emplaceBack(3),f.emplaceBack(2),f.emplaceBack(0),this.tileBorderIndexBuffer=i.createIndexBuffer(f);var d=new u.StructArrayLayout3ui6;d.emplaceBack(0,1,2),d.emplaceBack(2,1,3),this.quadTriangleIndexBuffer=i.createIndexBuffer(d),this.emptyTexture=new u.Texture(i,{width:1,height:1,data:new Uint8Array([0,0,0,0])},i.gl.RGBA);var y=this.context.gl;this.stencilClearMode=new O({func:y.ALWAYS,mask:0},0,255,y.ZERO,y.ZERO,y.ZERO);},Ie.prototype.clearStencil=function(){var i=this.context,o=i.gl;this.nextStencilID=1,this.currentStencilSource=void 0;var n=u.create();u.ortho(n,0,this.width,this.height,0,0,1),u.scale(n,n,[o.drawingBufferWidth,o.drawingBufferHeight,0]),this.useProgram("clippingMask").draw(i,o.TRIANGLES,M.disabled,this.stencilClearMode,Z.disabled,X.disabled,Un(n),"$clipping",this.viewportBuffer,this.quadTriangleIndexBuffer,this.viewportSegments);},Ie.prototype._renderTileClippingMasks=function(i,o){if(this.currentStencilSource!==i.source&&i.isTileClipped()&&o&&o.length){this.currentStencilSource=i.source;var n=this.context,s=n.gl;this.nextStencilID+o.length>256&&this.clearStencil(),n.setColorMode(Z.disabled),n.setDepthMode(M.disabled);var p=this.useProgram("clippingMask");this._tileClippingMaskIDs={};for(var f=0,d=o;f<d.length;f+=1){var y=d[f],v=this._tileClippingMaskIDs[y.key]=this.nextStencilID++;p.draw(n,s.TRIANGLES,M.disabled,new O({func:s.ALWAYS,mask:0},v,255,s.KEEP,s.KEEP,s.REPLACE),Z.disabled,X.disabled,Un(y.posMatrix),"$clipping",this.tileExtentBuffer,this.quadTriangleIndexBuffer,this.tileExtentSegments);}}},Ie.prototype.stencilModeFor3D=function(){this.currentStencilSource=void 0,this.nextStencilID+1>256&&this.clearStencil();var i=this.nextStencilID++,o=this.context.gl;return new O({func:o.NOTEQUAL,mask:255},i,255,o.KEEP,o.KEEP,o.REPLACE)},Ie.prototype.stencilModeForClipping=function(i){var o=this.context.gl;return new O({func:o.EQUAL,mask:255},this._tileClippingMaskIDs[i.key],0,o.KEEP,o.KEEP,o.REPLACE)},Ie.prototype.stencilConfigForOverlap=function(i){var o,n=this.context.gl,s=i.sort(function(v,S){return S.overscaledZ-v.overscaledZ}),p=s[s.length-1].overscaledZ,f=s[0].overscaledZ-p+1;if(f>1){this.currentStencilSource=void 0,this.nextStencilID+f>256&&this.clearStencil();for(var d={},y=0;y<f;y++)d[y+p]=new O({func:n.GEQUAL,mask:255},y+this.nextStencilID,255,n.KEEP,n.KEEP,n.REPLACE);return this.nextStencilID+=f,[d,s]}return [(o={},o[p]=O.disabled,o),s]},Ie.prototype.colorModeForRenderPass=function(){var i=this.context.gl;return this._showOverdrawInspector?new Z([i.CONSTANT_COLOR,i.ONE],new u.Color(1/8,1/8,1/8,0),[!0,!0,!0,!0]):this.renderPass==="opaque"?Z.unblended:Z.alphaBlended},Ie.prototype.depthModeForSublayer=function(i,o,n){if(!this.opaquePassEnabledForLayer())return M.disabled;var s=1-((1+this.currentLayer)*this.numSublayers+i)*this.depthEpsilon;return new M(n||this.context.gl.LEQUAL,o,[s,s])},Ie.prototype.opaquePassEnabledForLayer=function(){return this.currentLayer<this.opaquePassCutoff},Ie.prototype.render=function(i,o){var n=this;this.style=i,this.options=o,this.lineAtlas=i.lineAtlas,this.imageManager=i.imageManager,this.glyphManager=i.glyphManager,this.symbolFadeChange=i.placement.symbolFadeChange(u.browser.now()),this.imageManager.beginFrame();var s=this.style._order,p=this.style.sourceCaches;for(var f in p){var d=p[f];d.used&&d.prepare(this.context);}var y,v,S={},P={},z={};for(var k in p){var F=p[k];S[k]=F.getVisibleCoordinates(),P[k]=S[k].slice().reverse(),z[k]=F.getVisibleCoordinates(!0).reverse();}this.opaquePassCutoff=1/0;for(var R=0;R<s.length;R++)if(this.style._layers[s[R]].is3D()){this.opaquePassCutoff=R;break}this.renderPass="offscreen";for(var j=0,D=s;j<D.length;j+=1){var N=this.style._layers[D[j]];if(N.hasOffscreenPass()&&!N.isHidden(this.transform.zoom)){var G=P[N.source];(N.type==="custom"||G.length)&&this.renderLayer(this,p[N.source],N,G);}}for(this.context.bindFramebuffer.set(null),this.context.clear({color:o.showOverdrawInspector?u.Color.black:u.Color.transparent,depth:1}),this.clearStencil(),this._showOverdrawInspector=o.showOverdrawInspector,this.depthRangeFor3D=[0,1-(i._order.length+2)*this.numSublayers*this.depthEpsilon],this.renderPass="opaque",this.currentLayer=s.length-1;this.currentLayer>=0;this.currentLayer--){var K=this.style._layers[s[this.currentLayer]],tt=p[K.source],Q=S[K.source];this._renderTileClippingMasks(K,Q),this.renderLayer(this,tt,K,Q);}for(this.renderPass="translucent",this.currentLayer=0;this.currentLayer<s.length;this.currentLayer++){var et=this.style._layers[s[this.currentLayer]],ot=p[et.source],ht=(et.type==="symbol"?z:P)[et.source];this._renderTileClippingMasks(et,S[et.source]),this.renderLayer(this,ot,et,ht);}this.options.showTileBoundaries&&(u.values(this.style._layers).forEach(function(pt){pt.source&&!pt.isHidden(n.transform.zoom)&&(pt.source!==(v&&v.id)&&(v=n.style.sourceCaches[pt.source]),(!y||y.getSource().maxzoom<v.getSource().maxzoom)&&(y=v));}),y&&Nn.debug(this,y,y.getVisibleCoordinates())),this.options.showPadding&&function(pt){var bt=pt.transform.padding;Ls(pt,pt.transform.height-(bt.top||0),3,Ms),Ls(pt,bt.bottom||0,3,ql),Bs(pt,bt.left||0,3,Zl),Bs(pt,pt.transform.width-(bt.right||0),3,La);var kt=pt.transform.centerPoint;!function(Bt,Lt,ne,wt){Jo(Bt,Lt-1,ne-10,2,20,wt),Jo(Bt,Lt-10,ne-1,20,2,wt);}(pt,kt.x,pt.transform.height-kt.y,Ds);}(this),this.context.setDefault();},Ie.prototype.renderLayer=function(i,o,n,s){n.isHidden(this.transform.zoom)||(n.type==="background"||n.type==="custom"||s.length)&&(this.id=n.id,this.gpuTimingStart(n),Nn[n.type](i,o,n,s,this.style.placement.variableOffsets),this.gpuTimingEnd());},Ie.prototype.gpuTimingStart=function(i){if(this.options.gpuTiming){var o=this.context.extTimerQuery,n=this.gpuTimers[i.id];n||(n=this.gpuTimers[i.id]={calls:0,cpuTime:0,query:o.createQueryEXT()}),n.calls++,o.beginQueryEXT(o.TIME_ELAPSED_EXT,n.query);}},Ie.prototype.gpuTimingEnd=function(){if(this.options.gpuTiming){var i=this.context.extTimerQuery;i.endQueryEXT(i.TIME_ELAPSED_EXT);}},Ie.prototype.collectGpuTimers=function(){var i=this.gpuTimers;return this.gpuTimers={},i},Ie.prototype.queryGpuTimers=function(i){var o={};for(var n in i){var s=i[n],p=this.context.extTimerQuery,f=p.getQueryObjectEXT(s.query,p.QUERY_RESULT_EXT)/1e6;p.deleteQueryEXT(s.query),o[n]=f;}return o},Ie.prototype.translatePosMatrix=function(i,o,n,s,p){if(!n[0]&&!n[1])return i;var f=p?s==="map"?this.transform.angle:0:s==="viewport"?-this.transform.angle:0;if(f){var d=Math.sin(f),y=Math.cos(f);n=[n[0]*y-n[1]*d,n[0]*d+n[1]*y];}var v=[p?n[0]:Te(o,n[0],this.transform.zoom),p?n[1]:Te(o,n[1],this.transform.zoom),0],S=new Float32Array(16);return u.translate(S,i,v),S},Ie.prototype.saveTileTexture=function(i){var o=this._tileTextures[i.size[0]];o?o.push(i):this._tileTextures[i.size[0]]=[i];},Ie.prototype.getTileTexture=function(i){var o=this._tileTextures[i];return o&&o.length>0?o.pop():null},Ie.prototype.isPatternMissing=function(i){if(!i)return !1;if(!i.from||!i.to)return !0;var o=this.imageManager.getPattern(i.from.toString()),n=this.imageManager.getPattern(i.to.toString());return !o||!n},Ie.prototype.useProgram=function(i,o){this.cache=this.cache||{};var n=""+i+(o?o.cacheKey:"")+(this._showOverdrawInspector?"/overdraw":"");return this.cache[n]||(this.cache[n]=new Cl(this.context,i,Ou[i],o,Ul[i],this._showOverdrawInspector)),this.cache[n]},Ie.prototype.setCustomLayerDefaults=function(){this.context.unbindVAO(),this.context.cullFace.setDefault(),this.context.activeTexture.setDefault(),this.context.pixelStoreUnpack.setDefault(),this.context.pixelStoreUnpackPremultiplyAlpha.setDefault(),this.context.pixelStoreUnpackFlipY.setDefault();},Ie.prototype.setBaseState=function(){var i=this.context.gl;this.context.cullFace.set(!1),this.context.viewport.set([0,0,this.width,this.height]),this.context.blendEquation.set(i.FUNC_ADD);},Ie.prototype.initDebugOverlayCanvas=function(){this.debugOverlayCanvas==null&&(this.debugOverlayCanvas=u.window.document.createElement("canvas"),this.debugOverlayCanvas.width=512,this.debugOverlayCanvas.height=512,this.debugOverlayTexture=new u.Texture(this.context,this.debugOverlayCanvas,this.context.gl.RGBA));},Ie.prototype.destroy=function(){this.emptyTexture.destroy(),this.debugOverlayTexture&&this.debugOverlayTexture.destroy();};var Ba=function(i,o){this.points=i,this.planes=o;};Ba.fromInvProjectionMatrix=function(i,o,n){var s=Math.pow(2,n),p=[[-1,1,-1,1],[1,1,-1,1],[1,-1,-1,1],[-1,-1,-1,1],[-1,1,1,1],[1,1,1,1],[1,-1,1,1],[-1,-1,1,1]].map(function(d){return u.transformMat4([],d,i)}).map(function(d){return u.scale$1([],d,1/d[3]/o*s)}),f=[[0,1,2],[6,5,4],[0,3,7],[2,1,5],[3,2,6],[0,4,5]].map(function(d){var y=u.sub([],p[d[0]],p[d[1]]),v=u.sub([],p[d[2]],p[d[1]]),S=u.normalize([],u.cross([],y,v)),P=-u.dot(S,p[d[1]]);return S.concat(P)});return new Ba(p,f)};var jn=function(i,o){this.min=i,this.max=o,this.center=u.scale$2([],u.add([],this.min,this.max),.5);};jn.prototype.quadrant=function(i){for(var o=[i%2==0,i<2],n=u.clone$2(this.min),s=u.clone$2(this.max),p=0;p<o.length;p++)n[p]=o[p]?this.min[p]:this.center[p],s[p]=o[p]?this.center[p]:this.max[p];return s[2]=this.max[2],new jn(n,s)},jn.prototype.distanceX=function(i){return Math.max(Math.min(this.max[0],i[0]),this.min[0])-i[0]},jn.prototype.distanceY=function(i){return Math.max(Math.min(this.max[1],i[1]),this.min[1])-i[1]},jn.prototype.intersects=function(i){for(var o=[[this.min[0],this.min[1],0,1],[this.max[0],this.min[1],0,1],[this.max[0],this.max[1],0,1],[this.min[0],this.max[1],0,1]],n=!0,s=0;s<i.planes.length;s++){for(var p=i.planes[s],f=0,d=0;d<o.length;d++)f+=u.dot$1(p,o[d])>=0;if(f===0)return 0;f!==o.length&&(n=!1);}if(n)return 2;for(var y=0;y<3;y++){for(var v=Number.MAX_VALUE,S=-Number.MAX_VALUE,P=0;P<i.points.length;P++){var z=i.points[P][y]-this.min[y];v=Math.min(v,z),S=Math.max(S,z);}if(S<0||v>this.max[y]-this.min[y])return 0}return 1};var sn=function(i,o,n,s){if(i===void 0&&(i=0),o===void 0&&(o=0),n===void 0&&(n=0),s===void 0&&(s=0),isNaN(i)||i<0||isNaN(o)||o<0||isNaN(n)||n<0||isNaN(s)||s<0)throw new Error("Invalid value for edge-insets, top, bottom, left and right must all be numbers");this.top=i,this.bottom=o,this.left=n,this.right=s;};sn.prototype.interpolate=function(i,o,n){return o.top!=null&&i.top!=null&&(this.top=u.number(i.top,o.top,n)),o.bottom!=null&&i.bottom!=null&&(this.bottom=u.number(i.bottom,o.bottom,n)),o.left!=null&&i.left!=null&&(this.left=u.number(i.left,o.left,n)),o.right!=null&&i.right!=null&&(this.right=u.number(i.right,o.right,n)),this},sn.prototype.getCenter=function(i,o){var n=u.clamp((this.left+i-this.right)/2,0,i),s=u.clamp((this.top+o-this.bottom)/2,0,o);return new u.Point(n,s)},sn.prototype.equals=function(i){return this.top===i.top&&this.bottom===i.bottom&&this.left===i.left&&this.right===i.right},sn.prototype.clone=function(){return new sn(this.top,this.bottom,this.left,this.right)},sn.prototype.toJSON=function(){return {top:this.top,bottom:this.bottom,left:this.left,right:this.right}};var ee=function(i,o,n,s,p){this.tileSize=512,this.maxValidLatitude=85.051129,this._renderWorldCopies=p===void 0||p,this._minZoom=i||0,this._maxZoom=o||22,this._minPitch=n??0,this._maxPitch=s??60,this.setMaxBounds(),this.width=0,this.height=0,this._center=new u.LngLat(0,0),this.zoom=0,this.angle=0,this._fov=.6435011087932844,this._pitch=0,this._unmodified=!0,this._edgeInsets=new sn,this._posMatrixCache={},this._alignedPosMatrixCache={};},be={minZoom:{configurable:!0},maxZoom:{configurable:!0},minPitch:{configurable:!0},maxPitch:{configurable:!0},renderWorldCopies:{configurable:!0},worldSize:{configurable:!0},centerOffset:{configurable:!0},size:{configurable:!0},bearing:{configurable:!0},pitch:{configurable:!0},fov:{configurable:!0},zoom:{configurable:!0},center:{configurable:!0},padding:{configurable:!0},centerPoint:{configurable:!0},unmodified:{configurable:!0},point:{configurable:!0}};ee.prototype.clone=function(){var i=new ee(this._minZoom,this._maxZoom,this._minPitch,this.maxPitch,this._renderWorldCopies);return i.tileSize=this.tileSize,i.latRange=this.latRange,i.width=this.width,i.height=this.height,i._center=this._center,i.zoom=this.zoom,i.angle=this.angle,i._fov=this._fov,i._pitch=this._pitch,i._unmodified=this._unmodified,i._edgeInsets=this._edgeInsets.clone(),i._calcMatrices(),i},be.minZoom.get=function(){return this._minZoom},be.minZoom.set=function(i){this._minZoom!==i&&(this._minZoom=i,this.zoom=Math.max(this.zoom,i));},be.maxZoom.get=function(){return this._maxZoom},be.maxZoom.set=function(i){this._maxZoom!==i&&(this._maxZoom=i,this.zoom=Math.min(this.zoom,i));},be.minPitch.get=function(){return this._minPitch},be.minPitch.set=function(i){this._minPitch!==i&&(this._minPitch=i,this.pitch=Math.max(this.pitch,i));},be.maxPitch.get=function(){return this._maxPitch},be.maxPitch.set=function(i){this._maxPitch!==i&&(this._maxPitch=i,this.pitch=Math.min(this.pitch,i));},be.renderWorldCopies.get=function(){return this._renderWorldCopies},be.renderWorldCopies.set=function(i){i===void 0?i=!0:i===null&&(i=!1),this._renderWorldCopies=i;},be.worldSize.get=function(){return this.tileSize*this.scale},be.centerOffset.get=function(){return this.centerPoint._sub(this.size._div(2))},be.size.get=function(){return new u.Point(this.width,this.height)},be.bearing.get=function(){return -this.angle/Math.PI*180},be.bearing.set=function(i){var o=-u.wrap(i,-180,180)*Math.PI/180;this.angle!==o&&(this._unmodified=!1,this.angle=o,this._calcMatrices(),this.rotationMatrix=u.create$2(),u.rotate(this.rotationMatrix,this.rotationMatrix,this.angle));},be.pitch.get=function(){return this._pitch/Math.PI*180},be.pitch.set=function(i){var o=u.clamp(i,this.minPitch,this.maxPitch)/180*Math.PI;this._pitch!==o&&(this._unmodified=!1,this._pitch=o,this._calcMatrices());},be.fov.get=function(){return this._fov/Math.PI*180},be.fov.set=function(i){i=Math.max(.01,Math.min(60,i)),this._fov!==i&&(this._unmodified=!1,this._fov=i/180*Math.PI,this._calcMatrices());},be.zoom.get=function(){return this._zoom},be.zoom.set=function(i){var o=Math.min(Math.max(i,this.minZoom),this.maxZoom);this._zoom!==o&&(this._unmodified=!1,this._zoom=o,this.scale=this.zoomScale(o),this.tileZoom=Math.floor(o),this.zoomFraction=o-this.tileZoom,this._constrain(),this._calcMatrices());},be.center.get=function(){return this._center},be.center.set=function(i){i.lat===this._center.lat&&i.lng===this._center.lng||(this._unmodified=!1,this._center=i,this._constrain(),this._calcMatrices());},be.padding.get=function(){return this._edgeInsets.toJSON()},be.padding.set=function(i){this._edgeInsets.equals(i)||(this._unmodified=!1,this._edgeInsets.interpolate(this._edgeInsets,i,1),this._calcMatrices());},be.centerPoint.get=function(){return this._edgeInsets.getCenter(this.width,this.height)},ee.prototype.isPaddingEqual=function(i){return this._edgeInsets.equals(i)},ee.prototype.interpolatePadding=function(i,o,n){this._unmodified=!1,this._edgeInsets.interpolate(i,o,n),this._constrain(),this._calcMatrices();},ee.prototype.coveringZoomLevel=function(i){var o=(i.roundZoom?Math.round:Math.floor)(this.zoom+this.scaleZoom(this.tileSize/i.tileSize));return Math.max(0,o)},ee.prototype.getVisibleUnwrappedCoordinates=function(i){var o=[new u.UnwrappedTileID(0,i)];if(this._renderWorldCopies)for(var n=this.pointCoordinate(new u.Point(0,0)),s=this.pointCoordinate(new u.Point(this.width,0)),p=this.pointCoordinate(new u.Point(this.width,this.height)),f=this.pointCoordinate(new u.Point(0,this.height)),d=Math.floor(Math.min(n.x,s.x,p.x,f.x)),y=Math.floor(Math.max(n.x,s.x,p.x,f.x)),v=d-1;v<=y+1;v++)v!==0&&o.push(new u.UnwrappedTileID(v,i));return o},ee.prototype.coveringTiles=function(i){var o=this.coveringZoomLevel(i),n=o;if(i.minzoom!==void 0&&o<i.minzoom)return [];i.maxzoom!==void 0&&o>i.maxzoom&&(o=i.maxzoom);var s=u.MercatorCoordinate.fromLngLat(this.center),p=Math.pow(2,o),f=[p*s.x,p*s.y,0],d=Ba.fromInvProjectionMatrix(this.invProjMatrix,this.worldSize,o),y=i.minzoom||0;this.pitch<=60&&this._edgeInsets.top<.1&&(y=o);var v=function(pt){return {aabb:new jn([pt*p,0,0],[(pt+1)*p,p,0]),zoom:0,x:0,y:0,wrap:pt,fullyVisible:!1}},S=[],P=[],z=o,k=i.reparseOverscaled?n:o;if(this._renderWorldCopies)for(var F=1;F<=3;F++)S.push(v(-F)),S.push(v(F));for(S.push(v(0));S.length>0;){var R=S.pop(),j=R.x,D=R.y,N=R.fullyVisible;if(!N){var G=R.aabb.intersects(d);if(G===0)continue;N=G===2;}var K=R.aabb.distanceX(f),tt=R.aabb.distanceY(f),Q=Math.max(Math.abs(K),Math.abs(tt));if(R.zoom===z||Q>3+(1<<z-R.zoom)-2&&R.zoom>=y)P.push({tileID:new u.OverscaledTileID(R.zoom===z?k:R.zoom,R.wrap,R.zoom,j,D),distanceSq:u.sqrLen([f[0]-.5-j,f[1]-.5-D])});else for(var et=0;et<4;et++){var ot=(j<<1)+et%2,ht=(D<<1)+(et>>1);S.push({aabb:R.aabb.quadrant(et),zoom:R.zoom+1,x:ot,y:ht,wrap:R.wrap,fullyVisible:N});}}return P.sort(function(pt,bt){return pt.distanceSq-bt.distanceSq}).map(function(pt){return pt.tileID})},ee.prototype.resize=function(i,o){this.width=i,this.height=o,this.pixelsToGLUnits=[2/i,-2/o],this._constrain(),this._calcMatrices();},be.unmodified.get=function(){return this._unmodified},ee.prototype.zoomScale=function(i){return Math.pow(2,i)},ee.prototype.scaleZoom=function(i){return Math.log(i)/Math.LN2},ee.prototype.project=function(i){var o=u.clamp(i.lat,-this.maxValidLatitude,this.maxValidLatitude);return new u.Point(u.mercatorXfromLng(i.lng)*this.worldSize,u.mercatorYfromLat(o)*this.worldSize)},ee.prototype.unproject=function(i){return new u.MercatorCoordinate(i.x/this.worldSize,i.y/this.worldSize).toLngLat()},be.point.get=function(){return this.project(this.center)},ee.prototype.setLocationAtPoint=function(i,o){var n=this.pointCoordinate(o),s=this.pointCoordinate(this.centerPoint),p=this.locationCoordinate(i),f=new u.MercatorCoordinate(p.x-(n.x-s.x),p.y-(n.y-s.y));this.center=this.coordinateLocation(f),this._renderWorldCopies&&(this.center=this.center.wrap());},ee.prototype.locationPoint=function(i){return this.coordinatePoint(this.locationCoordinate(i))},ee.prototype.pointLocation=function(i){return this.coordinateLocation(this.pointCoordinate(i))},ee.prototype.locationCoordinate=function(i){return u.MercatorCoordinate.fromLngLat(i)},ee.prototype.coordinateLocation=function(i){return i.toLngLat()},ee.prototype.pointCoordinate=function(i){var o=[i.x,i.y,0,1],n=[i.x,i.y,1,1];u.transformMat4(o,o,this.pixelMatrixInverse),u.transformMat4(n,n,this.pixelMatrixInverse);var s=o[3],p=n[3],f=o[1]/s,d=n[1]/p,y=o[2]/s,v=n[2]/p,S=y===v?0:(0-y)/(v-y);return new u.MercatorCoordinate(u.number(o[0]/s,n[0]/p,S)/this.worldSize,u.number(f,d,S)/this.worldSize)},ee.prototype.coordinatePoint=function(i){var o=[i.x*this.worldSize,i.y*this.worldSize,0,1];return u.transformMat4(o,o,this.pixelMatrix),new u.Point(o[0]/o[3],o[1]/o[3])},ee.prototype.getBounds=function(){return new u.LngLatBounds().extend(this.pointLocation(new u.Point(0,0))).extend(this.pointLocation(new u.Point(this.width,0))).extend(this.pointLocation(new u.Point(this.width,this.height))).extend(this.pointLocation(new u.Point(0,this.height)))},ee.prototype.getMaxBounds=function(){return this.latRange&&this.latRange.length===2&&this.lngRange&&this.lngRange.length===2?new u.LngLatBounds([this.lngRange[0],this.latRange[0]],[this.lngRange[1],this.latRange[1]]):null},ee.prototype.setMaxBounds=function(i){i?(this.lngRange=[i.getWest(),i.getEast()],this.latRange=[i.getSouth(),i.getNorth()],this._constrain()):(this.lngRange=null,this.latRange=[-this.maxValidLatitude,this.maxValidLatitude]);},ee.prototype.calculatePosMatrix=function(i,o){o===void 0&&(o=!1);var n=i.key,s=o?this._alignedPosMatrixCache:this._posMatrixCache;if(s[n])return s[n];var p=i.canonical,f=this.worldSize/this.zoomScale(p.z),d=p.x+Math.pow(2,p.z)*i.wrap,y=u.identity(new Float64Array(16));return u.translate(y,y,[d*f,p.y*f,0]),u.scale(y,y,[f/u.EXTENT,f/u.EXTENT,1]),u.multiply(y,o?this.alignedProjMatrix:this.projMatrix,y),s[n]=new Float32Array(y),s[n]},ee.prototype.customLayerMatrix=function(){return this.mercatorMatrix.slice()},ee.prototype._constrain=function(){if(this.center&&this.width&&this.height&&!this._constraining){this._constraining=!0;var i,o,n,s,p=-90,f=90,d=-180,y=180,v=this.size,S=this._unmodified;if(this.latRange){var P=this.latRange;p=u.mercatorYfromLat(P[1])*this.worldSize,i=(f=u.mercatorYfromLat(P[0])*this.worldSize)-p<v.y?v.y/(f-p):0;}if(this.lngRange){var z=this.lngRange;d=u.mercatorXfromLng(z[0])*this.worldSize,o=(y=u.mercatorXfromLng(z[1])*this.worldSize)-d<v.x?v.x/(y-d):0;}var k=this.point,F=Math.max(o||0,i||0);if(F)return this.center=this.unproject(new u.Point(o?(y+d)/2:k.x,i?(f+p)/2:k.y)),this.zoom+=this.scaleZoom(F),this._unmodified=S,void(this._constraining=!1);if(this.latRange){var R=k.y,j=v.y/2;R-j<p&&(s=p+j),R+j>f&&(s=f-j);}if(this.lngRange){var D=k.x,N=v.x/2;D-N<d&&(n=d+N),D+N>y&&(n=y-N);}n===void 0&&s===void 0||(this.center=this.unproject(new u.Point(n!==void 0?n:k.x,s!==void 0?s:k.y))),this._unmodified=S,this._constraining=!1;}},ee.prototype._calcMatrices=function(){if(this.height){var i=this.centerOffset;this.cameraToCenterDistance=.5/Math.tan(this._fov/2)*this.height;var o=Math.PI/2+this._pitch,n=this._fov*(.5+i.y/this.height),s=Math.sin(n)*this.cameraToCenterDistance/Math.sin(u.clamp(Math.PI-o-n,.01,Math.PI-.01)),p=this.point,f=p.x,d=p.y,y=1.01*(Math.cos(Math.PI/2-this._pitch)*s+this.cameraToCenterDistance),v=this.height/50,S=new Float64Array(16);u.perspective(S,this._fov,this.width/this.height,v,y),S[8]=2*-i.x/this.width,S[9]=2*i.y/this.height,u.scale(S,S,[1,-1,1]),u.translate(S,S,[0,0,-this.cameraToCenterDistance]),u.rotateX(S,S,this._pitch),u.rotateZ(S,S,this.angle),u.translate(S,S,[-f,-d,0]),this.mercatorMatrix=u.scale([],S,[this.worldSize,this.worldSize,this.worldSize]),u.scale(S,S,[1,1,u.mercatorZfromAltitude(1,this.center.lat)*this.worldSize,1]),this.projMatrix=S,this.invProjMatrix=u.invert([],this.projMatrix);var P=this.width%2/2,z=this.height%2/2,k=Math.cos(this.angle),F=Math.sin(this.angle),R=f-Math.round(f)+k*P+F*z,j=d-Math.round(d)+k*z+F*P,D=new Float64Array(S);if(u.translate(D,D,[R>.5?R-1:R,j>.5?j-1:j,0]),this.alignedProjMatrix=D,S=u.create(),u.scale(S,S,[this.width/2,-this.height/2,1]),u.translate(S,S,[1,-1,0]),this.labelPlaneMatrix=S,S=u.create(),u.scale(S,S,[1,-1,1]),u.translate(S,S,[-1,-1,0]),u.scale(S,S,[2/this.width,2/this.height,1]),this.glCoordMatrix=S,this.pixelMatrix=u.multiply(new Float64Array(16),this.labelPlaneMatrix,this.projMatrix),!(S=u.invert(new Float64Array(16),this.pixelMatrix)))throw new Error("failed to invert matrix");this.pixelMatrixInverse=S,this._posMatrixCache={},this._alignedPosMatrixCache={};}},ee.prototype.maxPitchScaleFactor=function(){if(!this.pixelMatrixInverse)return 1;var i=this.pointCoordinate(new u.Point(0,0)),o=[i.x*this.worldSize,i.y*this.worldSize,0,1];return u.transformMat4(o,o,this.pixelMatrix)[3]/this.cameraToCenterDistance},ee.prototype.getCameraPoint=function(){var i=Math.tan(this._pitch)*(this.cameraToCenterDistance||1);return this.centerPoint.add(new u.Point(0,i))},ee.prototype.getCameraQueryGeometry=function(i){var o=this.getCameraPoint();if(i.length===1)return [i[0],o];for(var n=o.x,s=o.y,p=o.x,f=o.y,d=0,y=i;d<y.length;d+=1){var v=y[d];n=Math.min(n,v.x),s=Math.min(s,v.y),p=Math.max(p,v.x),f=Math.max(f,v.y);}return [new u.Point(n,s),new u.Point(p,s),new u.Point(p,f),new u.Point(n,f),new u.Point(n,s)]},Object.defineProperties(ee.prototype,be);var Xr=function(i){var o,n,s,p;this._hashName=i&&encodeURIComponent(i),u.bindAll(["_getCurrentHash","_onHashChange","_updateHash"],this),this._updateHash=(o=this._updateHashUnthrottled.bind(this),n=!1,s=null,p=function(){s=null,n&&(o(),s=setTimeout(p,300),n=!1);},function(){return n=!0,s||p(),s});};Xr.prototype.addTo=function(i){return this._map=i,u.window.addEventListener("hashchange",this._onHashChange,!1),this._map.on("moveend",this._updateHash),this},Xr.prototype.remove=function(){return u.window.removeEventListener("hashchange",this._onHashChange,!1),this._map.off("moveend",this._updateHash),clearTimeout(this._updateHash()),delete this._map,this},Xr.prototype.getHashString=function(i){var o=this._map.getCenter(),n=Math.round(100*this._map.getZoom())/100,s=Math.ceil((n*Math.LN2+Math.log(512/360/.5))/Math.LN10),p=Math.pow(10,s),f=Math.round(o.lng*p)/p,d=Math.round(o.lat*p)/p,y=this._map.getBearing(),v=this._map.getPitch(),S="";if(S+=i?"/"+f+"/"+d+"/"+n:n+"/"+d+"/"+f,(y||v)&&(S+="/"+Math.round(10*y)/10),v&&(S+="/"+Math.round(v)),this._hashName){var P=this._hashName,z=!1,k=u.window.location.hash.slice(1).split("&").map(function(F){var R=F.split("=")[0];return R===P?(z=!0,R+"="+S):F}).filter(function(F){return F});return z||k.push(P+"="+S),"#"+k.join("&")}return "#"+S},Xr.prototype._getCurrentHash=function(){var i,o=this,n=u.window.location.hash.replace("#","");return this._hashName?(n.split("&").map(function(s){return s.split("=")}).forEach(function(s){s[0]===o._hashName&&(i=s);}),(i&&i[1]||"").split("/")):n.split("/")},Xr.prototype._onHashChange=function(){var i=this._getCurrentHash();if(i.length>=3&&!i.some(function(n){return isNaN(n)})){var o=this._map.dragRotate.isEnabled()&&this._map.touchZoomRotate.isEnabled()?+(i[3]||0):this._map.getBearing();return this._map.jumpTo({center:[+i[2],+i[1]],zoom:+i[0],bearing:o,pitch:+(i[4]||0)}),!0}return !1},Xr.prototype._updateHashUnthrottled=function(){var i=u.window.location.href.replace(/(#.+)?$/,this.getHashString());try{u.window.history.replaceState(u.window.history.state,null,i);}catch(o){}};var Yo={linearity:.3,easing:u.bezier(0,0,.3,1)},_o=u.extend({deceleration:2500,maxSpeed:1400},Yo),Qo=u.extend({deceleration:20,maxSpeed:1400},Yo),ju=u.extend({deceleration:1e3,maxSpeed:360},Yo),qu=u.extend({deceleration:1e3,maxSpeed:90},Yo),$o=function(i){this._map=i,this.clear();};function ta(i,o){(!i.duration||i.duration<o.duration)&&(i.duration=o.duration,i.easing=o.easing);}function Ni(i,o,n){var s=n.maxSpeed,p=n.linearity,f=n.deceleration,d=u.clamp(i*p/(o/1e3),-s,s),y=Math.abs(d)/(f*p);return {easing:n.easing,duration:1e3*y,amount:d*(y/2)}}$o.prototype.clear=function(){this._inertiaBuffer=[];},$o.prototype.record=function(i){this._drainInertiaBuffer(),this._inertiaBuffer.push({time:u.browser.now(),settings:i});},$o.prototype._drainInertiaBuffer=function(){for(var i=this._inertiaBuffer,o=u.browser.now();i.length>0&&o-i[0].time>160;)i.shift();},$o.prototype._onMoveEnd=function(i){if(this._drainInertiaBuffer(),!(this._inertiaBuffer.length<2)){for(var o={zoom:0,bearing:0,pitch:0,pan:new u.Point(0,0),pinchAround:void 0,around:void 0},n=0,s=this._inertiaBuffer;n<s.length;n+=1){var p=s[n].settings;o.zoom+=p.zoomDelta||0,o.bearing+=p.bearingDelta||0,o.pitch+=p.pitchDelta||0,p.panDelta&&o.pan._add(p.panDelta),p.around&&(o.around=p.around),p.pinchAround&&(o.pinchAround=p.pinchAround);}var f=this._inertiaBuffer[this._inertiaBuffer.length-1].time-this._inertiaBuffer[0].time,d={};if(o.pan.mag()){var y=Ni(o.pan.mag(),f,u.extend({},_o,i||{}));d.offset=o.pan.mult(y.amount/o.pan.mag()),d.center=this._map.transform.center,ta(d,y);}if(o.zoom){var v=Ni(o.zoom,f,Qo);d.zoom=this._map.transform.zoom+v.amount,ta(d,v);}if(o.bearing){var S=Ni(o.bearing,f,ju);d.bearing=this._map.transform.bearing+u.clamp(S.amount,-179,179),ta(d,S);}if(o.pitch){var P=Ni(o.pitch,f,qu);d.pitch=this._map.transform.pitch+P.amount,ta(d,P);}if(d.zoom||d.bearing){var z=o.pinchAround===void 0?o.around:o.pinchAround;d.around=z?this._map.unproject(z):this._map.getCenter();}return this.clear(),u.extend(d,{noMoveStart:!0})}};var Xe=function(i){function o(s,p,f,d){d===void 0&&(d={});var y=ct.mousePos(p.getCanvasContainer(),f),v=p.unproject(y);i.call(this,s,u.extend({point:y,lngLat:v,originalEvent:f},d)),this._defaultPrevented=!1,this.target=p;}i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o;var n={defaultPrevented:{configurable:!0}};return o.prototype.preventDefault=function(){this._defaultPrevented=!0;},n.defaultPrevented.get=function(){return this._defaultPrevented},Object.defineProperties(o.prototype,n),o}(u.Event),ea=function(i){function o(s,p,f){var d=s==="touchend"?f.changedTouches:f.touches,y=ct.touchPos(p.getCanvasContainer(),d),v=y.map(function(z){return p.unproject(z)}),S=y.reduce(function(z,k,F,R){return z.add(k.div(R.length))},new u.Point(0,0)),P=p.unproject(S);i.call(this,s,{points:y,point:S,lngLats:v,lngLat:P,originalEvent:f}),this._defaultPrevented=!1;}i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o;var n={defaultPrevented:{configurable:!0}};return o.prototype.preventDefault=function(){this._defaultPrevented=!0;},n.defaultPrevented.get=function(){return this._defaultPrevented},Object.defineProperties(o.prototype,n),o}(u.Event),Xl=function(i){function o(s,p,f){i.call(this,s,{originalEvent:f}),this._defaultPrevented=!1;}i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o;var n={defaultPrevented:{configurable:!0}};return o.prototype.preventDefault=function(){this._defaultPrevented=!0;},n.defaultPrevented.get=function(){return this._defaultPrevented},Object.defineProperties(o.prototype,n),o}(u.Event),Ze=function(i,o){this._map=i,this._clickTolerance=o.clickTolerance;};Ze.prototype.reset=function(){delete this._mousedownPos;},Ze.prototype.wheel=function(i){return this._firePreventable(new Xl(i.type,this._map,i))},Ze.prototype.mousedown=function(i,o){return this._mousedownPos=o,this._firePreventable(new Xe(i.type,this._map,i))},Ze.prototype.mouseup=function(i){this._map.fire(new Xe(i.type,this._map,i));},Ze.prototype.click=function(i,o){this._mousedownPos&&this._mousedownPos.dist(o)>=this._clickTolerance||this._map.fire(new Xe(i.type,this._map,i));},Ze.prototype.dblclick=function(i){return this._firePreventable(new Xe(i.type,this._map,i))},Ze.prototype.mouseover=function(i){this._map.fire(new Xe(i.type,this._map,i));},Ze.prototype.mouseout=function(i){this._map.fire(new Xe(i.type,this._map,i));},Ze.prototype.touchstart=function(i){return this._firePreventable(new ea(i.type,this._map,i))},Ze.prototype.touchmove=function(i){this._map.fire(new ea(i.type,this._map,i));},Ze.prototype.touchend=function(i){this._map.fire(new ea(i.type,this._map,i));},Ze.prototype.touchcancel=function(i){this._map.fire(new ea(i.type,this._map,i));},Ze.prototype._firePreventable=function(i){if(this._map.fire(i),i.defaultPrevented)return {}},Ze.prototype.isEnabled=function(){return !0},Ze.prototype.isActive=function(){return !1},Ze.prototype.enable=function(){},Ze.prototype.disable=function(){};var Tt=function(i){this._map=i;};Tt.prototype.reset=function(){this._delayContextMenu=!1,delete this._contextMenuEvent;},Tt.prototype.mousemove=function(i){this._map.fire(new Xe(i.type,this._map,i));},Tt.prototype.mousedown=function(){this._delayContextMenu=!0;},Tt.prototype.mouseup=function(){this._delayContextMenu=!1,this._contextMenuEvent&&(this._map.fire(new Xe("contextmenu",this._map,this._contextMenuEvent)),delete this._contextMenuEvent);},Tt.prototype.contextmenu=function(i){this._delayContextMenu?this._contextMenuEvent=i:this._map.fire(new Xe(i.type,this._map,i)),this._map.listens("contextmenu")&&i.preventDefault();},Tt.prototype.isEnabled=function(){return !0},Tt.prototype.isActive=function(){return !1},Tt.prototype.enable=function(){},Tt.prototype.disable=function(){};var Fr=function(i,o){this._map=i,this._el=i.getCanvasContainer(),this._container=i.getContainer(),this._clickTolerance=o.clickTolerance||1;};function Ra(i,o){for(var n={},s=0;s<i.length;s++)n[i[s].identifier]=o[s];return n}Fr.prototype.isEnabled=function(){return !!this._enabled},Fr.prototype.isActive=function(){return !!this._active},Fr.prototype.enable=function(){this.isEnabled()||(this._enabled=!0);},Fr.prototype.disable=function(){this.isEnabled()&&(this._enabled=!1);},Fr.prototype.mousedown=function(i,o){this.isEnabled()&&i.shiftKey&&i.button===0&&(ct.disableDrag(),this._startPos=this._lastPos=o,this._active=!0);},Fr.prototype.mousemoveWindow=function(i,o){if(this._active){var n=o;if(!(this._lastPos.equals(n)||!this._box&&n.dist(this._startPos)<this._clickTolerance)){var s=this._startPos;this._lastPos=n,this._box||(this._box=ct.create("div","mapboxgl-boxzoom",this._container),this._container.classList.add("mapboxgl-crosshair"),this._fireEvent("boxzoomstart",i));var p=Math.min(s.x,n.x),f=Math.max(s.x,n.x),d=Math.min(s.y,n.y),y=Math.max(s.y,n.y);ct.setTransform(this._box,"translate("+p+"px,"+d+"px)"),this._box.style.width=f-p+"px",this._box.style.height=y-d+"px";}}},Fr.prototype.mouseupWindow=function(i,o){var n=this;if(this._active&&i.button===0){var s=this._startPos,p=o;if(this.reset(),ct.suppressClick(),s.x!==p.x||s.y!==p.y)return this._map.fire(new u.Event("boxzoomend",{originalEvent:i})),{cameraAnimation:function(f){return f.fitScreenCoordinates(s,p,n._map.getBearing(),{linear:!0})}};this._fireEvent("boxzoomcancel",i);}},Fr.prototype.keydown=function(i){this._active&&i.keyCode===27&&(this.reset(),this._fireEvent("boxzoomcancel",i));},Fr.prototype.blur=function(){this.reset();},Fr.prototype.reset=function(){this._active=!1,this._container.classList.remove("mapboxgl-crosshair"),this._box&&(ct.remove(this._box),this._box=null),ct.enableDrag(),delete this._startPos,delete this._lastPos;},Fr.prototype._fireEvent=function(i,o){return this._map.fire(new u.Event(i,{originalEvent:o}))};var vo=function(i){this.reset(),this.numTouches=i.numTouches;};vo.prototype.reset=function(){delete this.centroid,delete this.startTime,delete this.touches,this.aborted=!1;},vo.prototype.touchstart=function(i,o,n){(this.centroid||n.length>this.numTouches)&&(this.aborted=!0),this.aborted||(this.startTime===void 0&&(this.startTime=i.timeStamp),n.length===this.numTouches&&(this.centroid=function(s){for(var p=new u.Point(0,0),f=0,d=s;f<d.length;f+=1)p._add(d[f]);return p.div(s.length)}(o),this.touches=Ra(n,o)));},vo.prototype.touchmove=function(i,o,n){if(!this.aborted&&this.centroid){var s=Ra(n,o);for(var p in this.touches){var f=s[p];(!f||f.dist(this.touches[p])>30)&&(this.aborted=!0);}}},vo.prototype.touchend=function(i,o,n){if((!this.centroid||i.timeStamp-this.startTime>500)&&(this.aborted=!0),n.length===0){var s=!this.aborted&&this.centroid;if(this.reset(),s)return s}};var vi=function(i){this.singleTap=new vo(i),this.numTaps=i.numTaps,this.reset();};vi.prototype.reset=function(){this.lastTime=1/0,delete this.lastTap,this.count=0,this.singleTap.reset();},vi.prototype.touchstart=function(i,o,n){this.singleTap.touchstart(i,o,n);},vi.prototype.touchmove=function(i,o,n){this.singleTap.touchmove(i,o,n);},vi.prototype.touchend=function(i,o,n){var s=this.singleTap.touchend(i,o,n);if(s){var p=i.timeStamp-this.lastTime<500,f=!this.lastTap||this.lastTap.dist(s)<30;if(p&&f||this.reset(),this.count++,this.lastTime=i.timeStamp,this.lastTap=s,this.count===this.numTaps)return this.reset(),s}};var Or=function(){this._zoomIn=new vi({numTouches:1,numTaps:2}),this._zoomOut=new vi({numTouches:2,numTaps:1}),this.reset();};Or.prototype.reset=function(){this._active=!1,this._zoomIn.reset(),this._zoomOut.reset();},Or.prototype.touchstart=function(i,o,n){this._zoomIn.touchstart(i,o,n),this._zoomOut.touchstart(i,o,n);},Or.prototype.touchmove=function(i,o,n){this._zoomIn.touchmove(i,o,n),this._zoomOut.touchmove(i,o,n);},Or.prototype.touchend=function(i,o,n){var s=this,p=this._zoomIn.touchend(i,o,n),f=this._zoomOut.touchend(i,o,n);return p?(this._active=!0,i.preventDefault(),setTimeout(function(){return s.reset()},0),{cameraAnimation:function(d){return d.easeTo({duration:300,zoom:d.getZoom()+1,around:d.unproject(p)},{originalEvent:i})}}):f?(this._active=!0,i.preventDefault(),setTimeout(function(){return s.reset()},0),{cameraAnimation:function(d){return d.easeTo({duration:300,zoom:d.getZoom()-1,around:d.unproject(f)},{originalEvent:i})}}):void 0},Or.prototype.touchcancel=function(){this.reset();},Or.prototype.enable=function(){this._enabled=!0;},Or.prototype.disable=function(){this._enabled=!1,this.reset();},Or.prototype.isEnabled=function(){return this._enabled},Or.prototype.isActive=function(){return this._active};var Rs={0:1,2:2},mt=function(i){this.reset(),this._clickTolerance=i.clickTolerance||1;};mt.prototype.blur=function(){this.reset();},mt.prototype.reset=function(){this._active=!1,this._moved=!1,delete this._lastPoint,delete this._eventButton;},mt.prototype._correctButton=function(i,o){return !1},mt.prototype._move=function(i,o){return {}},mt.prototype.mousedown=function(i,o){if(!this._lastPoint){var n=ct.mouseButton(i);this._correctButton(i,n)&&(this._lastPoint=o,this._eventButton=n);}},mt.prototype.mousemoveWindow=function(i,o){var n=this._lastPoint;if(n){if(i.preventDefault(),function(s,p){var f=Rs[p];return s.buttons===void 0||(s.buttons&f)!==f}(i,this._eventButton))this.reset();else if(this._moved||!(o.dist(n)<this._clickTolerance))return this._moved=!0,this._lastPoint=o,this._move(n,o)}},mt.prototype.mouseupWindow=function(i){this._lastPoint&&ct.mouseButton(i)===this._eventButton&&(this._moved&&ct.suppressClick(),this.reset());},mt.prototype.enable=function(){this._enabled=!0;},mt.prototype.disable=function(){this._enabled=!1,this.reset();},mt.prototype.isEnabled=function(){return this._enabled},mt.prototype.isActive=function(){return this._active};var Fs=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.mousedown=function(n,s){i.prototype.mousedown.call(this,n,s),this._lastPoint&&(this._active=!0);},o.prototype._correctButton=function(n,s){return s===0&&!n.ctrlKey},o.prototype._move=function(n,s){return {around:s,panDelta:s.sub(n)}},o}(mt),Fa=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype._correctButton=function(n,s){return s===0&&n.ctrlKey||s===2},o.prototype._move=function(n,s){var p=.8*(s.x-n.x);if(p)return this._active=!0,{bearingDelta:p}},o.prototype.contextmenu=function(n){n.preventDefault();},o}(mt),Os=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype._correctButton=function(n,s){return s===0&&n.ctrlKey||s===2},o.prototype._move=function(n,s){var p=-.5*(s.y-n.y);if(p)return this._active=!0,{pitchDelta:p}},o.prototype.contextmenu=function(n){n.preventDefault();},o}(mt),ni=function(i){this._minTouches=1,this._clickTolerance=i.clickTolerance||1,this.reset();};ni.prototype.reset=function(){this._active=!1,this._touches={},this._sum=new u.Point(0,0);},ni.prototype.touchstart=function(i,o,n){return this._calculateTransform(i,o,n)},ni.prototype.touchmove=function(i,o,n){if(this._active&&!(n.length<this._minTouches))return i.preventDefault(),this._calculateTransform(i,o,n)},ni.prototype.touchend=function(i,o,n){this._calculateTransform(i,o,n),this._active&&n.length<this._minTouches&&this.reset();},ni.prototype.touchcancel=function(){this.reset();},ni.prototype._calculateTransform=function(i,o,n){n.length>0&&(this._active=!0);var s=Ra(n,o),p=new u.Point(0,0),f=new u.Point(0,0),d=0;for(var y in s){var v=s[y],S=this._touches[y];S&&(p._add(v),f._add(v.sub(S)),d++,s[y]=v);}if(this._touches=s,!(d<this._minTouches)&&f.mag()){var P=f.div(d);if(this._sum._add(P),!(this._sum.mag()<this._clickTolerance))return {around:p.div(d),panDelta:P}}},ni.prototype.enable=function(){this._enabled=!0;},ni.prototype.disable=function(){this._enabled=!1,this.reset();},ni.prototype.isEnabled=function(){return this._enabled},ni.prototype.isActive=function(){return this._active};var Ur=function(){this.reset();};function Oa(i,o,n){for(var s=0;s<i.length;s++)if(i[s].identifier===n)return o[s]}function Ua(i,o){return Math.log(i/o)/Math.LN2}Ur.prototype.reset=function(){this._active=!1,delete this._firstTwoTouches;},Ur.prototype._start=function(i){},Ur.prototype._move=function(i,o,n){return {}},Ur.prototype.touchstart=function(i,o,n){this._firstTwoTouches||n.length<2||(this._firstTwoTouches=[n[0].identifier,n[1].identifier],this._start([o[0],o[1]]));},Ur.prototype.touchmove=function(i,o,n){if(this._firstTwoTouches){i.preventDefault();var s=this._firstTwoTouches,p=s[1],f=Oa(n,o,s[0]),d=Oa(n,o,p);if(f&&d){var y=this._aroundCenter?null:f.add(d).div(2);return this._move([f,d],y,i)}}},Ur.prototype.touchend=function(i,o,n){if(this._firstTwoTouches){var s=this._firstTwoTouches,p=s[1],f=Oa(n,o,s[0]),d=Oa(n,o,p);f&&d||(this._active&&ct.suppressClick(),this.reset());}},Ur.prototype.touchcancel=function(){this.reset();},Ur.prototype.enable=function(i){this._enabled=!0,this._aroundCenter=!!i&&i.around==="center";},Ur.prototype.disable=function(){this._enabled=!1,this.reset();},Ur.prototype.isEnabled=function(){return this._enabled},Ur.prototype.isActive=function(){return this._active};var Vr=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.reset=function(){i.prototype.reset.call(this),delete this._distance,delete this._startDistance;},o.prototype._start=function(n){this._startDistance=this._distance=n[0].dist(n[1]);},o.prototype._move=function(n,s){var p=this._distance;if(this._distance=n[0].dist(n[1]),this._active||!(Math.abs(Ua(this._distance,this._startDistance))<.1))return this._active=!0,{zoomDelta:Ua(this._distance,p),pinchAround:s}},o}(Ur);function ji(i,o){return 180*i.angleWith(o)/Math.PI}var Wl=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.reset=function(){i.prototype.reset.call(this),delete this._minDiameter,delete this._startVector,delete this._vector;},o.prototype._start=function(n){this._startVector=this._vector=n[0].sub(n[1]),this._minDiameter=n[0].dist(n[1]);},o.prototype._move=function(n,s){var p=this._vector;if(this._vector=n[0].sub(n[1]),this._active||!this._isBelowThreshold(this._vector))return this._active=!0,{bearingDelta:ji(this._vector,p),pinchAround:s}},o.prototype._isBelowThreshold=function(n){this._minDiameter=Math.min(this._minDiameter,n.mag());var s=25/(Math.PI*this._minDiameter)*360,p=ji(n,this._startVector);return Math.abs(p)<s},o}(Ur);function ra(i){return Math.abs(i.y)>Math.abs(i.x)}var Us=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.reset=function(){i.prototype.reset.call(this),this._valid=void 0,delete this._firstMove,delete this._lastPoints;},o.prototype._start=function(n){this._lastPoints=n,ra(n[0].sub(n[1]))&&(this._valid=!1);},o.prototype._move=function(n,s,p){var f=n[0].sub(this._lastPoints[0]),d=n[1].sub(this._lastPoints[1]);if(this._valid=this.gestureBeginsVertically(f,d,p.timeStamp),this._valid)return this._lastPoints=n,this._active=!0,{pitchDelta:(f.y+d.y)/2*-.5}},o.prototype.gestureBeginsVertically=function(n,s,p){if(this._valid!==void 0)return this._valid;var f=n.mag()>=2,d=s.mag()>=2;if(f||d){if(!f||!d)return this._firstMove===void 0&&(this._firstMove=p),p-this._firstMove<100&&void 0;var y=n.y>0==s.y>0;return ra(n)&&ra(s)&&y}},o}(Ur),Vs={panStep:100,bearingStep:15,pitchStep:10},xi=function(){var i=Vs;this._panStep=i.panStep,this._bearingStep=i.bearingStep,this._pitchStep=i.pitchStep,this._rotationDisabled=!1;};function Wr(i){return i*(2-i)}xi.prototype.blur=function(){this.reset();},xi.prototype.reset=function(){this._active=!1;},xi.prototype.keydown=function(i){var o=this;if(!(i.altKey||i.ctrlKey||i.metaKey)){var n=0,s=0,p=0,f=0,d=0;switch(i.keyCode){case 61:case 107:case 171:case 187:n=1;break;case 189:case 109:case 173:n=-1;break;case 37:i.shiftKey?s=-1:(i.preventDefault(),f=-1);break;case 39:i.shiftKey?s=1:(i.preventDefault(),f=1);break;case 38:i.shiftKey?p=1:(i.preventDefault(),d=-1);break;case 40:i.shiftKey?p=-1:(i.preventDefault(),d=1);break;default:return}return this._rotationDisabled&&(s=0,p=0),{cameraAnimation:function(y){var v=y.getZoom();y.easeTo({duration:300,easeId:"keyboardHandler",easing:Wr,zoom:n?Math.round(v)+n*(i.shiftKey?2:1):v,bearing:y.getBearing()+s*o._bearingStep,pitch:y.getPitch()+p*o._pitchStep,offset:[-f*o._panStep,-d*o._panStep],center:y.getCenter()},{originalEvent:i});}}}},xi.prototype.enable=function(){this._enabled=!0;},xi.prototype.disable=function(){this._enabled=!1,this.reset();},xi.prototype.isEnabled=function(){return this._enabled},xi.prototype.isActive=function(){return this._active},xi.prototype.disableRotation=function(){this._rotationDisabled=!0;},xi.prototype.enableRotation=function(){this._rotationDisabled=!1;};var Jt=function(i,o){this._map=i,this._el=i.getCanvasContainer(),this._handler=o,this._delta=0,this._defaultZoomRate=.01,this._wheelZoomRate=1/450,u.bindAll(["_onTimeout"],this);};Jt.prototype.setZoomRate=function(i){this._defaultZoomRate=i;},Jt.prototype.setWheelZoomRate=function(i){this._wheelZoomRate=i;},Jt.prototype.isEnabled=function(){return !!this._enabled},Jt.prototype.isActive=function(){return !!this._active||this._finishTimeout!==void 0},Jt.prototype.isZooming=function(){return !!this._zooming},Jt.prototype.enable=function(i){this.isEnabled()||(this._enabled=!0,this._aroundCenter=i&&i.around==="center");},Jt.prototype.disable=function(){this.isEnabled()&&(this._enabled=!1);},Jt.prototype.wheel=function(i){if(this.isEnabled()){var o=i.deltaMode===u.window.WheelEvent.DOM_DELTA_LINE?40*i.deltaY:i.deltaY,n=u.browser.now(),s=n-(this._lastWheelEventTime||0);this._lastWheelEventTime=n,o!==0&&o%4.000244140625==0?this._type="wheel":o!==0&&Math.abs(o)<4?this._type="trackpad":s>400?(this._type=null,this._lastValue=o,this._timeout=setTimeout(this._onTimeout,40,i)):this._type||(this._type=Math.abs(s*o)<200?"trackpad":"wheel",this._timeout&&(clearTimeout(this._timeout),this._timeout=null,o+=this._lastValue)),i.shiftKey&&o&&(o/=4),this._type&&(this._lastWheelEvent=i,this._delta-=o,this._active||this._start(i)),i.preventDefault();}},Jt.prototype._onTimeout=function(i){this._type="wheel",this._delta-=this._lastValue,this._active||this._start(i);},Jt.prototype._start=function(i){if(this._delta){this._frameId&&(this._frameId=null),this._active=!0,this.isZooming()||(this._zooming=!0),this._finishTimeout&&(clearTimeout(this._finishTimeout),delete this._finishTimeout);var o=ct.mousePos(this._el,i);this._around=u.LngLat.convert(this._aroundCenter?this._map.getCenter():this._map.unproject(o)),this._aroundPoint=this._map.transform.locationPoint(this._around),this._frameId||(this._frameId=!0,this._handler._triggerRenderFrame());}},Jt.prototype.renderFrame=function(){var i=this;if(this._frameId&&(this._frameId=null,this.isActive())){var o=this._map.transform;if(this._delta!==0){var n=this._type==="wheel"&&Math.abs(this._delta)>4.000244140625?this._wheelZoomRate:this._defaultZoomRate,s=2/(1+Math.exp(-Math.abs(this._delta*n)));this._delta<0&&s!==0&&(s=1/s);var p=typeof this._targetZoom=="number"?o.zoomScale(this._targetZoom):o.scale;this._targetZoom=Math.min(o.maxZoom,Math.max(o.minZoom,o.scaleZoom(p*s))),this._type==="wheel"&&(this._startZoom=o.zoom,this._easing=this._smoothOutEasing(200)),this._delta=0;}var f,d=typeof this._targetZoom=="number"?this._targetZoom:o.zoom,y=this._startZoom,v=this._easing,S=!1;if(this._type==="wheel"&&y&&v){var P=Math.min((u.browser.now()-this._lastWheelEventTime)/200,1),z=v(P);f=u.number(y,d,z),P<1?this._frameId||(this._frameId=!0):S=!0;}else f=d,S=!0;return this._active=!0,S&&(this._active=!1,this._finishTimeout=setTimeout(function(){i._zooming=!1,i._handler._triggerRenderFrame(),delete i._targetZoom,delete i._finishTimeout;},200)),{noInertia:!0,needsRenderFrame:!S,zoomDelta:f-o.zoom,around:this._aroundPoint,originalEvent:this._lastWheelEvent}}},Jt.prototype._smoothOutEasing=function(i){var o=u.ease;if(this._prevEase){var n=this._prevEase,s=(u.browser.now()-n.start)/n.duration,p=n.easing(s+.01)-n.easing(s),f=.27/Math.sqrt(p*p+1e-4)*.01,d=Math.sqrt(.0729-f*f);o=u.bezier(f,d,.25,1);}return this._prevEase={start:u.browser.now(),duration:i,easing:o},o},Jt.prototype.blur=function(){this.reset();},Jt.prototype.reset=function(){this._active=!1;};var Pi=function(i,o){this._clickZoom=i,this._tapZoom=o;};Pi.prototype.enable=function(){this._clickZoom.enable(),this._tapZoom.enable();},Pi.prototype.disable=function(){this._clickZoom.disable(),this._tapZoom.disable();},Pi.prototype.isEnabled=function(){return this._clickZoom.isEnabled()&&this._tapZoom.isEnabled()},Pi.prototype.isActive=function(){return this._clickZoom.isActive()||this._tapZoom.isActive()};var oi=function(){this.reset();};oi.prototype.reset=function(){this._active=!1;},oi.prototype.blur=function(){this.reset();},oi.prototype.dblclick=function(i,o){return i.preventDefault(),{cameraAnimation:function(n){n.easeTo({duration:300,zoom:n.getZoom()+(i.shiftKey?-1:1),around:n.unproject(o)},{originalEvent:i});}}},oi.prototype.enable=function(){this._enabled=!0;},oi.prototype.disable=function(){this._enabled=!1,this.reset();},oi.prototype.isEnabled=function(){return this._enabled},oi.prototype.isActive=function(){return this._active};var pr=function(){this._tap=new vi({numTouches:1,numTaps:1}),this.reset();};pr.prototype.reset=function(){this._active=!1,delete this._swipePoint,delete this._swipeTouch,delete this._tapTime,this._tap.reset();},pr.prototype.touchstart=function(i,o,n){this._swipePoint||(this._tapTime&&i.timeStamp-this._tapTime>500&&this.reset(),this._tapTime?n.length>0&&(this._swipePoint=o[0],this._swipeTouch=n[0].identifier):this._tap.touchstart(i,o,n));},pr.prototype.touchmove=function(i,o,n){if(this._tapTime){if(this._swipePoint){if(n[0].identifier!==this._swipeTouch)return;var s=o[0],p=s.y-this._swipePoint.y;return this._swipePoint=s,i.preventDefault(),this._active=!0,{zoomDelta:p/128}}}else this._tap.touchmove(i,o,n);},pr.prototype.touchend=function(i,o,n){this._tapTime?this._swipePoint&&n.length===0&&this.reset():this._tap.touchend(i,o,n)&&(this._tapTime=i.timeStamp);},pr.prototype.touchcancel=function(){this.reset();},pr.prototype.enable=function(){this._enabled=!0;},pr.prototype.disable=function(){this._enabled=!1,this.reset();},pr.prototype.isEnabled=function(){return this._enabled},pr.prototype.isActive=function(){return this._active};var qn=function(i,o,n){this._el=i,this._mousePan=o,this._touchPan=n;};qn.prototype.enable=function(i){this._inertiaOptions=i||{},this._mousePan.enable(),this._touchPan.enable(),this._el.classList.add("mapboxgl-touch-drag-pan");},qn.prototype.disable=function(){this._mousePan.disable(),this._touchPan.disable(),this._el.classList.remove("mapboxgl-touch-drag-pan");},qn.prototype.isEnabled=function(){return this._mousePan.isEnabled()&&this._touchPan.isEnabled()},qn.prototype.isActive=function(){return this._mousePan.isActive()||this._touchPan.isActive()};var ln=function(i,o,n){this._pitchWithRotate=i.pitchWithRotate,this._mouseRotate=o,this._mousePitch=n;};ln.prototype.enable=function(){this._mouseRotate.enable(),this._pitchWithRotate&&this._mousePitch.enable();},ln.prototype.disable=function(){this._mouseRotate.disable(),this._mousePitch.disable();},ln.prototype.isEnabled=function(){return this._mouseRotate.isEnabled()&&(!this._pitchWithRotate||this._mousePitch.isEnabled())},ln.prototype.isActive=function(){return this._mouseRotate.isActive()||this._mousePitch.isActive()};var bi=function(i,o,n,s){this._el=i,this._touchZoom=o,this._touchRotate=n,this._tapDragZoom=s,this._rotationDisabled=!1,this._enabled=!0;};bi.prototype.enable=function(i){this._touchZoom.enable(i),this._rotationDisabled||this._touchRotate.enable(i),this._tapDragZoom.enable(),this._el.classList.add("mapboxgl-touch-zoom-rotate");},bi.prototype.disable=function(){this._touchZoom.disable(),this._touchRotate.disable(),this._tapDragZoom.disable(),this._el.classList.remove("mapboxgl-touch-zoom-rotate");},bi.prototype.isEnabled=function(){return this._touchZoom.isEnabled()&&(this._rotationDisabled||this._touchRotate.isEnabled())&&this._tapDragZoom.isEnabled()},bi.prototype.isActive=function(){return this._touchZoom.isActive()||this._touchRotate.isActive()||this._tapDragZoom.isActive()},bi.prototype.disableRotation=function(){this._rotationDisabled=!0,this._touchRotate.disable();},bi.prototype.enableRotation=function(){this._rotationDisabled=!1,this._touchZoom.isEnabled()&&this._touchRotate.enable();};var br=function(i){return i.zoom||i.drag||i.pitch||i.rotate},ia=function(i){function o(){i.apply(this,arguments);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o}(u.Event);function Ct(i){return i.panDelta&&i.panDelta.mag()||i.zoomDelta||i.bearingDelta||i.pitchDelta}var Et=function(i,o){this._map=i,this._el=this._map.getCanvasContainer(),this._handlers=[],this._handlersById={},this._changes=[],this._inertia=new $o(i),this._bearingSnap=o.bearingSnap,this._previousActiveHandlers={},this._eventsInProgress={},this._addDefaultHandlers(o),u.bindAll(["handleEvent","handleWindowEvent"],this);var n=this._el;this._listeners=[[n,"touchstart",{passive:!0}],[n,"touchmove",{passive:!1}],[n,"touchend",void 0],[n,"touchcancel",void 0],[n,"mousedown",void 0],[n,"mousemove",void 0],[n,"mouseup",void 0],[u.window.document,"mousemove",{capture:!0}],[u.window.document,"mouseup",void 0],[n,"mouseover",void 0],[n,"mouseout",void 0],[n,"dblclick",void 0],[n,"click",void 0],[n,"keydown",{capture:!1}],[n,"keyup",void 0],[n,"wheel",{passive:!1}],[n,"contextmenu",void 0],[u.window,"blur",void 0]];for(var s=0,p=this._listeners;s<p.length;s+=1){var f=p[s],d=f[0];ct.addEventListener(d,f[1],d===u.window.document?this.handleWindowEvent:this.handleEvent,f[2]);}};Et.prototype.destroy=function(){for(var i=0,o=this._listeners;i<o.length;i+=1){var n=o[i],s=n[0];ct.removeEventListener(s,n[1],s===u.window.document?this.handleWindowEvent:this.handleEvent,n[2]);}},Et.prototype._addDefaultHandlers=function(i){var o=this._map,n=o.getCanvasContainer();this._add("mapEvent",new Ze(o,i));var s=o.boxZoom=new Fr(o,i);this._add("boxZoom",s);var p=new Or,f=new oi;o.doubleClickZoom=new Pi(f,p),this._add("tapZoom",p),this._add("clickZoom",f);var d=new pr;this._add("tapDragZoom",d);var y=o.touchPitch=new Us;this._add("touchPitch",y);var v=new Fa(i),S=new Os(i);o.dragRotate=new ln(i,v,S),this._add("mouseRotate",v,["mousePitch"]),this._add("mousePitch",S,["mouseRotate"]);var P=new Fs(i),z=new ni(i);o.dragPan=new qn(n,P,z),this._add("mousePan",P),this._add("touchPan",z,["touchZoom","touchRotate"]);var k=new Wl,F=new Vr;o.touchZoomRotate=new bi(n,F,k,d),this._add("touchRotate",k,["touchPan","touchZoom"]),this._add("touchZoom",F,["touchPan","touchRotate"]);var R=o.scrollZoom=new Jt(o,this);this._add("scrollZoom",R,["mousePan"]);var j=o.keyboard=new xi;this._add("keyboard",j),this._add("blockableMapEvent",new Tt(o));for(var D=0,N=["boxZoom","doubleClickZoom","tapDragZoom","touchPitch","dragRotate","dragPan","touchZoomRotate","scrollZoom","keyboard"];D<N.length;D+=1){var G=N[D];i.interactive&&i[G]&&o[G].enable(i[G]);}},Et.prototype._add=function(i,o,n){this._handlers.push({handlerName:i,handler:o,allowed:n}),this._handlersById[i]=o;},Et.prototype.stop=function(i){if(!this._updatingCamera){for(var o=0,n=this._handlers;o<n.length;o+=1)n[o].handler.reset();this._inertia.clear(),this._fireEvents({},{},i),this._changes=[];}},Et.prototype.isActive=function(){for(var i=0,o=this._handlers;i<o.length;i+=1)if(o[i].handler.isActive())return !0;return !1},Et.prototype.isZooming=function(){return !!this._eventsInProgress.zoom||this._map.scrollZoom.isZooming()},Et.prototype.isRotating=function(){return !!this._eventsInProgress.rotate},Et.prototype.isMoving=function(){return Boolean(br(this._eventsInProgress))||this.isZooming()},Et.prototype._blockedByActive=function(i,o,n){for(var s in i)if(s!==n&&(!o||o.indexOf(s)<0))return !0;return !1},Et.prototype.handleWindowEvent=function(i){this.handleEvent(i,i.type+"Window");},Et.prototype._getMapTouches=function(i){for(var o=[],n=0,s=i;n<s.length;n+=1){var p=s[n];this._el.contains(p.target)&&o.push(p);}return o},Et.prototype.handleEvent=function(i,o){this._updatingCamera=!0;for(var n=i.type==="renderFrame"?void 0:i,s={needsRenderFrame:!1},p={},f={},d=i.touches?this._getMapTouches(i.touches):void 0,y=d?ct.touchPos(this._el,d):ct.mousePos(this._el,i),v=0,S=this._handlers;v<S.length;v+=1){var P=S[v],z=P.handlerName,k=P.handler,F=P.allowed;if(k.isEnabled()){var R=void 0;this._blockedByActive(f,F,z)?k.reset():k[o||i.type]&&(R=k[o||i.type](i,y,d),this.mergeHandlerResult(s,p,R,z,n),R&&R.needsRenderFrame&&this._triggerRenderFrame()),(R||k.isActive())&&(f[z]=k);}}var j={};for(var D in this._previousActiveHandlers)f[D]||(j[D]=n);this._previousActiveHandlers=f,(Object.keys(j).length||Ct(s))&&(this._changes.push([s,p,j]),this._triggerRenderFrame()),(Object.keys(f).length||Ct(s))&&this._map._stop(!0),this._updatingCamera=!1;var N=s.cameraAnimation;N&&(this._inertia.clear(),this._fireEvents({},{},!0),this._changes=[],N(this._map));},Et.prototype.mergeHandlerResult=function(i,o,n,s,p){if(n){u.extend(i,n);var f={handlerName:s,originalEvent:n.originalEvent||p};n.zoomDelta!==void 0&&(o.zoom=f),n.panDelta!==void 0&&(o.drag=f),n.pitchDelta!==void 0&&(o.pitch=f),n.bearingDelta!==void 0&&(o.rotate=f);}},Et.prototype._applyChanges=function(){for(var i={},o={},n={},s=0,p=this._changes;s<p.length;s+=1){var f=p[s],d=f[0],y=f[1],v=f[2];d.panDelta&&(i.panDelta=(i.panDelta||new u.Point(0,0))._add(d.panDelta)),d.zoomDelta&&(i.zoomDelta=(i.zoomDelta||0)+d.zoomDelta),d.bearingDelta&&(i.bearingDelta=(i.bearingDelta||0)+d.bearingDelta),d.pitchDelta&&(i.pitchDelta=(i.pitchDelta||0)+d.pitchDelta),d.around!==void 0&&(i.around=d.around),d.pinchAround!==void 0&&(i.pinchAround=d.pinchAround),d.noInertia&&(i.noInertia=d.noInertia),u.extend(o,y),u.extend(n,v);}this._updateMapTransform(i,o,n),this._changes=[];},Et.prototype._updateMapTransform=function(i,o,n){var s=this._map,p=s.transform;if(!Ct(i))return this._fireEvents(o,n,!0);var f=i.panDelta,d=i.zoomDelta,y=i.bearingDelta,v=i.pitchDelta,S=i.around,P=i.pinchAround;P!==void 0&&(S=P),s._stop(!0),S=S||s.transform.centerPoint;var z=p.pointLocation(f?S.sub(f):S);y&&(p.bearing+=y),v&&(p.pitch+=v),d&&(p.zoom+=d),p.setLocationAtPoint(z,S),this._map._update(),i.noInertia||this._inertia.record(i),this._fireEvents(o,n,!0);},Et.prototype._fireEvents=function(i,o,n){var s=this,p=br(this._eventsInProgress),f=br(i),d={};for(var y in i)this._eventsInProgress[y]||(d[y+"start"]=i[y].originalEvent),this._eventsInProgress[y]=i[y];for(var v in !p&&f&&this._fireEvent("movestart",f.originalEvent),d)this._fireEvent(v,d[v]);for(var S in f&&this._fireEvent("move",f.originalEvent),i)this._fireEvent(S,i[S].originalEvent);var P,z={};for(var k in this._eventsInProgress){var F=this._eventsInProgress[k],R=F.handlerName,j=F.originalEvent;this._handlersById[R].isActive()||(delete this._eventsInProgress[k],z[k+"end"]=P=o[R]||j);}for(var D in z)this._fireEvent(D,z[D]);var N=br(this._eventsInProgress);if(n&&(p||f)&&!N){this._updatingCamera=!0;var G=this._inertia._onMoveEnd(this._map.dragPan._inertiaOptions),K=function(tt){return tt!==0&&-s._bearingSnap<tt&&tt<s._bearingSnap};G?(K(G.bearing||this._map.getBearing())&&(G.bearing=0),this._map.easeTo(G,{originalEvent:P})):(this._map.fire(new u.Event("moveend",{originalEvent:P})),K(this._map.getBearing())&&this._map.resetNorth()),this._updatingCamera=!1;}},Et.prototype._fireEvent=function(i,o){this._map.fire(new u.Event(i,o?{originalEvent:o}:{}));},Et.prototype._requestFrame=function(){var i=this;return this._map.triggerRepaint(),this._map._renderTaskQueue.add(function(o){delete i._frameId,i.handleEvent(new ia("renderFrame",{timeStamp:o})),i._applyChanges();})},Et.prototype._triggerRenderFrame=function(){this._frameId===void 0&&(this._frameId=this._requestFrame());};var Va=function(i){function o(n,s){i.call(this),this._moving=!1,this._zooming=!1,this.transform=n,this._bearingSnap=s.bearingSnap,u.bindAll(["_renderFrameCallback"],this);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.getCenter=function(){return new u.LngLat(this.transform.center.lng,this.transform.center.lat)},o.prototype.setCenter=function(n,s){return this.jumpTo({center:n},s)},o.prototype.panBy=function(n,s,p){return n=u.Point.convert(n).mult(-1),this.panTo(this.transform.center,u.extend({offset:n},s),p)},o.prototype.panTo=function(n,s,p){return this.easeTo(u.extend({center:n},s),p)},o.prototype.getZoom=function(){return this.transform.zoom},o.prototype.setZoom=function(n,s){return this.jumpTo({zoom:n},s),this},o.prototype.zoomTo=function(n,s,p){return this.easeTo(u.extend({zoom:n},s),p)},o.prototype.zoomIn=function(n,s){return this.zoomTo(this.getZoom()+1,n,s),this},o.prototype.zoomOut=function(n,s){return this.zoomTo(this.getZoom()-1,n,s),this},o.prototype.getBearing=function(){return this.transform.bearing},o.prototype.setBearing=function(n,s){return this.jumpTo({bearing:n},s),this},o.prototype.getPadding=function(){return this.transform.padding},o.prototype.setPadding=function(n,s){return this.jumpTo({padding:n},s),this},o.prototype.rotateTo=function(n,s,p){return this.easeTo(u.extend({bearing:n},s),p)},o.prototype.resetNorth=function(n,s){return this.rotateTo(0,u.extend({duration:1e3},n),s),this},o.prototype.resetNorthPitch=function(n,s){return this.easeTo(u.extend({bearing:0,pitch:0,duration:1e3},n),s),this},o.prototype.snapToNorth=function(n,s){return Math.abs(this.getBearing())<this._bearingSnap?this.resetNorth(n,s):this},o.prototype.getPitch=function(){return this.transform.pitch},o.prototype.setPitch=function(n,s){return this.jumpTo({pitch:n},s),this},o.prototype.cameraForBounds=function(n,s){n=u.LngLatBounds.convert(n);var p=s&&s.bearing||0;return this._cameraForBoxAndBearing(n.getNorthWest(),n.getSouthEast(),p,s)},o.prototype._cameraForBoxAndBearing=function(n,s,p,f){var d={top:0,bottom:0,right:0,left:0};if(typeof(f=u.extend({padding:d,offset:[0,0],maxZoom:this.transform.maxZoom},f)).padding=="number"){var y=f.padding;f.padding={top:y,bottom:y,right:y,left:y};}f.padding=u.extend(d,f.padding);var v=this.transform,S=v.padding,P=v.project(u.LngLat.convert(n)),z=v.project(u.LngLat.convert(s)),k=P.rotate(-p*Math.PI/180),F=z.rotate(-p*Math.PI/180),R=new u.Point(Math.max(k.x,F.x),Math.max(k.y,F.y)),j=new u.Point(Math.min(k.x,F.x),Math.min(k.y,F.y)),D=R.sub(j),N=(v.width-(S.left+S.right+f.padding.left+f.padding.right))/D.x,G=(v.height-(S.top+S.bottom+f.padding.top+f.padding.bottom))/D.y;if(!(G<0||N<0)){var K=Math.min(v.scaleZoom(v.scale*Math.min(N,G)),f.maxZoom),tt=typeof f.offset.x=="number"?new u.Point(f.offset.x,f.offset.y):u.Point.convert(f.offset),Q=new u.Point((f.padding.left-f.padding.right)/2,(f.padding.top-f.padding.bottom)/2).rotate(p*Math.PI/180),et=tt.add(Q).mult(v.scale/v.zoomScale(K));return {center:v.unproject(P.add(z).div(2).sub(et)),zoom:K,bearing:p}}u.warnOnce("Map cannot fit within canvas with the given bounds, padding, and/or offset.");},o.prototype.fitBounds=function(n,s,p){return this._fitInternal(this.cameraForBounds(n,s),s,p)},o.prototype.fitScreenCoordinates=function(n,s,p,f,d){return this._fitInternal(this._cameraForBoxAndBearing(this.transform.pointLocation(u.Point.convert(n)),this.transform.pointLocation(u.Point.convert(s)),p,f),f,d)},o.prototype._fitInternal=function(n,s,p){return n?(delete(s=u.extend(n,s)).padding,s.linear?this.easeTo(s,p):this.flyTo(s,p)):this},o.prototype.jumpTo=function(n,s){this.stop();var p=this.transform,f=!1,d=!1,y=!1;return "zoom"in n&&p.zoom!==+n.zoom&&(f=!0,p.zoom=+n.zoom),n.center!==void 0&&(p.center=u.LngLat.convert(n.center)),"bearing"in n&&p.bearing!==+n.bearing&&(d=!0,p.bearing=+n.bearing),"pitch"in n&&p.pitch!==+n.pitch&&(y=!0,p.pitch=+n.pitch),n.padding==null||p.isPaddingEqual(n.padding)||(p.padding=n.padding),this.fire(new u.Event("movestart",s)).fire(new u.Event("move",s)),f&&this.fire(new u.Event("zoomstart",s)).fire(new u.Event("zoom",s)).fire(new u.Event("zoomend",s)),d&&this.fire(new u.Event("rotatestart",s)).fire(new u.Event("rotate",s)).fire(new u.Event("rotateend",s)),y&&this.fire(new u.Event("pitchstart",s)).fire(new u.Event("pitch",s)).fire(new u.Event("pitchend",s)),this.fire(new u.Event("moveend",s))},o.prototype.easeTo=function(n,s){var p=this;this._stop(!1,n.easeId),((n=u.extend({offset:[0,0],duration:500,easing:u.ease},n)).animate===!1||!n.essential&&u.browser.prefersReducedMotion)&&(n.duration=0);var f=this.transform,d=this.getZoom(),y=this.getBearing(),v=this.getPitch(),S=this.getPadding(),P="zoom"in n?+n.zoom:d,z="bearing"in n?this._normalizeBearing(n.bearing,y):y,k="pitch"in n?+n.pitch:v,F="padding"in n?n.padding:f.padding,R=u.Point.convert(n.offset),j=f.centerPoint.add(R),D=f.pointLocation(j),N=u.LngLat.convert(n.center||D);this._normalizeCenter(N);var G,K,tt=f.project(D),Q=f.project(N).sub(tt),et=f.zoomScale(P-d);n.around&&(G=u.LngLat.convert(n.around),K=f.locationPoint(G));var ot={moving:this._moving,zooming:this._zooming,rotating:this._rotating,pitching:this._pitching};return this._zooming=this._zooming||P!==d,this._rotating=this._rotating||y!==z,this._pitching=this._pitching||k!==v,this._padding=!f.isPaddingEqual(F),this._easeId=n.easeId,this._prepareEase(s,n.noMoveStart,ot),this._ease(function(ht){if(p._zooming&&(f.zoom=u.number(d,P,ht)),p._rotating&&(f.bearing=u.number(y,z,ht)),p._pitching&&(f.pitch=u.number(v,k,ht)),p._padding&&(f.interpolatePadding(S,F,ht),j=f.centerPoint.add(R)),G)f.setLocationAtPoint(G,K);else {var pt=f.zoomScale(f.zoom-d),bt=P>d?Math.min(2,et):Math.max(.5,et),kt=Math.pow(bt,1-ht),Bt=f.unproject(tt.add(Q.mult(ht*kt)).mult(pt));f.setLocationAtPoint(f.renderWorldCopies?Bt.wrap():Bt,j);}p._fireMoveEvents(s);},function(ht){p._afterEase(s,ht);},n),this},o.prototype._prepareEase=function(n,s,p){p===void 0&&(p={}),this._moving=!0,s||p.moving||this.fire(new u.Event("movestart",n)),this._zooming&&!p.zooming&&this.fire(new u.Event("zoomstart",n)),this._rotating&&!p.rotating&&this.fire(new u.Event("rotatestart",n)),this._pitching&&!p.pitching&&this.fire(new u.Event("pitchstart",n));},o.prototype._fireMoveEvents=function(n){this.fire(new u.Event("move",n)),this._zooming&&this.fire(new u.Event("zoom",n)),this._rotating&&this.fire(new u.Event("rotate",n)),this._pitching&&this.fire(new u.Event("pitch",n));},o.prototype._afterEase=function(n,s){if(!this._easeId||!s||this._easeId!==s){delete this._easeId;var p=this._zooming,f=this._rotating,d=this._pitching;this._moving=!1,this._zooming=!1,this._rotating=!1,this._pitching=!1,this._padding=!1,p&&this.fire(new u.Event("zoomend",n)),f&&this.fire(new u.Event("rotateend",n)),d&&this.fire(new u.Event("pitchend",n)),this.fire(new u.Event("moveend",n));}},o.prototype.flyTo=function(n,s){var p=this;if(!n.essential&&u.browser.prefersReducedMotion){var f=u.pick(n,["center","zoom","bearing","pitch","around"]);return this.jumpTo(f,s)}this.stop(),n=u.extend({offset:[0,0],speed:1.2,curve:1.42,easing:u.ease},n);var d=this.transform,y=this.getZoom(),v=this.getBearing(),S=this.getPitch(),P=this.getPadding(),z="zoom"in n?u.clamp(+n.zoom,d.minZoom,d.maxZoom):y,k="bearing"in n?this._normalizeBearing(n.bearing,v):v,F="pitch"in n?+n.pitch:S,R="padding"in n?n.padding:d.padding,j=d.zoomScale(z-y),D=u.Point.convert(n.offset),N=d.centerPoint.add(D),G=d.pointLocation(N),K=u.LngLat.convert(n.center||G);this._normalizeCenter(K);var tt=d.project(G),Q=d.project(K).sub(tt),et=n.curve,ot=Math.max(d.width,d.height),ht=ot/j,pt=Q.mag();if("minZoom"in n){var bt=u.clamp(Math.min(n.minZoom,y,z),d.minZoom,d.maxZoom),kt=ot/d.zoomScale(bt-y);et=Math.sqrt(kt/pt*2);}var Bt=et*et;function Lt(Ot){var Rt=(ht*ht-ot*ot+(Ot?-1:1)*Bt*Bt*pt*pt)/(2*(Ot?ht:ot)*Bt*pt);return Math.log(Math.sqrt(Rt*Rt+1)-Rt)}function ne(Ot){return (Math.exp(Ot)-Math.exp(-Ot))/2}function wt(Ot){return (Math.exp(Ot)+Math.exp(-Ot))/2}var Nt=Lt(0),Gt=function(Ot){return wt(Nt)/wt(Nt+et*Ot)},Vt=function(Ot){return ot*((wt(Nt)*(ne(Rt=Nt+et*Ot)/wt(Rt))-ne(Nt))/Bt)/pt;var Rt;},Ut=(Lt(1)-Nt)/et;if(Math.abs(pt)<1e-6||!isFinite(Ut)){if(Math.abs(ot-ht)<1e-6)return this.easeTo(n,s);var Zt=ht<ot?-1:1;Ut=Math.abs(Math.log(ht/ot))/et,Vt=function(){return 0},Gt=function(Ot){return Math.exp(Zt*et*Ot)};}return n.duration="duration"in n?+n.duration:1e3*Ut/("screenSpeed"in n?+n.screenSpeed/et:+n.speed),n.maxDuration&&n.duration>n.maxDuration&&(n.duration=0),this._zooming=!0,this._rotating=v!==k,this._pitching=F!==S,this._padding=!d.isPaddingEqual(R),this._prepareEase(s,!1),this._ease(function(Ot){var Rt=Ot*Ut,Je=1/Gt(Rt);d.zoom=Ot===1?z:y+d.scaleZoom(Je),p._rotating&&(d.bearing=u.number(v,k,Ot)),p._pitching&&(d.pitch=u.number(S,F,Ot)),p._padding&&(d.interpolatePadding(P,R,Ot),N=d.centerPoint.add(D));var De=Ot===1?K:d.unproject(tt.add(Q.mult(Vt(Rt))).mult(Je));d.setLocationAtPoint(d.renderWorldCopies?De.wrap():De,N),p._fireMoveEvents(s);},function(){return p._afterEase(s)},n),this},o.prototype.isEasing=function(){return !!this._easeFrameId},o.prototype.stop=function(){return this._stop()},o.prototype._stop=function(n,s){if(this._easeFrameId&&(this._cancelRenderFrame(this._easeFrameId),delete this._easeFrameId,delete this._onEaseFrame),this._onEaseEnd){var p=this._onEaseEnd;delete this._onEaseEnd,p.call(this,s);}if(!n){var f=this.handlers;f&&f.stop(!1);}return this},o.prototype._ease=function(n,s,p){p.animate===!1||p.duration===0?(n(1),s()):(this._easeStart=u.browser.now(),this._easeOptions=p,this._onEaseFrame=n,this._onEaseEnd=s,this._easeFrameId=this._requestRenderFrame(this._renderFrameCallback));},o.prototype._renderFrameCallback=function(){var n=Math.min((u.browser.now()-this._easeStart)/this._easeOptions.duration,1);this._onEaseFrame(this._easeOptions.easing(n)),n<1?this._easeFrameId=this._requestRenderFrame(this._renderFrameCallback):this.stop();},o.prototype._normalizeBearing=function(n,s){n=u.wrap(n,-180,180);var p=Math.abs(n-s);return Math.abs(n-360-s)<p&&(n-=360),Math.abs(n+360-s)<p&&(n+=360),n},o.prototype._normalizeCenter=function(n){var s=this.transform;if(s.renderWorldCopies&&!s.lngRange){var p=n.lng-s.center.lng;n.lng+=p>180?-360:p<-180?360:0;}},o}(u.Evented),wr=function(i){i===void 0&&(i={}),this.options=i,u.bindAll(["_toggleAttribution","_updateEditLink","_updateData","_updateCompact"],this);};wr.prototype.getDefaultPosition=function(){return "bottom-right"},wr.prototype.onAdd=function(i){var o=this.options&&this.options.compact;return this._map=i,this._container=ct.create("div","mapboxgl-ctrl mapboxgl-ctrl-attrib"),this._compactButton=ct.create("button","mapboxgl-ctrl-attrib-button",this._container),this._compactButton.addEventListener("click",this._toggleAttribution),this._setElementTitle(this._compactButton,"ToggleAttribution"),this._innerContainer=ct.create("div","mapboxgl-ctrl-attrib-inner",this._container),this._innerContainer.setAttribute("role","list"),o&&this._container.classList.add("mapboxgl-compact"),this._updateAttributions(),this._updateEditLink(),this._map.on("styledata",this._updateData),this._map.on("sourcedata",this._updateData),this._map.on("moveend",this._updateEditLink),o===void 0&&(this._map.on("resize",this._updateCompact),this._updateCompact()),this._container},wr.prototype.onRemove=function(){ct.remove(this._container),this._map.off("styledata",this._updateData),this._map.off("sourcedata",this._updateData),this._map.off("moveend",this._updateEditLink),this._map.off("resize",this._updateCompact),this._map=void 0,this._attribHTML=void 0;},wr.prototype._setElementTitle=function(i,o){var n=this._map._getUIString("AttributionControl."+o);i.title=n,i.setAttribute("aria-label",n);},wr.prototype._toggleAttribution=function(){this._container.classList.contains("mapboxgl-compact-show")?(this._container.classList.remove("mapboxgl-compact-show"),this._compactButton.setAttribute("aria-pressed","false")):(this._container.classList.add("mapboxgl-compact-show"),this._compactButton.setAttribute("aria-pressed","true"));},wr.prototype._updateEditLink=function(){var i=this._editLink;i||(i=this._editLink=this._container.querySelector(".mapbox-improve-map"));var o=[{key:"owner",value:this.styleOwner},{key:"id",value:this.styleId},{key:"access_token",value:this._map._requestManager._customAccessToken||u.config.ACCESS_TOKEN}];if(i){var n=o.reduce(function(s,p,f){return p.value&&(s+=p.key+"="+p.value+(f<o.length-1?"&":"")),s},"?");i.href=u.config.FEEDBACK_URL+"/"+n+(this._map._hash?this._map._hash.getHashString(!0):""),i.rel="noopener nofollow",this._setElementTitle(i,"MapFeedback");}},wr.prototype._updateData=function(i){!i||i.sourceDataType!=="metadata"&&i.sourceDataType!=="visibility"&&i.dataType!=="style"||(this._updateAttributions(),this._updateEditLink());},wr.prototype._updateAttributions=function(){if(this._map.style){var i=[];if(this.options.customAttribution&&(Array.isArray(this.options.customAttribution)?i=i.concat(this.options.customAttribution.map(function(y){return typeof y!="string"?"":y})):typeof this.options.customAttribution=="string"&&i.push(this.options.customAttribution)),this._map.style.stylesheet){var o=this._map.style.stylesheet;this.styleOwner=o.owner,this.styleId=o.id;}var n=this._map.style.sourceCaches;for(var s in n){var p=n[s];if(p.used){var f=p.getSource();f.attribution&&i.indexOf(f.attribution)<0&&i.push(f.attribution);}}i.sort(function(y,v){return y.length-v.length});var d=(i=i.filter(function(y,v){for(var S=v+1;S<i.length;S++)if(i[S].indexOf(y)>=0)return !1;return !0})).join(" | ");d!==this._attribHTML&&(this._attribHTML=d,i.length?(this._innerContainer.innerHTML=d,this._container.classList.remove("mapboxgl-attrib-empty")):this._container.classList.add("mapboxgl-attrib-empty"),this._editLink=null);}},wr.prototype._updateCompact=function(){this._map.getCanvasContainer().offsetWidth<=640?this._container.classList.add("mapboxgl-compact"):this._container.classList.remove("mapboxgl-compact","mapboxgl-compact-show");};var wi=function(){u.bindAll(["_updateLogo"],this),u.bindAll(["_updateCompact"],this);};wi.prototype.onAdd=function(i){this._map=i,this._container=ct.create("div","mapboxgl-ctrl");var o=ct.create("a","mapboxgl-ctrl-logo");return o.target="_blank",o.rel="noopener nofollow",o.href="https://www.mapbox.com/",o.setAttribute("aria-label",this._map._getUIString("LogoControl.Title")),o.setAttribute("rel","noopener nofollow"),this._container.appendChild(o),this._container.style.display="none",this._map.on("sourcedata",this._updateLogo),this._updateLogo(),this._map.on("resize",this._updateCompact),this._updateCompact(),this._container},wi.prototype.onRemove=function(){ct.remove(this._container),this._map.off("sourcedata",this._updateLogo),this._map.off("resize",this._updateCompact);},wi.prototype.getDefaultPosition=function(){return "bottom-left"},wi.prototype._updateLogo=function(i){i&&i.sourceDataType!=="metadata"||(this._container.style.display=this._logoRequired()?"block":"none");},wi.prototype._logoRequired=function(){if(this._map.style){var i=this._map.style.sourceCaches;for(var o in i)if(i[o].getSource().mapbox_logo)return !0;return !1}},wi.prototype._updateCompact=function(){var i=this._container.children;if(i.length){var o=i[0];this._map.getCanvasContainer().offsetWidth<250?o.classList.add("mapboxgl-compact"):o.classList.remove("mapboxgl-compact");}};var hr=function(){this._queue=[],this._id=0,this._cleared=!1,this._currentlyRunning=!1;};hr.prototype.add=function(i){var o=++this._id;return this._queue.push({callback:i,id:o,cancelled:!1}),o},hr.prototype.remove=function(i){for(var o=this._currentlyRunning,n=0,s=o?this._queue.concat(o):this._queue;n<s.length;n+=1){var p=s[n];if(p.id===i)return void(p.cancelled=!0)}},hr.prototype.run=function(i){i===void 0&&(i=0);var o=this._currentlyRunning=this._queue;this._queue=[];for(var n=0,s=o;n<s.length;n+=1){var p=s[n];if(!p.cancelled&&(p.callback(i),this._cleared))break}this._cleared=!1,this._currentlyRunning=!1;},hr.prototype.clear=function(){this._currentlyRunning&&(this._cleared=!0),this._queue=[];};var zi={"AttributionControl.ToggleAttribution":"Toggle attribution","AttributionControl.MapFeedback":"Map feedback","FullscreenControl.Enter":"Enter fullscreen","FullscreenControl.Exit":"Exit fullscreen","GeolocateControl.FindMyLocation":"Find my location","GeolocateControl.LocationNotAvailable":"Location not available","LogoControl.Title":"Mapbox logo","NavigationControl.ResetBearing":"Reset bearing to north","NavigationControl.ZoomIn":"Zoom in","NavigationControl.ZoomOut":"Zoom out","ScaleControl.Feet":"ft","ScaleControl.Meters":"m","ScaleControl.Kilometers":"km","ScaleControl.Miles":"mi","ScaleControl.NauticalMiles":"nm"},Ns=u.window.HTMLImageElement,Na=u.window.HTMLElement,he=u.window.ImageBitmap,ir={center:[0,0],zoom:0,bearing:0,pitch:0,minZoom:-2,maxZoom:22,minPitch:0,maxPitch:60,interactive:!0,scrollZoom:!0,boxZoom:!0,dragRotate:!0,dragPan:!0,keyboard:!0,doubleClickZoom:!0,touchZoomRotate:!0,touchPitch:!0,bearingSnap:7,clickTolerance:3,pitchWithRotate:!0,hash:!1,attributionControl:!0,failIfMajorPerformanceCaveat:!1,preserveDrawingBuffer:!1,trackResize:!0,renderWorldCopies:!0,refreshExpiredTiles:!0,maxTileCacheSize:null,localIdeographFontFamily:"sans-serif",transformRequest:null,accessToken:null,fadeDuration:300,crossSourceCollisions:!0},Kl=function(i){function o(s){var p=this;if((s=u.extend({},ir,s)).minZoom!=null&&s.maxZoom!=null&&s.minZoom>s.maxZoom)throw new Error("maxZoom must be greater than or equal to minZoom");if(s.minPitch!=null&&s.maxPitch!=null&&s.minPitch>s.maxPitch)throw new Error("maxPitch must be greater than or equal to minPitch");if(s.minPitch!=null&&s.minPitch<0)throw new Error("minPitch must be greater than or equal to 0");if(s.maxPitch!=null&&s.maxPitch>60)throw new Error("maxPitch must be less than or equal to 60");var f=new ee(s.minZoom,s.maxZoom,s.minPitch,s.maxPitch,s.renderWorldCopies);if(i.call(this,f,s),this._interactive=s.interactive,this._maxTileCacheSize=s.maxTileCacheSize,this._failIfMajorPerformanceCaveat=s.failIfMajorPerformanceCaveat,this._preserveDrawingBuffer=s.preserveDrawingBuffer,this._antialias=s.antialias,this._trackResize=s.trackResize,this._bearingSnap=s.bearingSnap,this._refreshExpiredTiles=s.refreshExpiredTiles,this._fadeDuration=s.fadeDuration,this._crossSourceCollisions=s.crossSourceCollisions,this._crossFadingFactor=1,this._collectResourceTiming=s.collectResourceTiming,this._renderTaskQueue=new hr,this._controls=[],this._mapId=u.uniqueId(),this._locale=u.extend({},zi,s.locale),this._clickTolerance=s.clickTolerance,this._requestManager=new u.RequestManager(s.transformRequest,s.accessToken),typeof s.container=="string"){if(this._container=u.window.document.getElementById(s.container),!this._container)throw new Error("Container '"+s.container+"' not found.")}else {if(!(s.container instanceof Na))throw new Error("Invalid type: 'container' must be a String or HTMLElement.");this._container=s.container;}if(s.maxBounds&&this.setMaxBounds(s.maxBounds),u.bindAll(["_onWindowOnline","_onWindowResize","_onMapScroll","_contextLost","_contextRestored"],this),this._setupContainer(),this._setupPainter(),this.painter===void 0)throw new Error("Failed to initialize WebGL.");this.on("move",function(){return p._update(!1)}),this.on("moveend",function(){return p._update(!1)}),this.on("zoom",function(){return p._update(!0)}),u.window!==void 0&&(u.window.addEventListener("online",this._onWindowOnline,!1),u.window.addEventListener("resize",this._onWindowResize,!1),u.window.addEventListener("orientationchange",this._onWindowResize,!1)),this.handlers=new Et(this,s),this._hash=s.hash&&new Xr(typeof s.hash=="string"&&s.hash||void 0).addTo(this),this._hash&&this._hash._onHashChange()||(this.jumpTo({center:s.center,zoom:s.zoom,bearing:s.bearing,pitch:s.pitch}),s.bounds&&(this.resize(),this.fitBounds(s.bounds,u.extend({},s.fitBoundsOptions,{duration:0})))),this.resize(),this._localIdeographFontFamily=s.localIdeographFontFamily,s.style&&this.setStyle(s.style,{localIdeographFontFamily:s.localIdeographFontFamily}),s.attributionControl&&this.addControl(new wr({customAttribution:s.customAttribution})),this.addControl(new wi,s.logoPosition),this.on("style.load",function(){p.transform.unmodified&&p.jumpTo(p.style.stylesheet);}),this.on("data",function(d){p._update(d.dataType==="style"),p.fire(new u.Event(d.dataType+"data",d));}),this.on("dataloading",function(d){p.fire(new u.Event(d.dataType+"dataloading",d));});}i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o;var n={showTileBoundaries:{configurable:!0},showPadding:{configurable:!0},showCollisionBoxes:{configurable:!0},showOverdrawInspector:{configurable:!0},repaint:{configurable:!0},vertices:{configurable:!0},version:{configurable:!0}};return o.prototype._getMapId=function(){return this._mapId},o.prototype.addControl=function(s,p){if(p===void 0&&(p=s.getDefaultPosition?s.getDefaultPosition():"top-right"),!s||!s.onAdd)return this.fire(new u.ErrorEvent(new Error("Invalid argument to map.addControl(). Argument must be a control with onAdd and onRemove methods.")));var f=s.onAdd(this);this._controls.push(s);var d=this._controlPositions[p];return p.indexOf("bottom")!==-1?d.insertBefore(f,d.firstChild):d.appendChild(f),this},o.prototype.removeControl=function(s){if(!s||!s.onRemove)return this.fire(new u.ErrorEvent(new Error("Invalid argument to map.removeControl(). Argument must be a control with onAdd and onRemove methods.")));var p=this._controls.indexOf(s);return p>-1&&this._controls.splice(p,1),s.onRemove(this),this},o.prototype.hasControl=function(s){return this._controls.indexOf(s)>-1},o.prototype.resize=function(s){var p=this._containerDimensions(),f=p[0],d=p[1];if(f===this.transform.width&&d===this.transform.height)return this;this._resizeCanvas(f,d),this.transform.resize(f,d),this.painter.resize(f,d);var y=!this._moving;return y&&this.fire(new u.Event("movestart",s)).fire(new u.Event("move",s)),this.fire(new u.Event("resize",s)),y&&this.fire(new u.Event("moveend",s)),this},o.prototype.getBounds=function(){return this.transform.getBounds()},o.prototype.getMaxBounds=function(){return this.transform.getMaxBounds()},o.prototype.setMaxBounds=function(s){return this.transform.setMaxBounds(u.LngLatBounds.convert(s)),this._update()},o.prototype.setMinZoom=function(s){if((s=s??-2)>=-2&&s<=this.transform.maxZoom)return this.transform.minZoom=s,this._update(),this.getZoom()<s&&this.setZoom(s),this;throw new Error("minZoom must be between -2 and the current maxZoom, inclusive")},o.prototype.getMinZoom=function(){return this.transform.minZoom},o.prototype.setMaxZoom=function(s){if((s=s??22)>=this.transform.minZoom)return this.transform.maxZoom=s,this._update(),this.getZoom()>s&&this.setZoom(s),this;throw new Error("maxZoom must be greater than the current minZoom")},o.prototype.getMaxZoom=function(){return this.transform.maxZoom},o.prototype.setMinPitch=function(s){if((s=s??0)<0)throw new Error("minPitch must be greater than or equal to 0");if(s>=0&&s<=this.transform.maxPitch)return this.transform.minPitch=s,this._update(),this.getPitch()<s&&this.setPitch(s),this;throw new Error("minPitch must be between 0 and the current maxPitch, inclusive")},o.prototype.getMinPitch=function(){return this.transform.minPitch},o.prototype.setMaxPitch=function(s){if((s=s??60)>60)throw new Error("maxPitch must be less than or equal to 60");if(s>=this.transform.minPitch)return this.transform.maxPitch=s,this._update(),this.getPitch()>s&&this.setPitch(s),this;throw new Error("maxPitch must be greater than the current minPitch")},o.prototype.getMaxPitch=function(){return this.transform.maxPitch},o.prototype.getRenderWorldCopies=function(){return this.transform.renderWorldCopies},o.prototype.setRenderWorldCopies=function(s){return this.transform.renderWorldCopies=s,this._update()},o.prototype.project=function(s){return this.transform.locationPoint(u.LngLat.convert(s))},o.prototype.unproject=function(s){return this.transform.pointLocation(u.Point.convert(s))},o.prototype.isMoving=function(){return this._moving||this.handlers.isMoving()},o.prototype.isZooming=function(){return this._zooming||this.handlers.isZooming()},o.prototype.isRotating=function(){return this._rotating||this.handlers.isRotating()},o.prototype._createDelegatedListener=function(s,p,f){var d,y=this;if(s==="mouseenter"||s==="mouseover"){var v=!1;return {layer:p,listener:f,delegates:{mousemove:function(P){var z=y.getLayer(p)?y.queryRenderedFeatures(P.point,{layers:[p]}):[];z.length?v||(v=!0,f.call(y,new Xe(s,y,P.originalEvent,{features:z}))):v=!1;},mouseout:function(){v=!1;}}}}if(s==="mouseleave"||s==="mouseout"){var S=!1;return {layer:p,listener:f,delegates:{mousemove:function(P){(y.getLayer(p)?y.queryRenderedFeatures(P.point,{layers:[p]}):[]).length?S=!0:S&&(S=!1,f.call(y,new Xe(s,y,P.originalEvent)));},mouseout:function(P){S&&(S=!1,f.call(y,new Xe(s,y,P.originalEvent)));}}}}return {layer:p,listener:f,delegates:(d={},d[s]=function(P){var z=y.getLayer(p)?y.queryRenderedFeatures(P.point,{layers:[p]}):[];z.length&&(P.features=z,f.call(y,P),delete P.features);},d)}},o.prototype.on=function(s,p,f){if(f===void 0)return i.prototype.on.call(this,s,p);var d=this._createDelegatedListener(s,p,f);for(var y in this._delegatedListeners=this._delegatedListeners||{},this._delegatedListeners[s]=this._delegatedListeners[s]||[],this._delegatedListeners[s].push(d),d.delegates)this.on(y,d.delegates[y]);return this},o.prototype.once=function(s,p,f){if(f===void 0)return i.prototype.once.call(this,s,p);var d=this._createDelegatedListener(s,p,f);for(var y in d.delegates)this.once(y,d.delegates[y]);return this},o.prototype.off=function(s,p,f){var d=this;return f===void 0?i.prototype.off.call(this,s,p):(this._delegatedListeners&&this._delegatedListeners[s]&&function(y){for(var v=y[s],S=0;S<v.length;S++){var P=v[S];if(P.layer===p&&P.listener===f){for(var z in P.delegates)d.off(z,P.delegates[z]);return v.splice(S,1),d}}}(this._delegatedListeners),this)},o.prototype.queryRenderedFeatures=function(s,p){if(!this.style)return [];var f;if(p!==void 0||s===void 0||s instanceof u.Point||Array.isArray(s)||(p=s,s=void 0),p=p||{},(s=s||[[0,0],[this.transform.width,this.transform.height]])instanceof u.Point||typeof s[0]=="number")f=[u.Point.convert(s)];else {var d=u.Point.convert(s[0]),y=u.Point.convert(s[1]);f=[d,new u.Point(y.x,d.y),y,new u.Point(d.x,y.y),d];}return this.style.queryRenderedFeatures(f,p,this.transform)},o.prototype.querySourceFeatures=function(s,p){return this.style.querySourceFeatures(s,p)},o.prototype.setStyle=function(s,p){return (p=u.extend({},{localIdeographFontFamily:this._localIdeographFontFamily},p)).diff!==!1&&p.localIdeographFontFamily===this._localIdeographFontFamily&&this.style&&s?(this._diffStyle(s,p),this):(this._localIdeographFontFamily=p.localIdeographFontFamily,this._updateStyle(s,p))},o.prototype._getUIString=function(s){var p=this._locale[s];if(p==null)throw new Error("Missing UI string '"+s+"'");return p},o.prototype._updateStyle=function(s,p){return this.style&&(this.style.setEventedParent(null),this.style._remove()),s?(this.style=new Rr(this,p||{}),this.style.setEventedParent(this,{style:this.style}),typeof s=="string"?this.style.loadURL(s):this.style.loadJSON(s),this):(delete this.style,this)},o.prototype._lazyInitEmptyStyle=function(){this.style||(this.style=new Rr(this,{}),this.style.setEventedParent(this,{style:this.style}),this.style.loadEmpty());},o.prototype._diffStyle=function(s,p){var f=this;if(typeof s=="string"){var d=this._requestManager.normalizeStyleURL(s),y=this._requestManager.transformRequest(d,u.ResourceType.Style);u.getJSON(y,function(v,S){v?f.fire(new u.ErrorEvent(v)):S&&f._updateDiff(S,p);});}else typeof s=="object"&&this._updateDiff(s,p);},o.prototype._updateDiff=function(s,p){try{this.style.setState(s)&&this._update(!0);}catch(f){u.warnOnce("Unable to perform style diff: "+(f.message||f.error||f)+".  Rebuilding the style from scratch."),this._updateStyle(s,p);}},o.prototype.getStyle=function(){if(this.style)return this.style.serialize()},o.prototype.isStyleLoaded=function(){return this.style?this.style.loaded():u.warnOnce("There is no style added to the map.")},o.prototype.addSource=function(s,p){return this._lazyInitEmptyStyle(),this.style.addSource(s,p),this._update(!0)},o.prototype.isSourceLoaded=function(s){var p=this.style&&this.style.sourceCaches[s];if(p!==void 0)return p.loaded();this.fire(new u.ErrorEvent(new Error("There is no source with ID '"+s+"'")));},o.prototype.areTilesLoaded=function(){var s=this.style&&this.style.sourceCaches;for(var p in s){var f=s[p]._tiles;for(var d in f){var y=f[d];if(y.state!=="loaded"&&y.state!=="errored")return !1}}return !0},o.prototype.addSourceType=function(s,p,f){return this._lazyInitEmptyStyle(),this.style.addSourceType(s,p,f)},o.prototype.removeSource=function(s){return this.style.removeSource(s),this._update(!0)},o.prototype.getSource=function(s){return this.style.getSource(s)},o.prototype.addImage=function(s,p,f){f===void 0&&(f={});var d=f.pixelRatio;d===void 0&&(d=1);var y=f.sdf;y===void 0&&(y=!1);var v=f.stretchX,S=f.stretchY,P=f.content;if(this._lazyInitEmptyStyle(),p instanceof Ns||he&&p instanceof he){var z=u.browser.getImageData(p);this.style.addImage(s,{data:new u.RGBAImage({width:z.width,height:z.height},z.data),pixelRatio:d,stretchX:v,stretchY:S,content:P,sdf:y,version:0});}else {if(p.width===void 0||p.height===void 0)return this.fire(new u.ErrorEvent(new Error("Invalid arguments to map.addImage(). The second argument must be an `HTMLImageElement`, `ImageData`, `ImageBitmap`, or object with `width`, `height`, and `data` properties with the same format as `ImageData`")));var k=p;this.style.addImage(s,{data:new u.RGBAImage({width:p.width,height:p.height},new Uint8Array(p.data)),pixelRatio:d,stretchX:v,stretchY:S,content:P,sdf:y,version:0,userImage:k}),k.onAdd&&k.onAdd(this,s);}},o.prototype.updateImage=function(s,p){var f=this.style.getImage(s);if(!f)return this.fire(new u.ErrorEvent(new Error("The map has no image with that id. If you are adding a new image use `map.addImage(...)` instead.")));var d=p instanceof Ns||he&&p instanceof he?u.browser.getImageData(p):p,y=d.width,v=d.height,S=d.data;return y===void 0||v===void 0?this.fire(new u.ErrorEvent(new Error("Invalid arguments to map.updateImage(). The second argument must be an `HTMLImageElement`, `ImageData`, `ImageBitmap`, or object with `width`, `height`, and `data` properties with the same format as `ImageData`"))):y!==f.data.width||v!==f.data.height?this.fire(new u.ErrorEvent(new Error("The width and height of the updated image must be that same as the previous version of the image"))):(f.data.replace(S,!(p instanceof Ns||he&&p instanceof he)),void this.style.updateImage(s,f))},o.prototype.hasImage=function(s){return s?!!this.style.getImage(s):(this.fire(new u.ErrorEvent(new Error("Missing required image id"))),!1)},o.prototype.removeImage=function(s){this.style.removeImage(s);},o.prototype.loadImage=function(s,p){u.getImage(this._requestManager.transformRequest(s,u.ResourceType.Image),p);},o.prototype.listImages=function(){return this.style.listImages()},o.prototype.addLayer=function(s,p){return this._lazyInitEmptyStyle(),this.style.addLayer(s,p),this._update(!0)},o.prototype.moveLayer=function(s,p){return this.style.moveLayer(s,p),this._update(!0)},o.prototype.removeLayer=function(s){return this.style.removeLayer(s),this._update(!0)},o.prototype.getLayer=function(s){return this.style.getLayer(s)},o.prototype.setLayerZoomRange=function(s,p,f){return this.style.setLayerZoomRange(s,p,f),this._update(!0)},o.prototype.setFilter=function(s,p,f){return f===void 0&&(f={}),this.style.setFilter(s,p,f),this._update(!0)},o.prototype.getFilter=function(s){return this.style.getFilter(s)},o.prototype.setPaintProperty=function(s,p,f,d){return d===void 0&&(d={}),this.style.setPaintProperty(s,p,f,d),this._update(!0)},o.prototype.getPaintProperty=function(s,p){return this.style.getPaintProperty(s,p)},o.prototype.setLayoutProperty=function(s,p,f,d){return d===void 0&&(d={}),this.style.setLayoutProperty(s,p,f,d),this._update(!0)},o.prototype.getLayoutProperty=function(s,p){return this.style.getLayoutProperty(s,p)},o.prototype.setLight=function(s,p){return p===void 0&&(p={}),this._lazyInitEmptyStyle(),this.style.setLight(s,p),this._update(!0)},o.prototype.getLight=function(){return this.style.getLight()},o.prototype.setFeatureState=function(s,p){return this.style.setFeatureState(s,p),this._update()},o.prototype.removeFeatureState=function(s,p){return this.style.removeFeatureState(s,p),this._update()},o.prototype.getFeatureState=function(s){return this.style.getFeatureState(s)},o.prototype.getContainer=function(){return this._container},o.prototype.getCanvasContainer=function(){return this._canvasContainer},o.prototype.getCanvas=function(){return this._canvas},o.prototype._containerDimensions=function(){var s=0,p=0;return this._container&&(s=this._container.clientWidth||400,p=this._container.clientHeight||300),[s,p]},o.prototype._detectMissingCSS=function(){u.window.getComputedStyle(this._missingCSSCanary).getPropertyValue("background-color")!=="rgb(250, 128, 114)"&&u.warnOnce("This page appears to be missing CSS declarations for Mapbox GL JS, which may cause the map to display incorrectly. Please ensure your page includes mapbox-gl.css, as described in https://www.mapbox.com/mapbox-gl-js/api/.");},o.prototype._setupContainer=function(){var s=this._container;s.classList.add("mapboxgl-map"),(this._missingCSSCanary=ct.create("div","mapboxgl-canary",s)).style.visibility="hidden",this._detectMissingCSS();var p=this._canvasContainer=ct.create("div","mapboxgl-canvas-container",s);this._interactive&&p.classList.add("mapboxgl-interactive"),this._canvas=ct.create("canvas","mapboxgl-canvas",p),this._canvas.addEventListener("webglcontextlost",this._contextLost,!1),this._canvas.addEventListener("webglcontextrestored",this._contextRestored,!1),this._canvas.setAttribute("tabindex","0"),this._canvas.setAttribute("aria-label","Map"),this._canvas.setAttribute("role","region");var f=this._containerDimensions();this._resizeCanvas(f[0],f[1]);var d=this._controlContainer=ct.create("div","mapboxgl-control-container",s),y=this._controlPositions={};["top-left","top-right","bottom-left","bottom-right"].forEach(function(v){y[v]=ct.create("div","mapboxgl-ctrl-"+v,d);}),this._container.addEventListener("scroll",this._onMapScroll,!1);},o.prototype._resizeCanvas=function(s,p){var f=u.browser.devicePixelRatio||1;this._canvas.width=f*s,this._canvas.height=f*p,this._canvas.style.width=s+"px",this._canvas.style.height=p+"px";},o.prototype._setupPainter=function(){var s=u.extend({},Zr.webGLContextAttributes,{failIfMajorPerformanceCaveat:this._failIfMajorPerformanceCaveat,preserveDrawingBuffer:this._preserveDrawingBuffer,antialias:this._antialias||!1}),p=this._canvas.getContext("webgl",s)||this._canvas.getContext("experimental-webgl",s);p?(this.painter=new Ie(p,this.transform),u.webpSupported.testSupport(p)):this.fire(new u.ErrorEvent(new Error("Failed to initialize WebGL")));},o.prototype._contextLost=function(s){s.preventDefault(),this._frame&&(this._frame.cancel(),this._frame=null),this.fire(new u.Event("webglcontextlost",{originalEvent:s}));},o.prototype._contextRestored=function(s){this._setupPainter(),this.resize(),this._update(),this.fire(new u.Event("webglcontextrestored",{originalEvent:s}));},o.prototype._onMapScroll=function(s){if(s.target===this._container)return this._container.scrollTop=0,this._container.scrollLeft=0,!1},o.prototype.loaded=function(){return !this._styleDirty&&!this._sourcesDirty&&!!this.style&&this.style.loaded()},o.prototype._update=function(s){return this.style?(this._styleDirty=this._styleDirty||s,this._sourcesDirty=!0,this.triggerRepaint(),this):this},o.prototype._requestRenderFrame=function(s){return this._update(),this._renderTaskQueue.add(s)},o.prototype._cancelRenderFrame=function(s){this._renderTaskQueue.remove(s);},o.prototype._render=function(s){var p,f=this,d=0,y=this.painter.context.extTimerQuery;if(this.listens("gpu-timing-frame")&&(p=y.createQueryEXT(),y.beginQueryEXT(y.TIME_ELAPSED_EXT,p),d=u.browser.now()),this.painter.context.setDirty(),this.painter.setBaseState(),this._renderTaskQueue.run(s),!this._removed){var v=!1;if(this.style&&this._styleDirty){this._styleDirty=!1;var S=this.transform.zoom,P=u.browser.now();this.style.zoomHistory.update(S,P);var z=new u.EvaluationParameters(S,{now:P,fadeDuration:this._fadeDuration,zoomHistory:this.style.zoomHistory,transition:this.style.getTransition()}),k=z.crossFadingFactor();k===1&&k===this._crossFadingFactor||(v=!0,this._crossFadingFactor=k),this.style.update(z);}if(this.style&&this._sourcesDirty&&(this._sourcesDirty=!1,this.style._updateSources(this.transform)),this._placementDirty=this.style&&this.style._updatePlacement(this.painter.transform,this.showCollisionBoxes,this._fadeDuration,this._crossSourceCollisions),this.painter.render(this.style,{showTileBoundaries:this.showTileBoundaries,showOverdrawInspector:this._showOverdrawInspector,rotating:this.isRotating(),zooming:this.isZooming(),moving:this.isMoving(),fadeDuration:this._fadeDuration,showPadding:this.showPadding,gpuTiming:!!this.listens("gpu-timing-layer")}),this.fire(new u.Event("render")),this.loaded()&&!this._loaded&&(this._loaded=!0,this.fire(new u.Event("load"))),this.style&&(this.style.hasTransitions()||v)&&(this._styleDirty=!0),this.style&&!this._placementDirty&&this.style._releaseSymbolFadeTiles(),this.listens("gpu-timing-frame")){var F=u.browser.now()-d;y.endQueryEXT(y.TIME_ELAPSED_EXT,p),setTimeout(function(){var D=y.getQueryObjectEXT(p,y.QUERY_RESULT_EXT)/1e6;y.deleteQueryEXT(p),f.fire(new u.Event("gpu-timing-frame",{cpuTime:F,gpuTime:D}));},50);}if(this.listens("gpu-timing-layer")){var R=this.painter.collectGpuTimers();setTimeout(function(){var D=f.painter.queryGpuTimers(R);f.fire(new u.Event("gpu-timing-layer",{layerTimes:D}));},50);}var j=this._sourcesDirty||this._styleDirty||this._placementDirty;return j||this._repaint?this.triggerRepaint():!this.isMoving()&&this.loaded()&&this.fire(new u.Event("idle")),!this._loaded||this._fullyLoaded||j||(this._fullyLoaded=!0),this}},o.prototype.remove=function(){this._hash&&this._hash.remove();for(var s=0,p=this._controls;s<p.length;s+=1)p[s].onRemove(this);this._controls=[],this._frame&&(this._frame.cancel(),this._frame=null),this._renderTaskQueue.clear(),this.painter.destroy(),this.handlers.destroy(),delete this.handlers,this.setStyle(null),u.window!==void 0&&(u.window.removeEventListener("resize",this._onWindowResize,!1),u.window.removeEventListener("orientationchange",this._onWindowResize,!1),u.window.removeEventListener("online",this._onWindowOnline,!1));var f=this.painter.context.gl.getExtension("WEBGL_lose_context");f&&f.loseContext(),Zn(this._canvasContainer),Zn(this._controlContainer),Zn(this._missingCSSCanary),this._container.classList.remove("mapboxgl-map"),this._removed=!0,this.fire(new u.Event("remove"));},o.prototype.triggerRepaint=function(){var s=this;this.style&&!this._frame&&(this._frame=u.browser.frame(function(p){s._frame=null,s._render(p);}));},o.prototype._onWindowOnline=function(){this._update();},o.prototype._onWindowResize=function(s){this._trackResize&&this.resize({originalEvent:s})._update();},n.showTileBoundaries.get=function(){return !!this._showTileBoundaries},n.showTileBoundaries.set=function(s){this._showTileBoundaries!==s&&(this._showTileBoundaries=s,this._update());},n.showPadding.get=function(){return !!this._showPadding},n.showPadding.set=function(s){this._showPadding!==s&&(this._showPadding=s,this._update());},n.showCollisionBoxes.get=function(){return !!this._showCollisionBoxes},n.showCollisionBoxes.set=function(s){this._showCollisionBoxes!==s&&(this._showCollisionBoxes=s,s?this.style._generateCollisionBoxes():this._update());},n.showOverdrawInspector.get=function(){return !!this._showOverdrawInspector},n.showOverdrawInspector.set=function(s){this._showOverdrawInspector!==s&&(this._showOverdrawInspector=s,this._update());},n.repaint.get=function(){return !!this._repaint},n.repaint.set=function(s){this._repaint!==s&&(this._repaint=s,this.triggerRepaint());},n.vertices.get=function(){return !!this._vertices},n.vertices.set=function(s){this._vertices=s,this._update();},o.prototype._setCacheLimits=function(s,p){u.setCacheLimits(s,p);},n.version.get=function(){return u.version},Object.defineProperties(o.prototype,n),o}(Va);function Zn(i){i.parentNode&&i.parentNode.removeChild(i);}var js={showCompass:!0,showZoom:!0,visualizePitch:!1},qi=function(i){var o=this;this.options=u.extend({},js,i),this._container=ct.create("div","mapboxgl-ctrl mapboxgl-ctrl-group"),this._container.addEventListener("contextmenu",function(n){return n.preventDefault()}),this.options.showZoom&&(u.bindAll(["_setButtonTitle","_updateZoomButtons"],this),this._zoomInButton=this._createButton("mapboxgl-ctrl-zoom-in",function(n){return o._map.zoomIn({},{originalEvent:n})}),ct.create("span","mapboxgl-ctrl-icon",this._zoomInButton).setAttribute("aria-hidden",!0),this._zoomOutButton=this._createButton("mapboxgl-ctrl-zoom-out",function(n){return o._map.zoomOut({},{originalEvent:n})}),ct.create("span","mapboxgl-ctrl-icon",this._zoomOutButton).setAttribute("aria-hidden",!0)),this.options.showCompass&&(u.bindAll(["_rotateCompassArrow"],this),this._compass=this._createButton("mapboxgl-ctrl-compass",function(n){o.options.visualizePitch?o._map.resetNorthPitch({},{originalEvent:n}):o._map.resetNorth({},{originalEvent:n});}),this._compassIcon=ct.create("span","mapboxgl-ctrl-icon",this._compass),this._compassIcon.setAttribute("aria-hidden",!0));};qi.prototype._updateZoomButtons=function(){var i=this._map.getZoom(),o=i===this._map.getMaxZoom(),n=i===this._map.getMinZoom();this._zoomInButton.disabled=o,this._zoomOutButton.disabled=n,this._zoomInButton.setAttribute("aria-disabled",o.toString()),this._zoomOutButton.setAttribute("aria-disabled",n.toString());},qi.prototype._rotateCompassArrow=function(){var i=this.options.visualizePitch?"scale("+1/Math.pow(Math.cos(this._map.transform.pitch*(Math.PI/180)),.5)+") rotateX("+this._map.transform.pitch+"deg) rotateZ("+this._map.transform.angle*(180/Math.PI)+"deg)":"rotate("+this._map.transform.angle*(180/Math.PI)+"deg)";this._compassIcon.style.transform=i;},qi.prototype.onAdd=function(i){return this._map=i,this.options.showZoom&&(this._setButtonTitle(this._zoomInButton,"ZoomIn"),this._setButtonTitle(this._zoomOutButton,"ZoomOut"),this._map.on("zoom",this._updateZoomButtons),this._updateZoomButtons()),this.options.showCompass&&(this._setButtonTitle(this._compass,"ResetBearing"),this.options.visualizePitch&&this._map.on("pitch",this._rotateCompassArrow),this._map.on("rotate",this._rotateCompassArrow),this._rotateCompassArrow(),this._handler=new Nr(this._map,this._compass,this.options.visualizePitch)),this._container},qi.prototype.onRemove=function(){ct.remove(this._container),this.options.showZoom&&this._map.off("zoom",this._updateZoomButtons),this.options.showCompass&&(this.options.visualizePitch&&this._map.off("pitch",this._rotateCompassArrow),this._map.off("rotate",this._rotateCompassArrow),this._handler.off(),delete this._handler),delete this._map;},qi.prototype._createButton=function(i,o){var n=ct.create("button",i,this._container);return n.type="button",n.addEventListener("click",o),n},qi.prototype._setButtonTitle=function(i,o){var n=this._map._getUIString("NavigationControl."+o);i.title=n,i.setAttribute("aria-label",n);};var Nr=function(i,o,n){n===void 0&&(n=!1),this._clickTolerance=10,this.element=o,this.mouseRotate=new Fa({clickTolerance:i.dragRotate._mouseRotate._clickTolerance}),this.map=i,n&&(this.mousePitch=new Os({clickTolerance:i.dragRotate._mousePitch._clickTolerance})),u.bindAll(["mousedown","mousemove","mouseup","touchstart","touchmove","touchend","reset"],this),ct.addEventListener(o,"mousedown",this.mousedown),ct.addEventListener(o,"touchstart",this.touchstart,{passive:!1}),ct.addEventListener(o,"touchmove",this.touchmove),ct.addEventListener(o,"touchend",this.touchend),ct.addEventListener(o,"touchcancel",this.reset);};function xo(i,o,n){if(i=new u.LngLat(i.lng,i.lat),o){var s=new u.LngLat(i.lng-360,i.lat),p=new u.LngLat(i.lng+360,i.lat),f=n.locationPoint(i).distSqr(o);n.locationPoint(s).distSqr(o)<f?i=s:n.locationPoint(p).distSqr(o)<f&&(i=p);}for(;Math.abs(i.lng-n.center.lng)>180;){var d=n.locationPoint(i);if(d.x>=0&&d.y>=0&&d.x<=n.width&&d.y<=n.height)break;i.lng>n.center.lng?i.lng-=360:i.lng+=360;}return i}Nr.prototype.down=function(i,o){this.mouseRotate.mousedown(i,o),this.mousePitch&&this.mousePitch.mousedown(i,o),ct.disableDrag();},Nr.prototype.move=function(i,o){var n=this.map,s=this.mouseRotate.mousemoveWindow(i,o);if(s&&s.bearingDelta&&n.setBearing(n.getBearing()+s.bearingDelta),this.mousePitch){var p=this.mousePitch.mousemoveWindow(i,o);p&&p.pitchDelta&&n.setPitch(n.getPitch()+p.pitchDelta);}},Nr.prototype.off=function(){var i=this.element;ct.removeEventListener(i,"mousedown",this.mousedown),ct.removeEventListener(i,"touchstart",this.touchstart,{passive:!1}),ct.removeEventListener(i,"touchmove",this.touchmove),ct.removeEventListener(i,"touchend",this.touchend),ct.removeEventListener(i,"touchcancel",this.reset),this.offTemp();},Nr.prototype.offTemp=function(){ct.enableDrag(),ct.removeEventListener(u.window,"mousemove",this.mousemove),ct.removeEventListener(u.window,"mouseup",this.mouseup);},Nr.prototype.mousedown=function(i){this.down(u.extend({},i,{ctrlKey:!0,preventDefault:function(){return i.preventDefault()}}),ct.mousePos(this.element,i)),ct.addEventListener(u.window,"mousemove",this.mousemove),ct.addEventListener(u.window,"mouseup",this.mouseup);},Nr.prototype.mousemove=function(i){this.move(i,ct.mousePos(this.element,i));},Nr.prototype.mouseup=function(i){this.mouseRotate.mouseupWindow(i),this.mousePitch&&this.mousePitch.mouseupWindow(i),this.offTemp();},Nr.prototype.touchstart=function(i){i.targetTouches.length!==1?this.reset():(this._startPos=this._lastPos=ct.touchPos(this.element,i.targetTouches)[0],this.down({type:"mousedown",button:0,ctrlKey:!0,preventDefault:function(){return i.preventDefault()}},this._startPos));},Nr.prototype.touchmove=function(i){i.targetTouches.length!==1?this.reset():(this._lastPos=ct.touchPos(this.element,i.targetTouches)[0],this.move({preventDefault:function(){return i.preventDefault()}},this._lastPos));},Nr.prototype.touchend=function(i){i.targetTouches.length===0&&this._startPos&&this._lastPos&&this._startPos.dist(this._lastPos)<this._clickTolerance&&this.element.click(),this.reset();},Nr.prototype.reset=function(){this.mouseRotate.reset(),this.mousePitch&&this.mousePitch.reset(),delete this._startPos,delete this._lastPos,this.offTemp();};var Ci={center:"translate(-50%,-50%)",top:"translate(-50%,0)","top-left":"translate(0,0)","top-right":"translate(-100%,0)",bottom:"translate(-50%,-100%)","bottom-left":"translate(0,-100%)","bottom-right":"translate(-100%,-100%)",left:"translate(0,-50%)",right:"translate(-100%,-50%)"};function ja(i,o,n){var s=i.classList;for(var p in Ci)s.remove("mapboxgl-"+n+"-anchor-"+p);s.add("mapboxgl-"+n+"-anchor-"+o);}var bo,na=function(i){function o(n,s){if(i.call(this),(n instanceof u.window.HTMLElement||s)&&(n=u.extend({element:n},s)),u.bindAll(["_update","_onMove","_onUp","_addDragHandler","_onMapClick","_onKeyPress"],this),this._anchor=n&&n.anchor||"center",this._color=n&&n.color||"#3FB1CE",this._scale=n&&n.scale||1,this._draggable=n&&n.draggable||!1,this._clickTolerance=n&&n.clickTolerance||0,this._isDragging=!1,this._state="inactive",this._rotation=n&&n.rotation||0,this._rotationAlignment=n&&n.rotationAlignment||"auto",this._pitchAlignment=n&&n.pitchAlignment&&n.pitchAlignment!=="auto"?n.pitchAlignment:this._rotationAlignment,n&&n.element)this._element=n.element,this._offset=u.Point.convert(n&&n.offset||[0,0]);else {this._defaultMarker=!0,this._element=ct.create("div"),this._element.setAttribute("aria-label","Map marker");var p=ct.createNS("http://www.w3.org/2000/svg","svg");p.setAttributeNS(null,"display","block"),p.setAttributeNS(null,"height","41px"),p.setAttributeNS(null,"width","27px"),p.setAttributeNS(null,"viewBox","0 0 27 41");var f=ct.createNS("http://www.w3.org/2000/svg","g");f.setAttributeNS(null,"stroke","none"),f.setAttributeNS(null,"stroke-width","1"),f.setAttributeNS(null,"fill","none"),f.setAttributeNS(null,"fill-rule","evenodd");var d=ct.createNS("http://www.w3.org/2000/svg","g");d.setAttributeNS(null,"fill-rule","nonzero");var y=ct.createNS("http://www.w3.org/2000/svg","g");y.setAttributeNS(null,"transform","translate(3.0, 29.0)"),y.setAttributeNS(null,"fill","#000000");for(var v=0,S=[{rx:"10.5",ry:"5.25002273"},{rx:"10.5",ry:"5.25002273"},{rx:"9.5",ry:"4.77275007"},{rx:"8.5",ry:"4.29549936"},{rx:"7.5",ry:"3.81822308"},{rx:"6.5",ry:"3.34094679"},{rx:"5.5",ry:"2.86367051"},{rx:"4.5",ry:"2.38636864"}];v<S.length;v+=1){var P=S[v],z=ct.createNS("http://www.w3.org/2000/svg","ellipse");z.setAttributeNS(null,"opacity","0.04"),z.setAttributeNS(null,"cx","10.5"),z.setAttributeNS(null,"cy","5.80029008"),z.setAttributeNS(null,"rx",P.rx),z.setAttributeNS(null,"ry",P.ry),y.appendChild(z);}var k=ct.createNS("http://www.w3.org/2000/svg","g");k.setAttributeNS(null,"fill",this._color);var F=ct.createNS("http://www.w3.org/2000/svg","path");F.setAttributeNS(null,"d","M27,13.5 C27,19.074644 20.250001,27.000002 14.75,34.500002 C14.016665,35.500004 12.983335,35.500004 12.25,34.500002 C6.7499993,27.000002 0,19.222562 0,13.5 C0,6.0441559 6.0441559,0 13.5,0 C20.955844,0 27,6.0441559 27,13.5 Z"),k.appendChild(F);var R=ct.createNS("http://www.w3.org/2000/svg","g");R.setAttributeNS(null,"opacity","0.25"),R.setAttributeNS(null,"fill","#000000");var j=ct.createNS("http://www.w3.org/2000/svg","path");j.setAttributeNS(null,"d","M13.5,0 C6.0441559,0 0,6.0441559 0,13.5 C0,19.222562 6.7499993,27 12.25,34.5 C13,35.522727 14.016664,35.500004 14.75,34.5 C20.250001,27 27,19.074644 27,13.5 C27,6.0441559 20.955844,0 13.5,0 Z M13.5,1 C20.415404,1 26,6.584596 26,13.5 C26,15.898657 24.495584,19.181431 22.220703,22.738281 C19.945823,26.295132 16.705119,30.142167 13.943359,33.908203 C13.743445,34.180814 13.612715,34.322738 13.5,34.441406 C13.387285,34.322738 13.256555,34.180814 13.056641,33.908203 C10.284481,30.127985 7.4148684,26.314159 5.015625,22.773438 C2.6163816,19.232715 1,15.953538 1,13.5 C1,6.584596 6.584596,1 13.5,1 Z"),R.appendChild(j);var D=ct.createNS("http://www.w3.org/2000/svg","g");D.setAttributeNS(null,"transform","translate(6.0, 7.0)"),D.setAttributeNS(null,"fill","#FFFFFF");var N=ct.createNS("http://www.w3.org/2000/svg","g");N.setAttributeNS(null,"transform","translate(8.0, 8.0)");var G=ct.createNS("http://www.w3.org/2000/svg","circle");G.setAttributeNS(null,"fill","#000000"),G.setAttributeNS(null,"opacity","0.25"),G.setAttributeNS(null,"cx","5.5"),G.setAttributeNS(null,"cy","5.5"),G.setAttributeNS(null,"r","5.4999962");var K=ct.createNS("http://www.w3.org/2000/svg","circle");K.setAttributeNS(null,"fill","#FFFFFF"),K.setAttributeNS(null,"cx","5.5"),K.setAttributeNS(null,"cy","5.5"),K.setAttributeNS(null,"r","5.4999962"),N.appendChild(G),N.appendChild(K),d.appendChild(y),d.appendChild(k),d.appendChild(R),d.appendChild(D),d.appendChild(N),p.appendChild(d),p.setAttributeNS(null,"height",41*this._scale+"px"),p.setAttributeNS(null,"width",27*this._scale+"px"),this._element.appendChild(p),this._offset=u.Point.convert(n&&n.offset||[0,-14]);}this._element.classList.add("mapboxgl-marker"),this._element.addEventListener("dragstart",function(tt){tt.preventDefault();}),this._element.addEventListener("mousedown",function(tt){tt.preventDefault();}),ja(this._element,this._anchor,"marker"),this._popup=null;}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.addTo=function(n){return this.remove(),this._map=n,n.getCanvasContainer().appendChild(this._element),n.on("move",this._update),n.on("moveend",this._update),this.setDraggable(this._draggable),this._update(),this._map.on("click",this._onMapClick),this},o.prototype.remove=function(){return this._map&&(this._map.off("click",this._onMapClick),this._map.off("move",this._update),this._map.off("moveend",this._update),this._map.off("mousedown",this._addDragHandler),this._map.off("touchstart",this._addDragHandler),this._map.off("mouseup",this._onUp),this._map.off("touchend",this._onUp),this._map.off("mousemove",this._onMove),this._map.off("touchmove",this._onMove),delete this._map),ct.remove(this._element),this._popup&&this._popup.remove(),this},o.prototype.getLngLat=function(){return this._lngLat},o.prototype.setLngLat=function(n){return this._lngLat=u.LngLat.convert(n),this._pos=null,this._popup&&this._popup.setLngLat(this._lngLat),this._update(),this},o.prototype.getElement=function(){return this._element},o.prototype.setPopup=function(n){if(this._popup&&(this._popup.remove(),this._popup=null,this._element.removeEventListener("keypress",this._onKeyPress),this._originalTabIndex||this._element.removeAttribute("tabindex")),n){if(!("offset"in n.options)){var s=Math.sqrt(Math.pow(13.5,2)/2);n.options.offset=this._defaultMarker?{top:[0,0],"top-left":[0,0],"top-right":[0,0],bottom:[0,-38.1],"bottom-left":[s,-1*(24.6+s)],"bottom-right":[-s,-1*(24.6+s)],left:[13.5,-24.6],right:[-13.5,-24.6]}:this._offset;}this._popup=n,this._lngLat&&this._popup.setLngLat(this._lngLat),this._originalTabIndex=this._element.getAttribute("tabindex"),this._originalTabIndex||this._element.setAttribute("tabindex","0"),this._element.addEventListener("keypress",this._onKeyPress);}return this},o.prototype._onKeyPress=function(n){var s=n.code,p=n.charCode||n.keyCode;s!=="Space"&&s!=="Enter"&&p!==32&&p!==13||this.togglePopup();},o.prototype._onMapClick=function(n){var s=n.originalEvent.target,p=this._element;this._popup&&(s===p||p.contains(s))&&this.togglePopup();},o.prototype.getPopup=function(){return this._popup},o.prototype.togglePopup=function(){var n=this._popup;return n?(n.isOpen()?n.remove():n.addTo(this._map),this):this},o.prototype._update=function(n){if(this._map){this._map.transform.renderWorldCopies&&(this._lngLat=xo(this._lngLat,this._pos,this._map.transform)),this._pos=this._map.project(this._lngLat)._add(this._offset);var s="";this._rotationAlignment==="viewport"||this._rotationAlignment==="auto"?s="rotateZ("+this._rotation+"deg)":this._rotationAlignment==="map"&&(s="rotateZ("+(this._rotation-this._map.getBearing())+"deg)");var p="";this._pitchAlignment==="viewport"||this._pitchAlignment==="auto"?p="rotateX(0deg)":this._pitchAlignment==="map"&&(p="rotateX("+this._map.getPitch()+"deg)"),n&&n.type!=="moveend"||(this._pos=this._pos.round()),ct.setTransform(this._element,Ci[this._anchor]+" translate("+this._pos.x+"px, "+this._pos.y+"px) "+p+" "+s);}},o.prototype.getOffset=function(){return this._offset},o.prototype.setOffset=function(n){return this._offset=u.Point.convert(n),this._update(),this},o.prototype._onMove=function(n){if(!this._isDragging){var s=this._clickTolerance||this._map._clickTolerance;this._isDragging=n.point.dist(this._pointerdownPos)>=s;}this._isDragging&&(this._pos=n.point.sub(this._positionDelta),this._lngLat=this._map.unproject(this._pos),this.setLngLat(this._lngLat),this._element.style.pointerEvents="none",this._state==="pending"&&(this._state="active",this.fire(new u.Event("dragstart"))),this.fire(new u.Event("drag")));},o.prototype._onUp=function(){this._element.style.pointerEvents="auto",this._positionDelta=null,this._pointerdownPos=null,this._isDragging=!1,this._map.off("mousemove",this._onMove),this._map.off("touchmove",this._onMove),this._state==="active"&&this.fire(new u.Event("dragend")),this._state="inactive";},o.prototype._addDragHandler=function(n){this._element.contains(n.originalEvent.target)&&(n.preventDefault(),this._positionDelta=n.point.sub(this._pos).add(this._offset),this._pointerdownPos=n.point,this._state="pending",this._map.on("mousemove",this._onMove),this._map.on("touchmove",this._onMove),this._map.once("mouseup",this._onUp),this._map.once("touchend",this._onUp));},o.prototype.setDraggable=function(n){return this._draggable=!!n,this._map&&(n?(this._map.on("mousedown",this._addDragHandler),this._map.on("touchstart",this._addDragHandler)):(this._map.off("mousedown",this._addDragHandler),this._map.off("touchstart",this._addDragHandler))),this},o.prototype.isDraggable=function(){return this._draggable},o.prototype.setRotation=function(n){return this._rotation=n||0,this._update(),this},o.prototype.getRotation=function(){return this._rotation},o.prototype.setRotationAlignment=function(n){return this._rotationAlignment=n||"auto",this._update(),this},o.prototype.getRotationAlignment=function(){return this._rotationAlignment},o.prototype.setPitchAlignment=function(n){return this._pitchAlignment=n&&n!=="auto"?n:this._rotationAlignment,this._update(),this},o.prototype.getPitchAlignment=function(){return this._pitchAlignment},o}(u.Evented),qs={positionOptions:{enableHighAccuracy:!1,maximumAge:0,timeout:6e3},fitBoundsOptions:{maxZoom:15},trackUserLocation:!1,showAccuracyCircle:!0,showUserLocation:!0},wo=0,Gn=!1,Zs=function(i){function o(n){i.call(this),this.options=u.extend({},qs,n),u.bindAll(["_onSuccess","_onError","_onZoom","_finish","_setupUI","_updateCamera","_updateMarker"],this);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.onAdd=function(n){var s;return this._map=n,this._container=ct.create("div","mapboxgl-ctrl mapboxgl-ctrl-group"),s=this._setupUI,bo!==void 0?s(bo):u.window.navigator.permissions!==void 0?u.window.navigator.permissions.query({name:"geolocation"}).then(function(p){s(bo=p.state!=="denied");}):s(bo=!!u.window.navigator.geolocation),this._container},o.prototype.onRemove=function(){this._geolocationWatchID!==void 0&&(u.window.navigator.geolocation.clearWatch(this._geolocationWatchID),this._geolocationWatchID=void 0),this.options.showUserLocation&&this._userLocationDotMarker&&this._userLocationDotMarker.remove(),this.options.showAccuracyCircle&&this._accuracyCircleMarker&&this._accuracyCircleMarker.remove(),ct.remove(this._container),this._map.off("zoom",this._onZoom),this._map=void 0,wo=0,Gn=!1;},o.prototype._isOutOfMapMaxBounds=function(n){var s=this._map.getMaxBounds(),p=n.coords;return s&&(p.longitude<s.getWest()||p.longitude>s.getEast()||p.latitude<s.getSouth()||p.latitude>s.getNorth())},o.prototype._setErrorState=function(){switch(this._watchState){case"WAITING_ACTIVE":this._watchState="ACTIVE_ERROR",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active-error");break;case"ACTIVE_LOCK":this._watchState="ACTIVE_ERROR",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active-error"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting");break;case"BACKGROUND":this._watchState="BACKGROUND_ERROR",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-background-error"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting");}},o.prototype._onSuccess=function(n){if(this._map){if(this._isOutOfMapMaxBounds(n))return this._setErrorState(),this.fire(new u.Event("outofmaxbounds",n)),this._updateMarker(),void this._finish();if(this.options.trackUserLocation)switch(this._lastKnownPosition=n,this._watchState){case"WAITING_ACTIVE":case"ACTIVE_LOCK":case"ACTIVE_ERROR":this._watchState="ACTIVE_LOCK",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active-error"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active");break;case"BACKGROUND":case"BACKGROUND_ERROR":this._watchState="BACKGROUND",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background-error"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-background");}this.options.showUserLocation&&this._watchState!=="OFF"&&this._updateMarker(n),this.options.trackUserLocation&&this._watchState!=="ACTIVE_LOCK"||this._updateCamera(n),this.options.showUserLocation&&this._dotElement.classList.remove("mapboxgl-user-location-dot-stale"),this.fire(new u.Event("geolocate",n)),this._finish();}},o.prototype._updateCamera=function(n){var s=new u.LngLat(n.coords.longitude,n.coords.latitude),p=n.coords.accuracy,f=this._map.getBearing(),d=u.extend({bearing:f},this.options.fitBoundsOptions);this._map.fitBounds(s.toBounds(p),d,{geolocateSource:!0});},o.prototype._updateMarker=function(n){if(n){var s=new u.LngLat(n.coords.longitude,n.coords.latitude);this._accuracyCircleMarker.setLngLat(s).addTo(this._map),this._userLocationDotMarker.setLngLat(s).addTo(this._map),this._accuracy=n.coords.accuracy,this.options.showUserLocation&&this.options.showAccuracyCircle&&this._updateCircleRadius();}else this._userLocationDotMarker.remove(),this._accuracyCircleMarker.remove();},o.prototype._updateCircleRadius=function(){var n=this._map._container.clientHeight/2,s=this._map.unproject([0,n]),p=this._map.unproject([1,n]),f=s.distanceTo(p),d=Math.ceil(2*this._accuracy/f);this._circleElement.style.width=d+"px",this._circleElement.style.height=d+"px";},o.prototype._onZoom=function(){this.options.showUserLocation&&this.options.showAccuracyCircle&&this._updateCircleRadius();},o.prototype._onError=function(n){if(this._map){if(this.options.trackUserLocation)if(n.code===1){this._watchState="OFF",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active-error"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background-error"),this._geolocateButton.disabled=!0;var s=this._map._getUIString("GeolocateControl.LocationNotAvailable");this._geolocateButton.title=s,this._geolocateButton.setAttribute("aria-label",s),this._geolocationWatchID!==void 0&&this._clearWatch();}else {if(n.code===3&&Gn)return;this._setErrorState();}this._watchState!=="OFF"&&this.options.showUserLocation&&this._dotElement.classList.add("mapboxgl-user-location-dot-stale"),this.fire(new u.Event("error",n)),this._finish();}},o.prototype._finish=function(){this._timeoutId&&clearTimeout(this._timeoutId),this._timeoutId=void 0;},o.prototype._setupUI=function(n){var s=this;if(this._container.addEventListener("contextmenu",function(d){return d.preventDefault()}),this._geolocateButton=ct.create("button","mapboxgl-ctrl-geolocate",this._container),ct.create("span","mapboxgl-ctrl-icon",this._geolocateButton).setAttribute("aria-hidden",!0),this._geolocateButton.type="button",n===!1){u.warnOnce("Geolocation support is not available so the GeolocateControl will be disabled.");var p=this._map._getUIString("GeolocateControl.LocationNotAvailable");this._geolocateButton.disabled=!0,this._geolocateButton.title=p,this._geolocateButton.setAttribute("aria-label",p);}else {var f=this._map._getUIString("GeolocateControl.FindMyLocation");this._geolocateButton.title=f,this._geolocateButton.setAttribute("aria-label",f);}this.options.trackUserLocation&&(this._geolocateButton.setAttribute("aria-pressed","false"),this._watchState="OFF"),this.options.showUserLocation&&(this._dotElement=ct.create("div","mapboxgl-user-location-dot"),this._userLocationDotMarker=new na(this._dotElement),this._circleElement=ct.create("div","mapboxgl-user-location-accuracy-circle"),this._accuracyCircleMarker=new na({element:this._circleElement,pitchAlignment:"map"}),this.options.trackUserLocation&&(this._watchState="OFF"),this._map.on("zoom",this._onZoom)),this._geolocateButton.addEventListener("click",this.trigger.bind(this)),this._setup=!0,this.options.trackUserLocation&&this._map.on("movestart",function(d){d.geolocateSource||s._watchState!=="ACTIVE_LOCK"||d.originalEvent&&d.originalEvent.type==="resize"||(s._watchState="BACKGROUND",s._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-background"),s._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active"),s.fire(new u.Event("trackuserlocationend")));});},o.prototype.trigger=function(){if(!this._setup)return u.warnOnce("Geolocate control triggered before added to a map"),!1;if(this.options.trackUserLocation){switch(this._watchState){case"OFF":this._watchState="WAITING_ACTIVE",this.fire(new u.Event("trackuserlocationstart"));break;case"WAITING_ACTIVE":case"ACTIVE_LOCK":case"ACTIVE_ERROR":case"BACKGROUND_ERROR":wo--,Gn=!1,this._watchState="OFF",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-active-error"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background"),this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background-error"),this.fire(new u.Event("trackuserlocationend"));break;case"BACKGROUND":this._watchState="ACTIVE_LOCK",this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-background"),this._lastKnownPosition&&this._updateCamera(this._lastKnownPosition),this.fire(new u.Event("trackuserlocationstart"));}switch(this._watchState){case"WAITING_ACTIVE":this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active");break;case"ACTIVE_LOCK":this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active");break;case"ACTIVE_ERROR":this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-active-error");break;case"BACKGROUND":this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-background");break;case"BACKGROUND_ERROR":this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-background-error");}if(this._watchState==="OFF"&&this._geolocationWatchID!==void 0)this._clearWatch();else if(this._geolocationWatchID===void 0){var n;this._geolocateButton.classList.add("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.setAttribute("aria-pressed","true"),++wo>1?(n={maximumAge:6e5,timeout:0},Gn=!0):(n=this.options.positionOptions,Gn=!1),this._geolocationWatchID=u.window.navigator.geolocation.watchPosition(this._onSuccess,this._onError,n);}}else u.window.navigator.geolocation.getCurrentPosition(this._onSuccess,this._onError,this.options.positionOptions),this._timeoutId=setTimeout(this._finish,1e4);return !0},o.prototype._clearWatch=function(){u.window.navigator.geolocation.clearWatch(this._geolocationWatchID),this._geolocationWatchID=void 0,this._geolocateButton.classList.remove("mapboxgl-ctrl-geolocate-waiting"),this._geolocateButton.setAttribute("aria-pressed","false"),this.options.showUserLocation&&this._updateMarker(null);},o}(u.Evented),un={maxWidth:100,unit:"metric"},cn=function(i){this.options=u.extend({},un,i),u.bindAll(["_onMove","setUnit"],this);};function qa(i,o,n){var s=n&&n.maxWidth||100,p=i._container.clientHeight/2,f=i.unproject([0,p]),d=i.unproject([s,p]),y=f.distanceTo(d);if(n&&n.unit==="imperial"){var v=3.2808*y;v>5280?pn(o,s,v/5280,i._getUIString("ScaleControl.Miles")):pn(o,s,v,i._getUIString("ScaleControl.Feet"));}else n&&n.unit==="nautical"?pn(o,s,y/1852,i._getUIString("ScaleControl.NauticalMiles")):y>=1e3?pn(o,s,y/1e3,i._getUIString("ScaleControl.Kilometers")):pn(o,s,y,i._getUIString("ScaleControl.Meters"));}function pn(i,o,n,s){var p,f,d,y=(p=n,(f=Math.pow(10,(""+Math.floor(p)).length-1))*(d=(d=p/f)>=10?10:d>=5?5:d>=3?3:d>=2?2:d>=1?1:function(v){var S=Math.pow(10,Math.ceil(-Math.log(v)/Math.LN10));return Math.round(v*S)/S}(d)));i.style.width=o*(y/n)+"px",i.innerHTML=y+"&nbsp;"+s;}cn.prototype.getDefaultPosition=function(){return "bottom-left"},cn.prototype._onMove=function(){qa(this._map,this._container,this.options);},cn.prototype.onAdd=function(i){return this._map=i,this._container=ct.create("div","mapboxgl-ctrl mapboxgl-ctrl-scale",i.getContainer()),this._map.on("move",this._onMove),this._onMove(),this._container},cn.prototype.onRemove=function(){ct.remove(this._container),this._map.off("move",this._onMove),this._map=void 0;},cn.prototype.setUnit=function(i){this.options.unit=i,qa(this._map,this._container,this.options);};var ai=function(i){this._fullscreen=!1,i&&i.container&&(i.container instanceof u.window.HTMLElement?this._container=i.container:u.warnOnce("Full screen control 'container' must be a DOM element.")),u.bindAll(["_onClickFullscreen","_changeIcon"],this),"onfullscreenchange"in u.window.document?this._fullscreenchange="fullscreenchange":"onmozfullscreenchange"in u.window.document?this._fullscreenchange="mozfullscreenchange":"onwebkitfullscreenchange"in u.window.document?this._fullscreenchange="webkitfullscreenchange":"onmsfullscreenchange"in u.window.document&&(this._fullscreenchange="MSFullscreenChange");};ai.prototype.onAdd=function(i){return this._map=i,this._container||(this._container=this._map.getContainer()),this._controlContainer=ct.create("div","mapboxgl-ctrl mapboxgl-ctrl-group"),this._checkFullscreenSupport()?this._setupUI():(this._controlContainer.style.display="none",u.warnOnce("This device does not support fullscreen mode.")),this._controlContainer},ai.prototype.onRemove=function(){ct.remove(this._controlContainer),this._map=null,u.window.document.removeEventListener(this._fullscreenchange,this._changeIcon);},ai.prototype._checkFullscreenSupport=function(){return !!(u.window.document.fullscreenEnabled||u.window.document.mozFullScreenEnabled||u.window.document.msFullscreenEnabled||u.window.document.webkitFullscreenEnabled)},ai.prototype._setupUI=function(){var i=this._fullscreenButton=ct.create("button","mapboxgl-ctrl-fullscreen",this._controlContainer);ct.create("span","mapboxgl-ctrl-icon",i).setAttribute("aria-hidden",!0),i.type="button",this._updateTitle(),this._fullscreenButton.addEventListener("click",this._onClickFullscreen),u.window.document.addEventListener(this._fullscreenchange,this._changeIcon);},ai.prototype._updateTitle=function(){var i=this._getTitle();this._fullscreenButton.setAttribute("aria-label",i),this._fullscreenButton.title=i;},ai.prototype._getTitle=function(){return this._map._getUIString(this._isFullscreen()?"FullscreenControl.Exit":"FullscreenControl.Enter")},ai.prototype._isFullscreen=function(){return this._fullscreen},ai.prototype._changeIcon=function(){(u.window.document.fullscreenElement||u.window.document.mozFullScreenElement||u.window.document.webkitFullscreenElement||u.window.document.msFullscreenElement)===this._container!==this._fullscreen&&(this._fullscreen=!this._fullscreen,this._fullscreenButton.classList.toggle("mapboxgl-ctrl-shrink"),this._fullscreenButton.classList.toggle("mapboxgl-ctrl-fullscreen"),this._updateTitle());},ai.prototype._onClickFullscreen=function(){this._isFullscreen()?u.window.document.exitFullscreen?u.window.document.exitFullscreen():u.window.document.mozCancelFullScreen?u.window.document.mozCancelFullScreen():u.window.document.msExitFullscreen?u.window.document.msExitFullscreen():u.window.document.webkitCancelFullScreen&&u.window.document.webkitCancelFullScreen():this._container.requestFullscreen?this._container.requestFullscreen():this._container.mozRequestFullScreen?this._container.mozRequestFullScreen():this._container.msRequestFullscreen?this._container.msRequestFullscreen():this._container.webkitRequestFullscreen&&this._container.webkitRequestFullscreen();};var Gs={closeButton:!0,closeOnClick:!0,focusAfterOpen:!0,className:"",maxWidth:"240px"},oa=["a[href]","[tabindex]:not([tabindex='-1'])","[contenteditable]:not([contenteditable='false'])","button:not([disabled])","input:not([disabled])","select:not([disabled])","textarea:not([disabled])"].join(", "),Xs=function(i){function o(n){i.call(this),this.options=u.extend(Object.create(Gs),n),u.bindAll(["_update","_onClose","remove","_onMouseMove","_onMouseUp","_onDrag"],this);}return i&&(o.__proto__=i),(o.prototype=Object.create(i&&i.prototype)).constructor=o,o.prototype.addTo=function(n){return this._map&&this.remove(),this._map=n,this.options.closeOnClick&&this._map.on("click",this._onClose),this.options.closeOnMove&&this._map.on("move",this._onClose),this._map.on("remove",this.remove),this._update(),this._focusFirstElement(),this._trackPointer?(this._map.on("mousemove",this._onMouseMove),this._map.on("mouseup",this._onMouseUp),this._container&&this._container.classList.add("mapboxgl-popup-track-pointer"),this._map._canvasContainer.classList.add("mapboxgl-track-pointer")):this._map.on("move",this._update),this.fire(new u.Event("open")),this},o.prototype.isOpen=function(){return !!this._map},o.prototype.remove=function(){return this._content&&ct.remove(this._content),this._container&&(ct.remove(this._container),delete this._container),this._map&&(this._map.off("move",this._update),this._map.off("move",this._onClose),this._map.off("click",this._onClose),this._map.off("remove",this.remove),this._map.off("mousemove",this._onMouseMove),this._map.off("mouseup",this._onMouseUp),this._map.off("drag",this._onDrag),delete this._map),this.fire(new u.Event("close")),this},o.prototype.getLngLat=function(){return this._lngLat},o.prototype.setLngLat=function(n){return this._lngLat=u.LngLat.convert(n),this._pos=null,this._trackPointer=!1,this._update(),this._map&&(this._map.on("move",this._update),this._map.off("mousemove",this._onMouseMove),this._container&&this._container.classList.remove("mapboxgl-popup-track-pointer"),this._map._canvasContainer.classList.remove("mapboxgl-track-pointer")),this},o.prototype.trackPointer=function(){return this._trackPointer=!0,this._pos=null,this._update(),this._map&&(this._map.off("move",this._update),this._map.on("mousemove",this._onMouseMove),this._map.on("drag",this._onDrag),this._container&&this._container.classList.add("mapboxgl-popup-track-pointer"),this._map._canvasContainer.classList.add("mapboxgl-track-pointer")),this},o.prototype.getElement=function(){return this._container},o.prototype.setText=function(n){return this.setDOMContent(u.window.document.createTextNode(n))},o.prototype.setHTML=function(n){var s,p=u.window.document.createDocumentFragment(),f=u.window.document.createElement("body");for(f.innerHTML=n;s=f.firstChild;)p.appendChild(s);return this.setDOMContent(p)},o.prototype.getMaxWidth=function(){return this._container&&this._container.style.maxWidth},o.prototype.setMaxWidth=function(n){return this.options.maxWidth=n,this._update(),this},o.prototype.setDOMContent=function(n){if(this._content)for(;this._content.hasChildNodes();)this._content.firstChild&&this._content.removeChild(this._content.firstChild);else this._content=ct.create("div","mapboxgl-popup-content",this._container);return this._content.appendChild(n),this._createCloseButton(),this._update(),this._focusFirstElement(),this},o.prototype.addClassName=function(n){this._container&&this._container.classList.add(n);},o.prototype.removeClassName=function(n){this._container&&this._container.classList.remove(n);},o.prototype.setOffset=function(n){return this.options.offset=n,this._update(),this},o.prototype.toggleClassName=function(n){if(this._container)return this._container.classList.toggle(n)},o.prototype._createCloseButton=function(){this.options.closeButton&&(this._closeButton=ct.create("button","mapboxgl-popup-close-button",this._content),this._closeButton.type="button",this._closeButton.setAttribute("aria-label","Close popup"),this._closeButton.innerHTML="&#215;",this._closeButton.addEventListener("click",this._onClose));},o.prototype._onMouseUp=function(n){this._update(n.point);},o.prototype._onMouseMove=function(n){this._update(n.point);},o.prototype._onDrag=function(n){this._update(n.point);},o.prototype._update=function(n){var s=this;if(this._map&&(this._lngLat||this._trackPointer)&&this._content&&(this._container||(this._container=ct.create("div","mapboxgl-popup",this._map.getContainer()),this._tip=ct.create("div","mapboxgl-popup-tip",this._container),this._container.appendChild(this._content),this.options.className&&this.options.className.split(" ").forEach(function(z){return s._container.classList.add(z)}),this._trackPointer&&this._container.classList.add("mapboxgl-popup-track-pointer")),this.options.maxWidth&&this._container.style.maxWidth!==this.options.maxWidth&&(this._container.style.maxWidth=this.options.maxWidth),this._map.transform.renderWorldCopies&&!this._trackPointer&&(this._lngLat=xo(this._lngLat,this._pos,this._map.transform)),!this._trackPointer||n)){var p=this._pos=this._trackPointer&&n?n:this._map.project(this._lngLat),f=this.options.anchor,d=function z(k){if(k){if(typeof k=="number"){var F=Math.round(Math.sqrt(.5*Math.pow(k,2)));return {center:new u.Point(0,0),top:new u.Point(0,k),"top-left":new u.Point(F,F),"top-right":new u.Point(-F,F),bottom:new u.Point(0,-k),"bottom-left":new u.Point(F,-F),"bottom-right":new u.Point(-F,-F),left:new u.Point(k,0),right:new u.Point(-k,0)}}if(k instanceof u.Point||Array.isArray(k)){var R=u.Point.convert(k);return {center:R,top:R,"top-left":R,"top-right":R,bottom:R,"bottom-left":R,"bottom-right":R,left:R,right:R}}return {center:u.Point.convert(k.center||[0,0]),top:u.Point.convert(k.top||[0,0]),"top-left":u.Point.convert(k["top-left"]||[0,0]),"top-right":u.Point.convert(k["top-right"]||[0,0]),bottom:u.Point.convert(k.bottom||[0,0]),"bottom-left":u.Point.convert(k["bottom-left"]||[0,0]),"bottom-right":u.Point.convert(k["bottom-right"]||[0,0]),left:u.Point.convert(k.left||[0,0]),right:u.Point.convert(k.right||[0,0])}}return z(new u.Point(0,0))}(this.options.offset);if(!f){var y,v=this._container.offsetWidth,S=this._container.offsetHeight;y=p.y+d.bottom.y<S?["top"]:p.y>this._map.transform.height-S?["bottom"]:[],p.x<v/2?y.push("left"):p.x>this._map.transform.width-v/2&&y.push("right"),f=y.length===0?"bottom":y.join("-");}var P=p.add(d[f]).round();ct.setTransform(this._container,Ci[f]+" translate("+P.x+"px,"+P.y+"px)"),ja(this._container,f,"popup");}},o.prototype._focusFirstElement=function(){if(this.options.focusAfterOpen&&this._container){var n=this._container.querySelector(oa);n&&n.focus();}},o.prototype._onClose=function(){this.remove();},o}(u.Evented),Za={version:u.version,supported:Zr,setRTLTextPlugin:u.setRTLTextPlugin,getRTLTextPluginStatus:u.getRTLTextPluginStatus,Map:Kl,NavigationControl:qi,GeolocateControl:Zs,AttributionControl:wr,ScaleControl:cn,FullscreenControl:ai,Popup:Xs,Marker:na,Style:Rr,LngLat:u.LngLat,LngLatBounds:u.LngLatBounds,Point:u.Point,MercatorCoordinate:u.MercatorCoordinate,Evented:u.Evented,config:u.config,prewarm:function(){it().acquire(rt);},clearPrewarmedResources:function(){var i=It;i&&(i.isPreloaded()&&i.numActive()===1?(i.release(rt),It=null):console.warn("Could not clear WebWorkers since there are active Map instances that still reference it. The pre-warmed WebWorker pool can only be cleared when all map instances have been removed with map.remove()"));},get accessToken(){return u.config.ACCESS_TOKEN},set accessToken(i){u.config.ACCESS_TOKEN=i;},get baseApiUrl(){return u.config.API_URL},set baseApiUrl(i){u.config.API_URL=i;},get workerCount(){return st.workerCount},set workerCount(i){st.workerCount=i;},get maxParallelImageRequests(){return u.config.MAX_PARALLEL_IMAGE_REQUESTS},set maxParallelImageRequests(i){u.config.MAX_PARALLEL_IMAGE_REQUESTS=i;},clearStorage:function(i){u.clearTileCache(i);},workerUrl:""};return Za}),ko});}),If=ze.AttributionControl,Ef=ze.Evented,Af=ze.FullscreenControl,Pf=ze.GeolocateControl,zf=ze.LngLat,Cf=ze.LngLatBounds,kf=ze.Map,Mf=ze.Marker,Df=ze.MercatorCoordinate,Lf=ze.NavigationControl,Bf=ze.Point,Rf=ze.Popup,Ff=ze.ScaleControl,Of=ze.Style,Uf=ze.accessToken,Vf=ze.baseApiUrl,Nf=ze.clearPrewarmedResources,jf=ze.clearStorage,qf=ze.config;var Zf=ze.getRTLTextPluginStatus,Gf=ze.maxParallelImageRequests,Xf=ze.prewarm,Wf=ze.setRTLTextPlugin,Kf=ze.supported,Hf=ze.version,Jf=ze.workerCount,Yf=ze.workerUrl;
 
     /* libs\@onsvisual\svelte-maps\src\Map.svelte generated by Svelte v3.44.1 */
+
+    const { console: console_1 } = globals;
     const file$1 = "libs\\@onsvisual\\svelte-maps\\src\\Map.svelte";
 
-    // (126:2) {#if loaded}
+    // (131:2) {#if loaded}
     function create_if_block(ctx) {
     	let current;
     	const default_slot_template = /*#slots*/ ctx[18].default;
@@ -1801,7 +1803,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_if_block.name,
     		type: "if",
-    		source: "(126:2) {#if loaded}",
+    		source: "(131:2) {#if loaded}",
     		ctx
     	});
 
@@ -1821,7 +1823,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			attr_dev(div, "id", /*id*/ ctx[0]);
     			attr_dev(div, "class", "svelte-78euky");
     			add_render_callback(() => /*div_elementresize_handler*/ ctx[19].call(div));
-    			add_location(div, file$1, 124, 0, 3121);
+    			add_location(div, file$1, 129, 0, 3252);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1893,7 +1895,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Map', slots, ['default']);
     	let { map } = $$props;
-    	let { id = 'map' } = $$props;
+    	let { id } = $$props;
     	let { location = { lng: 15, lat: 45, zoom: 1 } } = $$props;
     	let { style = { version: 8, sources: {}, layers: [] } } = $$props;
     	let { minzoom = 0 } = $$props;
@@ -1910,7 +1912,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let h;
     	let options;
     	let loaded = false;
-    	setContext('map', { getMap: () => map });
+    	setContext(id, { getMap: () => map });
 
     	// Interpret location
     	if (location.bounds) {
@@ -1929,6 +1931,8 @@ uniform `+P+" "+z+" u_"+k+`;
     		link.href = 'https://unpkg.com/mapbox-gl@1.13.2/dist/mapbox-gl.css';
 
     		link.onload = () => {
+    			// console.log('making new mapbox');
+    			// console.log(container);
     			$$invalidate(5, map = new ze.Map({
     					container,
     					style,
@@ -2009,7 +2013,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<Map> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<Map> was created with unknown prop '${key}'`);
     	});
 
     	function div_elementresize_handler() {
@@ -2046,6 +2050,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	$$self.$capture_state = () => ({
     		onMount,
     		setContext,
+    		getContext,
     		mapbox: ze,
     		map,
     		id,
@@ -2094,6 +2099,12 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*id*/ 1) {
+    			 {
+    				console.log(`Run <Map/>: ${id}`);
+    			}
+    		}
+
     		if ($$self.$$.dirty & /*w, h*/ 6) {
     			// Invoke above function when parent div size changes
     			 (w || h) && resizeCanvas();
@@ -2156,7 +2167,11 @@ uniform `+P+" "+z+" u_"+k+`;
     		const props = options.props || {};
 
     		if (/*map*/ ctx[5] === undefined && !('map' in props)) {
-    			console.warn("<Map> was created without expected prop 'map'");
+    			console_1.warn("<Map> was created without expected prop 'map'");
+    		}
+
+    		if (/*id*/ ctx[0] === undefined && !('id' in props)) {
+    			console_1.warn("<Map> was created without expected prop 'id'");
     		}
     	}
 
@@ -2265,13 +2280,16 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
     }
 
-    /* libs\@onsvisual\svelte-maps\src\MapSource.svelte generated by Svelte v3.44.1 */
+    /* libs\@onsvisual\svelte-maps\src\StaticMap1.svelte generated by Svelte v3.44.1 */
 
-    // (102:0) {#if loaded}
+    const { console: console_1$1 } = globals;
+    const file$2 = "libs\\@onsvisual\\svelte-maps\\src\\StaticMap1.svelte";
+
+    // (131:2) {#if loaded}
     function create_if_block$1(ctx) {
     	let current;
-    	const default_slot_template = /*#slots*/ ctx[11].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[10], null);
+    	const default_slot_template = /*#slots*/ ctx[18].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[17], null);
 
     	const block = {
     		c: function create() {
@@ -2286,15 +2304,15 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty & /*$$scope*/ 1024)) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 131072)) {
     					update_slot_base(
     						default_slot,
     						default_slot_template,
     						ctx,
-    						/*$$scope*/ ctx[10],
+    						/*$$scope*/ ctx[17],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[10])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[10], dirty, null),
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[17])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[17], dirty, null),
     						null
     					);
     				}
@@ -2318,7 +2336,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_if_block$1.name,
     		type: "if",
-    		source: "(102:0) {#if loaded}",
+    		source: "(131:2) {#if loaded}",
     		ctx
     	});
 
@@ -2326,9 +2344,541 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     function create_fragment$2(ctx) {
+    	let div;
+    	let div_resize_listener;
+    	let current;
+    	let if_block = /*loaded*/ ctx[4] && create_if_block$1(ctx);
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			if (if_block) if_block.c();
+    			attr_dev(div, "id", /*id*/ ctx[0]);
+    			attr_dev(div, "class", "svelte-78euky");
+    			add_render_callback(() => /*div_elementresize_handler*/ ctx[19].call(div));
+    			add_location(div, file$2, 129, 0, 3267);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			if (if_block) if_block.m(div, null);
+    			div_resize_listener = add_resize_listener(div, /*div_elementresize_handler*/ ctx[19].bind(div));
+    			/*div_binding*/ ctx[20](div);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*loaded*/ ctx[4]) {
+    				if (if_block) {
+    					if_block.p(ctx, dirty);
+
+    					if (dirty & /*loaded*/ 16) {
+    						transition_in(if_block, 1);
+    					}
+    				} else {
+    					if_block = create_if_block$1(ctx);
+    					if_block.c();
+    					transition_in(if_block, 1);
+    					if_block.m(div, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+
+    				transition_out(if_block, 1, 1, () => {
+    					if_block = null;
+    				});
+
+    				check_outros();
+    			}
+
+    			if (!current || dirty & /*id*/ 1) {
+    				attr_dev(div, "id", /*id*/ ctx[0]);
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(if_block);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(if_block);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			if (if_block) if_block.d();
+    			div_resize_listener();
+    			/*div_binding*/ ctx[20](null);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance$2($$self, $$props, $$invalidate) {
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('StaticMap1', slots, ['default']);
+    	let { map2 } = $$props;
+    	let { id } = $$props;
+    	let { location = { lng: 15, lat: 45, zoom: 1 } } = $$props;
+    	let { style = { version: 8, sources: {}, layers: [] } } = $$props;
+    	let { minzoom = 0 } = $$props;
+    	let { maxzoom = 14 } = $$props;
+    	let { controls = false } = $$props;
+    	let { scales = false } = $$props;
+    	let { locate = false } = $$props;
+    	let { tabbable = false } = $$props;
+    	let { zoom = null } = $$props;
+    	let { center = null } = $$props;
+    	let { interactive = true } = $$props;
+    	let container;
+    	let w;
+    	let h;
+    	let options;
+    	let loaded = false;
+    	setContext(id, { getMap: () => map2 });
+
+    	// Interpret location
+    	if (location.bounds) {
+    		options = { bounds: location.bounds };
+    	} else if (typeof location.lng == 'number' && typeof location.lat == 'number') {
+    		options = { center: [location.lng, location.lat] };
+
+    		if (typeof location.zoom == 'number') {
+    			options.zoom = location.zoom;
+    		}
+    	}
+
+    	onMount(() => {
+    		const link = document.createElement('link');
+    		link.rel = 'stylesheet';
+    		link.href = 'https://unpkg.com/mapbox-gl@1.13.2/dist/mapbox-gl.css';
+
+    		link.onload = () => {
+    			// console.log('making new mapbox');
+    			// console.log(container);
+    			$$invalidate(5, map2 = new ze.Map({
+    					container,
+    					style,
+    					minZoom: minzoom,
+    					maxZoom: maxzoom,
+    					interactive,
+    					...options
+    				}));
+
+    			map2.scrollZoom.disable();
+
+    			if (controls) {
+    				map2.addControl(new ze.NavigationControl({ showCompass: false }));
+    			}
+
+    			if (scales) {
+    				map2.addControl(new ze.ScaleControl());
+    			}
+
+    			if (locate) {
+    				map2.addControl(new ze.GeolocateControl());
+    			}
+
+    			// Get initial zoom level
+    			map2.on('load', () => {
+    				$$invalidate(6, zoom = map2.getZoom());
+    				$$invalidate(7, center = map2.getCenter());
+    				$$invalidate(4, loaded = true);
+
+    				// Prevent map from being tabbable
+    				if (!tabbable && document.querySelector(`#${id} canvas`)) {
+    					document.querySelector(`#${id} canvas`).tabIndex = '-1';
+    				}
+    			});
+
+    			// Update zoom level and center when the view changes
+    			map2.on('moveend', () => {
+    				$$invalidate(6, zoom = map2.getZoom());
+    				$$invalidate(7, center = map2.getCenter());
+    			});
+    		};
+
+    		document.head.appendChild(link);
+
+    		return () => {
+    			map2.remove();
+    			link.parentNode.removeChild(link);
+    		};
+    	});
+
+    	// Function that forces map to resize to fit parent div, in case it doesn't automatically
+    	function resizeCanvas() {
+    		if (loaded) {
+    			let canvas = document.getElementsByClassName('mapboxgl-canvas');
+
+    			if (canvas[0]) {
+    				canvas[0].style.width = '100%';
+    				canvas[0].style.height = '100%';
+    				map2.resize();
+    			}
+    		}
+    	}
+
+    	const writable_props = [
+    		'map2',
+    		'id',
+    		'location',
+    		'style',
+    		'minzoom',
+    		'maxzoom',
+    		'controls',
+    		'scales',
+    		'locate',
+    		'tabbable',
+    		'zoom',
+    		'center',
+    		'interactive'
+    	];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$1.warn(`<StaticMap1> was created with unknown prop '${key}'`);
+    	});
+
+    	function div_elementresize_handler() {
+    		w = this.clientWidth;
+    		h = this.clientHeight;
+    		$$invalidate(1, w);
+    		$$invalidate(2, h);
+    	}
+
+    	function div_binding($$value) {
+    		binding_callbacks[$$value ? 'unshift' : 'push'](() => {
+    			container = $$value;
+    			$$invalidate(3, container);
+    		});
+    	}
+
+    	$$self.$$set = $$props => {
+    		if ('map2' in $$props) $$invalidate(5, map2 = $$props.map2);
+    		if ('id' in $$props) $$invalidate(0, id = $$props.id);
+    		if ('location' in $$props) $$invalidate(8, location = $$props.location);
+    		if ('style' in $$props) $$invalidate(9, style = $$props.style);
+    		if ('minzoom' in $$props) $$invalidate(10, minzoom = $$props.minzoom);
+    		if ('maxzoom' in $$props) $$invalidate(11, maxzoom = $$props.maxzoom);
+    		if ('controls' in $$props) $$invalidate(12, controls = $$props.controls);
+    		if ('scales' in $$props) $$invalidate(13, scales = $$props.scales);
+    		if ('locate' in $$props) $$invalidate(14, locate = $$props.locate);
+    		if ('tabbable' in $$props) $$invalidate(15, tabbable = $$props.tabbable);
+    		if ('zoom' in $$props) $$invalidate(6, zoom = $$props.zoom);
+    		if ('center' in $$props) $$invalidate(7, center = $$props.center);
+    		if ('interactive' in $$props) $$invalidate(16, interactive = $$props.interactive);
+    		if ('$$scope' in $$props) $$invalidate(17, $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$capture_state = () => ({
+    		onMount,
+    		setContext,
+    		getContext,
+    		mapbox: ze,
+    		map2,
+    		id,
+    		location,
+    		style,
+    		minzoom,
+    		maxzoom,
+    		controls,
+    		scales,
+    		locate,
+    		tabbable,
+    		zoom,
+    		center,
+    		interactive,
+    		container,
+    		w,
+    		h,
+    		options,
+    		loaded,
+    		resizeCanvas
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('map2' in $$props) $$invalidate(5, map2 = $$props.map2);
+    		if ('id' in $$props) $$invalidate(0, id = $$props.id);
+    		if ('location' in $$props) $$invalidate(8, location = $$props.location);
+    		if ('style' in $$props) $$invalidate(9, style = $$props.style);
+    		if ('minzoom' in $$props) $$invalidate(10, minzoom = $$props.minzoom);
+    		if ('maxzoom' in $$props) $$invalidate(11, maxzoom = $$props.maxzoom);
+    		if ('controls' in $$props) $$invalidate(12, controls = $$props.controls);
+    		if ('scales' in $$props) $$invalidate(13, scales = $$props.scales);
+    		if ('locate' in $$props) $$invalidate(14, locate = $$props.locate);
+    		if ('tabbable' in $$props) $$invalidate(15, tabbable = $$props.tabbable);
+    		if ('zoom' in $$props) $$invalidate(6, zoom = $$props.zoom);
+    		if ('center' in $$props) $$invalidate(7, center = $$props.center);
+    		if ('interactive' in $$props) $$invalidate(16, interactive = $$props.interactive);
+    		if ('container' in $$props) $$invalidate(3, container = $$props.container);
+    		if ('w' in $$props) $$invalidate(1, w = $$props.w);
+    		if ('h' in $$props) $$invalidate(2, h = $$props.h);
+    		if ('options' in $$props) options = $$props.options;
+    		if ('loaded' in $$props) $$invalidate(4, loaded = $$props.loaded);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*id*/ 1) {
+    			 {
+    				console.log(`Run <Map/>: ${id}`);
+    			}
+    		}
+
+    		if ($$self.$$.dirty & /*w, h*/ 6) {
+    			// Invoke above function when parent div size changes
+    			 (w || h) && resizeCanvas();
+    		}
+    	};
+
+    	return [
+    		id,
+    		w,
+    		h,
+    		container,
+    		loaded,
+    		map2,
+    		zoom,
+    		center,
+    		location,
+    		style,
+    		minzoom,
+    		maxzoom,
+    		controls,
+    		scales,
+    		locate,
+    		tabbable,
+    		interactive,
+    		$$scope,
+    		slots,
+    		div_elementresize_handler,
+    		div_binding
+    	];
+    }
+
+    class StaticMap1 extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {
+    			map2: 5,
+    			id: 0,
+    			location: 8,
+    			style: 9,
+    			minzoom: 10,
+    			maxzoom: 11,
+    			controls: 12,
+    			scales: 13,
+    			locate: 14,
+    			tabbable: 15,
+    			zoom: 6,
+    			center: 7,
+    			interactive: 16
+    		});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "StaticMap1",
+    			options,
+    			id: create_fragment$2.name
+    		});
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+
+    		if (/*map2*/ ctx[5] === undefined && !('map2' in props)) {
+    			console_1$1.warn("<StaticMap1> was created without expected prop 'map2'");
+    		}
+
+    		if (/*id*/ ctx[0] === undefined && !('id' in props)) {
+    			console_1$1.warn("<StaticMap1> was created without expected prop 'id'");
+    		}
+    	}
+
+    	get map2() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set map2(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get id() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set id(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get location() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set location(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get style() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set style(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get minzoom() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set minzoom(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get maxzoom() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set maxzoom(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get controls() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set controls(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get scales() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set scales(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get locate() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set locate(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get tabbable() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set tabbable(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get zoom() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set zoom(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get center() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set center(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get interactive() {
+    		throw new Error("<StaticMap1>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set interactive(value) {
+    		throw new Error("<StaticMap1>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
+    /* libs\@onsvisual\svelte-maps\src\MapSource.svelte generated by Svelte v3.44.1 */
+
+    const { console: console_1$2 } = globals;
+
+    // (105:0) {#if loaded}
+    function create_if_block$2(ctx) {
+    	let current;
+    	const default_slot_template = /*#slots*/ ctx[12].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[11], null);
+
+    	const block = {
+    		c: function create() {
+    			if (default_slot) default_slot.c();
+    		},
+    		m: function mount(target, anchor) {
+    			if (default_slot) {
+    				default_slot.m(target, anchor);
+    			}
+
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			if (default_slot) {
+    				if (default_slot.p && (!current || dirty & /*$$scope*/ 2048)) {
+    					update_slot_base(
+    						default_slot,
+    						default_slot_template,
+    						ctx,
+    						/*$$scope*/ ctx[11],
+    						!current
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[11])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[11], dirty, null),
+    						null
+    					);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (default_slot) default_slot.d(detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block$2.name,
+    		type: "if",
+    		source: "(105:0) {#if loaded}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$3(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*loaded*/ ctx[0] && create_if_block$1(ctx);
+    	let if_block = /*loaded*/ ctx[0] && create_if_block$2(ctx);
 
     	const block = {
     		c: function create() {
@@ -2352,7 +2902,7 @@ uniform `+P+" "+z+" u_"+k+`;
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$1(ctx);
+    					if_block = create_if_block$2(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -2384,7 +2934,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$3.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2393,9 +2943,10 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$2($$self, $$props, $$invalidate) {
+    function instance$3($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MapSource', slots, ['default']);
+    	let { map_id } = $$props;
     	let { id } = $$props;
     	let { type } = $$props;
     	let { url = null } = $$props;
@@ -2405,8 +2956,13 @@ uniform `+P+" "+z+" u_"+k+`;
     	let { promoteId = null } = $$props;
     	let { minzoom = null } = $$props;
     	let { maxzoom = null } = $$props;
+
+    	if (map_id == 'static-map-1') {
+    		console.log(` --- ${map_id}:  ${id}`);
+    	}
+
     	let loaded = false;
-    	const { getMap } = getContext('map');
+    	const { getMap } = getContext(map_id);
     	const map = getMap();
     	setContext('source', { source: id, layer, promoteId });
 
@@ -2478,6 +3034,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	const writable_props = [
+    		'map_id',
     		'id',
     		'type',
     		'url',
@@ -2490,25 +3047,27 @@ uniform `+P+" "+z+" u_"+k+`;
     	];
 
     	Object.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<MapSource> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$2.warn(`<MapSource> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('id' in $$props) $$invalidate(2, id = $$props.id);
-    		if ('type' in $$props) $$invalidate(3, type = $$props.type);
-    		if ('url' in $$props) $$invalidate(4, url = $$props.url);
+    		if ('map_id' in $$props) $$invalidate(2, map_id = $$props.map_id);
+    		if ('id' in $$props) $$invalidate(3, id = $$props.id);
+    		if ('type' in $$props) $$invalidate(4, type = $$props.type);
+    		if ('url' in $$props) $$invalidate(5, url = $$props.url);
     		if ('props' in $$props) $$invalidate(1, props = $$props.props);
-    		if ('data' in $$props) $$invalidate(5, data = $$props.data);
-    		if ('layer' in $$props) $$invalidate(6, layer = $$props.layer);
-    		if ('promoteId' in $$props) $$invalidate(7, promoteId = $$props.promoteId);
-    		if ('minzoom' in $$props) $$invalidate(8, minzoom = $$props.minzoom);
-    		if ('maxzoom' in $$props) $$invalidate(9, maxzoom = $$props.maxzoom);
-    		if ('$$scope' in $$props) $$invalidate(10, $$scope = $$props.$$scope);
+    		if ('data' in $$props) $$invalidate(6, data = $$props.data);
+    		if ('layer' in $$props) $$invalidate(7, layer = $$props.layer);
+    		if ('promoteId' in $$props) $$invalidate(8, promoteId = $$props.promoteId);
+    		if ('minzoom' in $$props) $$invalidate(9, minzoom = $$props.minzoom);
+    		if ('maxzoom' in $$props) $$invalidate(10, maxzoom = $$props.maxzoom);
+    		if ('$$scope' in $$props) $$invalidate(11, $$scope = $$props.$$scope);
     	};
 
     	$$self.$capture_state = () => ({
     		getContext,
     		setContext,
+    		map_id,
     		id,
     		type,
     		url,
@@ -2527,15 +3086,16 @@ uniform `+P+" "+z+" u_"+k+`;
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('id' in $$props) $$invalidate(2, id = $$props.id);
-    		if ('type' in $$props) $$invalidate(3, type = $$props.type);
-    		if ('url' in $$props) $$invalidate(4, url = $$props.url);
+    		if ('map_id' in $$props) $$invalidate(2, map_id = $$props.map_id);
+    		if ('id' in $$props) $$invalidate(3, id = $$props.id);
+    		if ('type' in $$props) $$invalidate(4, type = $$props.type);
+    		if ('url' in $$props) $$invalidate(5, url = $$props.url);
     		if ('props' in $$props) $$invalidate(1, props = $$props.props);
-    		if ('data' in $$props) $$invalidate(5, data = $$props.data);
-    		if ('layer' in $$props) $$invalidate(6, layer = $$props.layer);
-    		if ('promoteId' in $$props) $$invalidate(7, promoteId = $$props.promoteId);
-    		if ('minzoom' in $$props) $$invalidate(8, minzoom = $$props.minzoom);
-    		if ('maxzoom' in $$props) $$invalidate(9, maxzoom = $$props.maxzoom);
+    		if ('data' in $$props) $$invalidate(6, data = $$props.data);
+    		if ('layer' in $$props) $$invalidate(7, layer = $$props.layer);
+    		if ('promoteId' in $$props) $$invalidate(8, promoteId = $$props.promoteId);
+    		if ('minzoom' in $$props) $$invalidate(9, minzoom = $$props.minzoom);
+    		if ('maxzoom' in $$props) $$invalidate(10, maxzoom = $$props.maxzoom);
     		if ('loaded' in $$props) $$invalidate(0, loaded = $$props.loaded);
     	};
 
@@ -2544,7 +3104,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*loaded, data*/ 33) {
+    		if ($$self.$$.dirty & /*loaded, data*/ 65) {
     			 loaded && data && setData();
     		}
     	};
@@ -2552,6 +3112,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return [
     		loaded,
     		props,
+    		map_id,
     		id,
     		type,
     		url,
@@ -2569,35 +3130,48 @@ uniform `+P+" "+z+" u_"+k+`;
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, {
-    			id: 2,
-    			type: 3,
-    			url: 4,
+    		init(this, options, instance$3, create_fragment$3, safe_not_equal, {
+    			map_id: 2,
+    			id: 3,
+    			type: 4,
+    			url: 5,
     			props: 1,
-    			data: 5,
-    			layer: 6,
-    			promoteId: 7,
-    			minzoom: 8,
-    			maxzoom: 9
+    			data: 6,
+    			layer: 7,
+    			promoteId: 8,
+    			minzoom: 9,
+    			maxzoom: 10
     		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "MapSource",
     			options,
-    			id: create_fragment$2.name
+    			id: create_fragment$3.name
     		});
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*id*/ ctx[2] === undefined && !('id' in props)) {
-    			console.warn("<MapSource> was created without expected prop 'id'");
+    		if (/*map_id*/ ctx[2] === undefined && !('map_id' in props)) {
+    			console_1$2.warn("<MapSource> was created without expected prop 'map_id'");
     		}
 
-    		if (/*type*/ ctx[3] === undefined && !('type' in props)) {
-    			console.warn("<MapSource> was created without expected prop 'type'");
+    		if (/*id*/ ctx[3] === undefined && !('id' in props)) {
+    			console_1$2.warn("<MapSource> was created without expected prop 'id'");
     		}
+
+    		if (/*type*/ ctx[4] === undefined && !('type' in props)) {
+    			console_1$2.warn("<MapSource> was created without expected prop 'type'");
+    		}
+    	}
+
+    	get map_id() {
+    		throw new Error("<MapSource>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set map_id(value) {
+    		throw new Error("<MapSource>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get id() {
@@ -2723,15 +3297,15 @@ uniform `+P+" "+z+" u_"+k+`;
 
     /* libs\@onsvisual\svelte-maps\src\MapLayer.svelte generated by Svelte v3.44.1 */
 
-    const { Object: Object_1, console: console_1 } = globals;
+    const { Object: Object_1, console: console_1$3 } = globals;
     const get_default_slot_changes = dirty => ({ hovered: dirty[0] & /*hovered*/ 1 });
     const get_default_slot_context = ctx => ({ hovered: /*hovered*/ ctx[0] });
 
-    // (253:0) {#if hover}
-    function create_if_block$2(ctx) {
+    // (275:0) {#if hover}
+    function create_if_block$3(ctx) {
     	let current;
-    	const default_slot_template = /*#slots*/ ctx[29].default;
-    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[28], get_default_slot_context);
+    	const default_slot_template = /*#slots*/ ctx[30].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[29], get_default_slot_context);
 
     	const block = {
     		c: function create() {
@@ -2746,15 +3320,15 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			if (default_slot) {
-    				if (default_slot.p && (!current || dirty[0] & /*$$scope, hovered*/ 268435457)) {
+    				if (default_slot.p && (!current || dirty[0] & /*$$scope, hovered*/ 536870913)) {
     					update_slot_base(
     						default_slot,
     						default_slot_template,
     						ctx,
-    						/*$$scope*/ ctx[28],
+    						/*$$scope*/ ctx[29],
     						!current
-    						? get_all_dirty_from_scope(/*$$scope*/ ctx[28])
-    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[28], dirty, get_default_slot_changes),
+    						? get_all_dirty_from_scope(/*$$scope*/ ctx[29])
+    						: get_slot_changes(default_slot_template, /*$$scope*/ ctx[29], dirty, get_default_slot_changes),
     						get_default_slot_context
     					);
     				}
@@ -2776,19 +3350,19 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$2.name,
+    		id: create_if_block$3.name,
     		type: "if",
-    		source: "(253:0) {#if hover}",
+    		source: "(275:0) {#if hover}",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$3(ctx) {
+    function create_fragment$4(ctx) {
     	let if_block_anchor;
     	let current;
-    	let if_block = /*hover*/ ctx[1] && create_if_block$2(ctx);
+    	let if_block = /*hover*/ ctx[1] && create_if_block$3(ctx);
 
     	const block = {
     		c: function create() {
@@ -2812,7 +3386,7 @@ uniform `+P+" "+z+" u_"+k+`;
     						transition_in(if_block, 1);
     					}
     				} else {
-    					if_block = create_if_block$2(ctx);
+    					if_block = create_if_block$3(ctx);
     					if_block.c();
     					transition_in(if_block, 1);
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
@@ -2844,7 +3418,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$3.name,
+    		id: create_fragment$4.name,
     		type: "component",
     		source: "",
     		ctx
@@ -2853,11 +3427,12 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$3($$self, $$props, $$invalidate) {
+    function instance$4($$self, $$props, $$invalidate) {
     	let $hoverObj;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MapLayer', slots, ['default']);
     	const dispatch = createEventDispatcher();
+    	let { map_id } = $$props;
     	let { id } = $$props;
     	let { type } = $$props;
     	let { filter = null } = $$props;
@@ -2883,12 +3458,21 @@ uniform `+P+" "+z+" u_"+k+`;
     	let { sourceLayer = null } = $$props;
     	let { custom } = $$props;
     	const { source, layer, promoteId } = getContext('source');
-    	const { getMap } = getContext('map');
+    	const { getMap } = getContext(map_id);
     	const map = getMap();
+    	console.log(`*** Map Layer getContext from: ${map_id} for ${id}`);
+    	console.log(`*** container id: ${map.getContainer().id}`);
+
+    	// if (map_id != 'scrolly_map_1') {
+    	//   console.log('-----------------');
+    	//   console.log(map_id);
+    	//   console.log(map.getContainer().id);
+    	// }
     	setContext('layer', { layer: id });
+
     	const hoverObj = writable({ id: null, feature: null, event: null });
     	validate_store(hoverObj, 'hoverObj');
-    	component_subscribe($$self, hoverObj, value => $$invalidate(30, $hoverObj = value));
+    	component_subscribe($$self, hoverObj, value => $$invalidate(31, $hoverObj = value));
     	setContext('hover', hoverObj);
     	idKey = idKey ? idKey : promoteId;
     	sourceLayer = sourceLayer ? sourceLayer : layer;
@@ -2899,6 +3483,17 @@ uniform `+P+" "+z+" u_"+k+`;
     	if (map.getLayer(id)) {
     		map.removeLayer(id);
     	}
+
+    	// # ============================================================================ #
+    	// # diagnose code here
+    	if (map_id != 'scrolly_map_1') {
+    		console.log('-----------------');
+    		console.log(map_id);
+    		console.log(map.getContainer().id);
+    		let options = { id, type, source, paint, layout };
+    		map.addLayer(options, order);
+    		console.log(`added layer ${id} to map ${map_id}`);
+    	} // console.log(map.getContainer());
 
     	// Updates "color" feature states for all geo codes
     	// Assumes that each data point has the colours defined on the colorCode key
@@ -2933,7 +3528,7 @@ uniform `+P+" "+z+" u_"+k+`;
     					map.flyTo({ center: center.geometry.coordinates });
     				}
 
-    				$$invalidate(25, selectedPrev = selected);
+    				$$invalidate(26, selectedPrev = selected);
     			}
     		});
     	}
@@ -2947,7 +3542,7 @@ uniform `+P+" "+z+" u_"+k+`;
     				}
 
     				let feature = e.features[0];
-    				$$invalidate(0, hovered = $$invalidate(26, hoveredPrev = feature.id));
+    				$$invalidate(0, hovered = $$invalidate(27, hoveredPrev = feature.id));
     				hoverObj.set({ id: hovered, feature, event: e });
     				dispatch('hover', $hoverObj);
     				map.setFeatureState({ source, sourceLayer, id: hovered }, { hovered: true });
@@ -2962,7 +3557,7 @@ uniform `+P+" "+z+" u_"+k+`;
     				map.setFeatureState({ source, sourceLayer, id: hovered }, { hovered: false });
     			}
 
-    			$$invalidate(0, hovered = $$invalidate(26, hoveredPrev = null));
+    			$$invalidate(0, hovered = $$invalidate(27, hoveredPrev = null));
     			hoverObj.set({ id: null, feature: null, event: e });
     			dispatch('hover', $hoverObj);
 
@@ -2972,6 +3567,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	const writable_props = [
+    		'map_id',
     		'id',
     		'type',
     		'filter',
@@ -2999,35 +3595,36 @@ uniform `+P+" "+z+" u_"+k+`;
     	];
 
     	Object_1.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1.warn(`<MapLayer> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console_1$3.warn(`<MapLayer> was created with unknown prop '${key}'`);
     	});
 
     	$$self.$$set = $$props => {
-    		if ('id' in $$props) $$invalidate(6, id = $$props.id);
-    		if ('type' in $$props) $$invalidate(7, type = $$props.type);
-    		if ('filter' in $$props) $$invalidate(8, filter = $$props.filter);
-    		if ('layout' in $$props) $$invalidate(9, layout = $$props.layout);
-    		if ('paint' in $$props) $$invalidate(10, paint = $$props.paint);
-    		if ('data' in $$props) $$invalidate(11, data = $$props.data);
-    		if ('colorKey' in $$props) $$invalidate(12, colorKey = $$props.colorKey);
-    		if ('nameKey' in $$props) $$invalidate(13, nameKey = $$props.nameKey);
-    		if ('valueKey' in $$props) $$invalidate(14, valueKey = $$props.valueKey);
+    		if ('map_id' in $$props) $$invalidate(6, map_id = $$props.map_id);
+    		if ('id' in $$props) $$invalidate(7, id = $$props.id);
+    		if ('type' in $$props) $$invalidate(8, type = $$props.type);
+    		if ('filter' in $$props) $$invalidate(9, filter = $$props.filter);
+    		if ('layout' in $$props) $$invalidate(10, layout = $$props.layout);
+    		if ('paint' in $$props) $$invalidate(11, paint = $$props.paint);
+    		if ('data' in $$props) $$invalidate(12, data = $$props.data);
+    		if ('colorKey' in $$props) $$invalidate(13, colorKey = $$props.colorKey);
+    		if ('nameKey' in $$props) $$invalidate(14, nameKey = $$props.nameKey);
+    		if ('valueKey' in $$props) $$invalidate(15, valueKey = $$props.valueKey);
     		if ('idKey' in $$props) $$invalidate(5, idKey = $$props.idKey);
-    		if ('select' in $$props) $$invalidate(15, select = $$props.select);
-    		if ('clickIgnore' in $$props) $$invalidate(16, clickIgnore = $$props.clickIgnore);
-    		if ('clickCenter' in $$props) $$invalidate(17, clickCenter = $$props.clickCenter);
+    		if ('select' in $$props) $$invalidate(16, select = $$props.select);
+    		if ('clickIgnore' in $$props) $$invalidate(17, clickIgnore = $$props.clickIgnore);
+    		if ('clickCenter' in $$props) $$invalidate(18, clickCenter = $$props.clickCenter);
     		if ('selected' in $$props) $$invalidate(3, selected = $$props.selected);
     		if ('hover' in $$props) $$invalidate(1, hover = $$props.hover);
     		if ('hovered' in $$props) $$invalidate(0, hovered = $$props.hovered);
-    		if ('highlight' in $$props) $$invalidate(18, highlight = $$props.highlight);
-    		if ('highlightKey' in $$props) $$invalidate(19, highlightKey = $$props.highlightKey);
-    		if ('highlighted' in $$props) $$invalidate(20, highlighted = $$props.highlighted);
-    		if ('order' in $$props) $$invalidate(21, order = $$props.order);
-    		if ('maxzoom' in $$props) $$invalidate(22, maxzoom = $$props.maxzoom);
-    		if ('minzoom' in $$props) $$invalidate(23, minzoom = $$props.minzoom);
+    		if ('highlight' in $$props) $$invalidate(19, highlight = $$props.highlight);
+    		if ('highlightKey' in $$props) $$invalidate(20, highlightKey = $$props.highlightKey);
+    		if ('highlighted' in $$props) $$invalidate(21, highlighted = $$props.highlighted);
+    		if ('order' in $$props) $$invalidate(22, order = $$props.order);
+    		if ('maxzoom' in $$props) $$invalidate(23, maxzoom = $$props.maxzoom);
+    		if ('minzoom' in $$props) $$invalidate(24, minzoom = $$props.minzoom);
     		if ('sourceLayer' in $$props) $$invalidate(4, sourceLayer = $$props.sourceLayer);
-    		if ('custom' in $$props) $$invalidate(24, custom = $$props.custom);
-    		if ('$$scope' in $$props) $$invalidate(28, $$scope = $$props.$$scope);
+    		if ('custom' in $$props) $$invalidate(25, custom = $$props.custom);
+    		if ('$$scope' in $$props) $$invalidate(29, $$scope = $$props.$$scope);
     	};
 
     	$$self.$capture_state = () => ({
@@ -3036,6 +3633,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		createEventDispatcher,
     		writable,
     		dispatch,
+    		map_id,
     		id,
     		type,
     		filter,
@@ -3074,33 +3672,34 @@ uniform `+P+" "+z+" u_"+k+`;
     	});
 
     	$$self.$inject_state = $$props => {
-    		if ('id' in $$props) $$invalidate(6, id = $$props.id);
-    		if ('type' in $$props) $$invalidate(7, type = $$props.type);
-    		if ('filter' in $$props) $$invalidate(8, filter = $$props.filter);
-    		if ('layout' in $$props) $$invalidate(9, layout = $$props.layout);
-    		if ('paint' in $$props) $$invalidate(10, paint = $$props.paint);
-    		if ('data' in $$props) $$invalidate(11, data = $$props.data);
-    		if ('colorKey' in $$props) $$invalidate(12, colorKey = $$props.colorKey);
-    		if ('nameKey' in $$props) $$invalidate(13, nameKey = $$props.nameKey);
-    		if ('valueKey' in $$props) $$invalidate(14, valueKey = $$props.valueKey);
+    		if ('map_id' in $$props) $$invalidate(6, map_id = $$props.map_id);
+    		if ('id' in $$props) $$invalidate(7, id = $$props.id);
+    		if ('type' in $$props) $$invalidate(8, type = $$props.type);
+    		if ('filter' in $$props) $$invalidate(9, filter = $$props.filter);
+    		if ('layout' in $$props) $$invalidate(10, layout = $$props.layout);
+    		if ('paint' in $$props) $$invalidate(11, paint = $$props.paint);
+    		if ('data' in $$props) $$invalidate(12, data = $$props.data);
+    		if ('colorKey' in $$props) $$invalidate(13, colorKey = $$props.colorKey);
+    		if ('nameKey' in $$props) $$invalidate(14, nameKey = $$props.nameKey);
+    		if ('valueKey' in $$props) $$invalidate(15, valueKey = $$props.valueKey);
     		if ('idKey' in $$props) $$invalidate(5, idKey = $$props.idKey);
-    		if ('select' in $$props) $$invalidate(15, select = $$props.select);
-    		if ('clickIgnore' in $$props) $$invalidate(16, clickIgnore = $$props.clickIgnore);
-    		if ('clickCenter' in $$props) $$invalidate(17, clickCenter = $$props.clickCenter);
+    		if ('select' in $$props) $$invalidate(16, select = $$props.select);
+    		if ('clickIgnore' in $$props) $$invalidate(17, clickIgnore = $$props.clickIgnore);
+    		if ('clickCenter' in $$props) $$invalidate(18, clickCenter = $$props.clickCenter);
     		if ('selected' in $$props) $$invalidate(3, selected = $$props.selected);
     		if ('hover' in $$props) $$invalidate(1, hover = $$props.hover);
     		if ('hovered' in $$props) $$invalidate(0, hovered = $$props.hovered);
-    		if ('highlight' in $$props) $$invalidate(18, highlight = $$props.highlight);
-    		if ('highlightKey' in $$props) $$invalidate(19, highlightKey = $$props.highlightKey);
-    		if ('highlighted' in $$props) $$invalidate(20, highlighted = $$props.highlighted);
-    		if ('order' in $$props) $$invalidate(21, order = $$props.order);
-    		if ('maxzoom' in $$props) $$invalidate(22, maxzoom = $$props.maxzoom);
-    		if ('minzoom' in $$props) $$invalidate(23, minzoom = $$props.minzoom);
+    		if ('highlight' in $$props) $$invalidate(19, highlight = $$props.highlight);
+    		if ('highlightKey' in $$props) $$invalidate(20, highlightKey = $$props.highlightKey);
+    		if ('highlighted' in $$props) $$invalidate(21, highlighted = $$props.highlighted);
+    		if ('order' in $$props) $$invalidate(22, order = $$props.order);
+    		if ('maxzoom' in $$props) $$invalidate(23, maxzoom = $$props.maxzoom);
+    		if ('minzoom' in $$props) $$invalidate(24, minzoom = $$props.minzoom);
     		if ('sourceLayer' in $$props) $$invalidate(4, sourceLayer = $$props.sourceLayer);
-    		if ('custom' in $$props) $$invalidate(24, custom = $$props.custom);
-    		if ('selectedPrev' in $$props) $$invalidate(25, selectedPrev = $$props.selectedPrev);
-    		if ('hoveredPrev' in $$props) $$invalidate(26, hoveredPrev = $$props.hoveredPrev);
-    		if ('highlightedPrev' in $$props) $$invalidate(27, highlightedPrev = $$props.highlightedPrev);
+    		if ('custom' in $$props) $$invalidate(25, custom = $$props.custom);
+    		if ('selectedPrev' in $$props) $$invalidate(26, selectedPrev = $$props.selectedPrev);
+    		if ('hoveredPrev' in $$props) $$invalidate(27, hoveredPrev = $$props.hoveredPrev);
+    		if ('highlightedPrev' in $$props) $$invalidate(28, highlightedPrev = $$props.highlightedPrev);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -3108,40 +3707,40 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty[0] & /*custom, id, type, layout, order*/ 18875072) {
-    			// # ============================================================================ #
-    			// # diagnose code here
+    		if ($$self.$$.dirty[0] & /*custom, id, type, layout, order*/ 37750144) {
     			// Reactive statement
     			 {
-    				const layers_to_display = Object.entries(custom.layers).filter(([key, value]) => value).map(x => x[0]);
+    				if (custom) {
+    					const layers_to_display = Object.entries(custom.layers).filter(([key, value]) => value).map(x => x[0]);
 
-    				// remove current layer if exists
-    				if (map.getLayer(id)) {
-    					map.removeLayer(id);
-    				}
+    					// remove current layer if exists
+    					if (map.getLayer(id)) {
+    						map.removeLayer(id);
+    					}
 
-    				// add current layer if specified
-    				if (layers_to_display.includes(id)) {
-    					const paint_tmp = custom.layers[id] ? custom.layers[id] : {};
+    					// add current layer if specified
+    					if (layers_to_display.includes(id)) {
+    						const paint_tmp = custom.layers[id] ? custom.layers[id] : {};
 
-    					let options = {
-    						id,
-    						type,
-    						source,
-    						paint: paint_tmp,
-    						layout
-    					};
+    						let options = {
+    							id,
+    							type,
+    							source,
+    							paint: paint_tmp,
+    							layout
+    						};
 
-    					map.addLayer(options, order);
+    						map.addLayer(options, order);
+    					}
     				}
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*data, colorKey*/ 6144) {
+    		if ($$self.$$.dirty[0] & /*data, colorKey*/ 12288) {
     			 data && (data || colorKey) && updateColors();
     		}
 
-    		if ($$self.$$.dirty[0] & /*highlight, highlighted, highlightedPrev, highlightKey, sourceLayer*/ 136052752) {
+    		if ($$self.$$.dirty[0] & /*highlight, highlighted, highlightedPrev, highlightKey, sourceLayer*/ 272105488) {
     			// Updates the "highlighted" feature state as geo codes are added to/removed from the highlighted array
     			 if (highlight && highlighted != highlightedPrev) {
     				if (highlightedPrev[0]) {
@@ -3152,7 +3751,7 @@ uniform `+P+" "+z+" u_"+k+`;
     					});
     				}
 
-    				$$invalidate(27, highlightedPrev = highlighted);
+    				$$invalidate(28, highlightedPrev = highlighted);
 
     				if (highlighted[0]) {
     					highlighted.forEach(id => {
@@ -3164,7 +3763,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*select, selected, selectedPrev, sourceLayer*/ 33587224) {
+    		if ($$self.$$.dirty[0] & /*select, selected, selectedPrev, sourceLayer*/ 67174424) {
     			// Updates the selected geo code if it is changed elsewhere in the app (outside of this component)
     			 if (select && selected != selectedPrev) {
     				if (selectedPrev) {
@@ -3175,11 +3774,11 @@ uniform `+P+" "+z+" u_"+k+`;
     					map.setFeatureState({ source, sourceLayer, id: selected }, { selected: true });
     				}
 
-    				$$invalidate(25, selectedPrev = selected);
+    				$$invalidate(26, selectedPrev = selected);
     			}
     		}
 
-    		if ($$self.$$.dirty[0] & /*hover, hovered, hoveredPrev, sourceLayer*/ 67108883) {
+    		if ($$self.$$.dirty[0] & /*hover, hovered, hoveredPrev, sourceLayer*/ 134217747) {
     			// Updates the hovered geo code if it is changed elsewhere in the app (outside of this component)
     			 if (hover && hovered != hoveredPrev) {
     				if (hoveredPrev) {
@@ -3190,7 +3789,7 @@ uniform `+P+" "+z+" u_"+k+`;
     					map.setFeatureState({ source, sourceLayer, id: hovered }, { hovered: true });
     				}
 
-    				$$invalidate(26, hoveredPrev = hovered);
+    				$$invalidate(27, hoveredPrev = hovered);
     			}
     		}
     	};
@@ -3202,6 +3801,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		selected,
     		sourceLayer,
     		idKey,
+    		map_id,
     		id,
     		type,
     		filter,
@@ -3236,34 +3836,35 @@ uniform `+P+" "+z+" u_"+k+`;
     		init(
     			this,
     			options,
-    			instance$3,
-    			create_fragment$3,
+    			instance$4,
+    			create_fragment$4,
     			safe_not_equal,
     			{
-    				id: 6,
-    				type: 7,
-    				filter: 8,
-    				layout: 9,
-    				paint: 10,
-    				data: 11,
-    				colorKey: 12,
-    				nameKey: 13,
-    				valueKey: 14,
+    				map_id: 6,
+    				id: 7,
+    				type: 8,
+    				filter: 9,
+    				layout: 10,
+    				paint: 11,
+    				data: 12,
+    				colorKey: 13,
+    				nameKey: 14,
+    				valueKey: 15,
     				idKey: 5,
-    				select: 15,
-    				clickIgnore: 16,
-    				clickCenter: 17,
+    				select: 16,
+    				clickIgnore: 17,
+    				clickCenter: 18,
     				selected: 3,
     				hover: 1,
     				hovered: 0,
-    				highlight: 18,
-    				highlightKey: 19,
-    				highlighted: 20,
-    				order: 21,
-    				maxzoom: 22,
-    				minzoom: 23,
+    				highlight: 19,
+    				highlightKey: 20,
+    				highlighted: 21,
+    				order: 22,
+    				maxzoom: 23,
+    				minzoom: 24,
     				sourceLayer: 4,
-    				custom: 24
+    				custom: 25
     			},
     			null,
     			[-1, -1]
@@ -3273,23 +3874,35 @@ uniform `+P+" "+z+" u_"+k+`;
     			component: this,
     			tagName: "MapLayer",
     			options,
-    			id: create_fragment$3.name
+    			id: create_fragment$4.name
     		});
 
     		const { ctx } = this.$$;
     		const props = options.props || {};
 
-    		if (/*id*/ ctx[6] === undefined && !('id' in props)) {
-    			console_1.warn("<MapLayer> was created without expected prop 'id'");
+    		if (/*map_id*/ ctx[6] === undefined && !('map_id' in props)) {
+    			console_1$3.warn("<MapLayer> was created without expected prop 'map_id'");
     		}
 
-    		if (/*type*/ ctx[7] === undefined && !('type' in props)) {
-    			console_1.warn("<MapLayer> was created without expected prop 'type'");
+    		if (/*id*/ ctx[7] === undefined && !('id' in props)) {
+    			console_1$3.warn("<MapLayer> was created without expected prop 'id'");
     		}
 
-    		if (/*custom*/ ctx[24] === undefined && !('custom' in props)) {
-    			console_1.warn("<MapLayer> was created without expected prop 'custom'");
+    		if (/*type*/ ctx[8] === undefined && !('type' in props)) {
+    			console_1$3.warn("<MapLayer> was created without expected prop 'type'");
     		}
+
+    		if (/*custom*/ ctx[25] === undefined && !('custom' in props)) {
+    			console_1$3.warn("<MapLayer> was created without expected prop 'custom'");
+    		}
+    	}
+
+    	get map_id() {
+    		throw new Error("<MapLayer>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set map_id(value) {
+    		throw new Error("<MapLayer>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
     	get id() {
@@ -3487,7 +4100,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     /* libs\@onsvisual\svelte-maps\src\MapTooltip.svelte generated by Svelte v3.44.1 */
 
-    function create_fragment$4(ctx) {
+    function create_fragment$5(ctx) {
     	const block = {
     		c: noop,
     		l: function claim(nodes) {
@@ -3502,7 +4115,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -3511,7 +4124,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$4($$self, $$props, $$invalidate) {
+    function instance$5($$self, $$props, $$invalidate) {
     	let $hoverObj;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('MapTooltip', slots, []);
@@ -3573,13 +4186,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class MapTooltip extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, { content: 1 });
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, { content: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "MapTooltip",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$5.name
     		});
 
     		const { ctx } = this.$$;
@@ -4176,9 +4789,9 @@ uniform `+P+" "+z+" u_"+k+`;
     };
 
     /* src\layout\UHCHeader.svelte generated by Svelte v3.44.1 */
-    const file$2 = "src\\layout\\UHCHeader.svelte";
+    const file$3 = "src\\layout\\UHCHeader.svelte";
 
-    function create_fragment$5(ctx) {
+    function create_fragment$6(ctx) {
     	let nav;
     	let div1;
     	let a;
@@ -4198,23 +4811,23 @@ uniform `+P+" "+z+" u_"+k+`;
     			if (!src_url_equal(img.src, img_src_value = "./img/uhc-primary-blue_black.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Drexel Urban Health Collaborative");
     			attr_dev(img, "class", "svelte-dmeou9");
-    			add_location(img, file$2, 17, 8, 485);
+    			add_location(img, file$3, 17, 8, 485);
     			attr_dev(div0, "id", "svg-container");
     			attr_dev(div0, "class", "svelte-dmeou9");
-    			add_location(div0, file$2, 16, 6, 451);
+    			add_location(div0, file$3, 16, 6, 451);
     			attr_dev(a, "href", "https://drexel.edu/uhc/");
     			attr_dev(a, "class", "svelte-dmeou9");
-    			add_location(a, file$2, 15, 4, 409);
+    			add_location(a, file$3, 15, 4, 409);
     			attr_dev(div1, "class", "col-wide middle");
     			toggle_class(div1, "center", /*center*/ ctx[2]);
-    			add_location(div1, file$2, 14, 2, 361);
+    			add_location(div1, file$3, 14, 2, 361);
 
     			attr_dev(nav, "style", nav_style_value = "border-bottom-color: " + themes[/*theme*/ ctx[0]]['muted'] + "; " + (/*filled*/ ctx[1]
     			? 'background-color: ' + themes[/*theme*/ ctx[0]]['background'] + ';'
     			: ''));
 
     			attr_dev(nav, "class", "svelte-dmeou9");
-    			add_location(nav, file$2, 9, 0, 209);
+    			add_location(nav, file$3, 9, 0, 209);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -4246,7 +4859,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -4255,7 +4868,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
+    function instance$6($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UHCHeader', slots, []);
     	let { theme = getContext('theme') } = $$props;
@@ -4297,13 +4910,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class UHCHeader extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, { theme: 0, filled: 1, center: 2 });
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, { theme: 0, filled: 1, center: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UHCHeader",
     			options,
-    			id: create_fragment$5.name
+    			id: create_fragment$6.name
     		});
     	}
 
@@ -6236,10 +6849,10 @@ uniform `+P+" "+z+" u_"+k+`;
     };
 
     /* node_modules\@iconify\svelte\dist\Icon.svelte generated by Svelte v3.44.1 */
-    const file$3 = "node_modules\\@iconify\\svelte\\dist\\Icon.svelte";
+    const file$4 = "node_modules\\@iconify\\svelte\\dist\\Icon.svelte";
 
     // (108:0) {#if data}
-    function create_if_block$3(ctx) {
+    function create_if_block$4(ctx) {
     	let if_block_anchor;
 
     	function select_block_type(ctx, dirty) {
@@ -6280,7 +6893,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$3.name,
+    		id: create_if_block$4.name,
     		type: "if",
     		source: "(108:0) {#if data}",
     		ctx
@@ -6303,7 +6916,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		c: function create() {
     			span = element("span");
     			set_attributes(span, span_data);
-    			add_location(span, file$3, 113, 2, 2001);
+    			add_location(span, file$4, 113, 2, 2001);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -6342,7 +6955,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		c: function create() {
     			svg = svg_element("svg");
     			set_svg_attributes(svg, svg_data);
-    			add_location(svg, file$3, 109, 2, 1933);
+    			add_location(svg, file$4, 109, 2, 1933);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, svg, anchor);
@@ -6367,9 +6980,9 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function create_fragment$6(ctx) {
+    function create_fragment$7(ctx) {
     	let if_block_anchor;
-    	let if_block = /*data*/ ctx[0] && create_if_block$3(ctx);
+    	let if_block = /*data*/ ctx[0] && create_if_block$4(ctx);
 
     	const block = {
     		c: function create() {
@@ -6388,7 +7001,7 @@ uniform `+P+" "+z+" u_"+k+`;
     				if (if_block) {
     					if_block.p(ctx, dirty);
     				} else {
-    					if_block = create_if_block$3(ctx);
+    					if_block = create_if_block$4(ctx);
     					if_block.c();
     					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
@@ -6407,7 +7020,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$6.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -6416,7 +7029,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$6($$self, $$props, $$invalidate) {
+    function instance$7($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Icon', slots, []);
 
@@ -6538,21 +7151,21 @@ uniform `+P+" "+z+" u_"+k+`;
     class Icon extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$6, create_fragment$6, safe_not_equal, {});
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Icon",
     			options,
-    			id: create_fragment$6.name
+    			id: create_fragment$7.name
     		});
     	}
     }
 
     /* src\layout\UHCFooter.svelte generated by Svelte v3.44.1 */
-    const file$4 = "src\\layout\\UHCFooter.svelte";
+    const file$5 = "src\\layout\\UHCFooter.svelte";
 
-    function create_fragment$7(ctx) {
+    function create_fragment$8(ctx) {
     	let footer;
     	let div13;
     	let div11;
@@ -6702,86 +7315,86 @@ uniform `+P+" "+z+" u_"+k+`;
     			if (!src_url_equal(img.src, img_src_value = "./img/uhc-primary-blue_black.svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "alt", "Drexel Urban Health Collaborative");
     			attr_dev(img, "class", "svelte-jjyrck");
-    			add_location(img, file$4, 17, 12, 492);
+    			add_location(img, file$5, 17, 12, 492);
     			attr_dev(div0, "id", "svg-container");
     			attr_dev(div0, "class", "svelte-jjyrck");
-    			add_location(div0, file$4, 16, 10, 454);
+    			add_location(div0, file$5, 16, 10, 454);
     			attr_dev(a0, "href", "https://drexel.edu/uhc/");
     			attr_dev(a0, "class", "svelte-jjyrck");
-    			add_location(a0, file$4, 15, 8, 408);
+    			add_location(a0, file$5, 15, 8, 408);
     			attr_dev(a1, "href", "https://drexel.edu/uhc/about/contact/");
     			attr_dev(a1, "class", "link svelte-jjyrck");
     			set_style(a1, "color", themes[/*theme*/ ctx[0]]['text']);
-    			add_location(a1, file$4, 27, 14, 763);
+    			add_location(a1, file$5, 27, 14, 763);
     			attr_dev(li0, "class", "svelte-jjyrck");
-    			add_location(li0, file$4, 26, 12, 743);
+    			add_location(li0, file$5, 26, 12, 743);
     			attr_dev(a2, "href", "https://drexel.edu/privacy");
     			attr_dev(a2, "class", "link svelte-jjyrck");
     			set_style(a2, "color", themes[/*theme*/ ctx[0]]['text']);
-    			add_location(a2, file$4, 35, 14, 999);
+    			add_location(a2, file$5, 35, 14, 999);
     			attr_dev(li1, "class", "svelte-jjyrck");
-    			add_location(li1, file$4, 34, 12, 979);
+    			add_location(li1, file$5, 34, 12, 979);
     			attr_dev(ul, "class", "svelte-jjyrck");
-    			add_location(ul, file$4, 25, 10, 725);
+    			add_location(ul, file$5, 25, 10, 725);
     			attr_dev(div1, "class", "link-tree svelte-jjyrck");
-    			add_location(div1, file$4, 24, 8, 690);
+    			add_location(div1, file$5, 24, 8, 690);
     			attr_dev(div2, "class", "item svelte-jjyrck");
-    			add_location(div2, file$4, 14, 6, 380);
+    			add_location(div2, file$5, 14, 6, 380);
     			attr_dev(div3, "class", "social-icon svelte-jjyrck");
-    			add_location(div3, file$4, 48, 12, 1404);
+    			add_location(div3, file$5, 48, 12, 1404);
     			attr_dev(a3, "href", "https://github.com/Drexel-UHC");
-    			add_location(a3, file$4, 47, 10, 1350);
+    			add_location(a3, file$5, 47, 10, 1350);
     			attr_dev(div4, "class", "social-icon svelte-jjyrck");
-    			add_location(div4, file$4, 51, 12, 1549);
+    			add_location(div4, file$5, 51, 12, 1549);
     			attr_dev(a4, "href", "https://www.facebook.com/DrexelUHC/");
-    			add_location(a4, file$4, 50, 10, 1489);
+    			add_location(a4, file$5, 50, 10, 1489);
     			attr_dev(div5, "class", "social-icon svelte-jjyrck");
-    			add_location(div5, file$4, 54, 12, 1689);
+    			add_location(div5, file$5, 54, 12, 1689);
     			attr_dev(a5, "href", "https://twitter.com/drexeluhc");
-    			add_location(a5, file$4, 53, 10, 1635);
+    			add_location(a5, file$5, 53, 10, 1635);
     			attr_dev(div6, "class", "social-icon svelte-jjyrck");
-    			add_location(div6, file$4, 57, 12, 1835);
+    			add_location(div6, file$5, 57, 12, 1835);
     			attr_dev(a6, "href", "https://www.instagram.com/drexeluhc");
-    			add_location(a6, file$4, 56, 10, 1775);
+    			add_location(a6, file$5, 56, 10, 1775);
     			attr_dev(div7, "class", "social-icon svelte-jjyrck");
-    			add_location(div7, file$4, 60, 12, 2001);
+    			add_location(div7, file$5, 60, 12, 2001);
     			attr_dev(a7, "href", "https://www.youtube.com/@urbanhealthcollaborative8928");
-    			add_location(a7, file$4, 59, 10, 1923);
+    			add_location(a7, file$5, 59, 10, 1923);
     			attr_dev(div8, "class", "social-icon svelte-jjyrck");
-    			add_location(div8, file$4, 65, 12, 2204);
+    			add_location(div8, file$5, 65, 12, 2204);
     			attr_dev(a8, "href", "https://www.linkedin.com/company/drexel-urban-health-collaborative/");
-    			add_location(a8, file$4, 62, 10, 2087);
+    			add_location(a8, file$5, 62, 10, 2087);
     			attr_dev(div9, "class", "container svelte-jjyrck");
-    			add_location(div9, file$4, 46, 8, 1315);
+    			add_location(div9, file$5, 46, 8, 1315);
     			attr_dev(div10, "class", "item svelte-jjyrck");
     			attr_dev(div10, "id", "follow-uhc");
-    			add_location(div10, file$4, 44, 6, 1250);
+    			add_location(div10, file$5, 44, 6, 1250);
     			attr_dev(div11, "class", "container svelte-jjyrck");
-    			add_location(div11, file$4, 13, 4, 349);
+    			add_location(div11, file$5, 13, 4, 349);
     			set_style(hr, "border-top-color", themes[/*theme*/ ctx[0]]['muted']);
     			attr_dev(hr, "class", "svelte-jjyrck");
-    			add_location(hr, file$4, 70, 4, 2327);
+    			add_location(hr, file$5, 70, 4, 2327);
     			attr_dev(a9, "href", "https://github.com/ONSvisual/svelte-scrolly");
     			attr_dev(a9, "class", "link svelte-jjyrck");
     			attr_dev(a9, "target", "_blank");
     			attr_dev(a9, "rel", "noopener");
     			set_style(a9, "color", themes[/*theme*/ ctx[0]]['text']);
-    			add_location(a9, file$4, 72, 53, 2466);
+    			add_location(a9, file$5, 72, 53, 2466);
     			attr_dev(a10, "href", "https://opensource.org/licenses/MIT");
     			attr_dev(a10, "class", "link svelte-jjyrck");
     			attr_dev(a10, "target", "_blank");
     			attr_dev(a10, "rel", "noopener");
     			set_style(a10, "color", themes[/*theme*/ ctx[0]]['text']);
-    			add_location(a10, file$4, 80, 6, 2746);
+    			add_location(a10, file$5, 80, 6, 2746);
     			attr_dev(div12, "class", "license svelte-jjyrck");
-    			add_location(div12, file$4, 71, 4, 2390);
+    			add_location(div12, file$5, 71, 4, 2390);
     			attr_dev(div13, "class", "col-wide");
     			attr_dev(div13, "data-analytics", "footer");
-    			add_location(div13, file$4, 12, 2, 297);
+    			add_location(div13, file$5, 12, 2, 297);
     			set_style(footer, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(footer, "background-color", themes[/*theme*/ ctx[0]]['pale']);
     			attr_dev(footer, "class", "svelte-jjyrck");
-    			add_location(footer, file$4, 7, 0, 187);
+    			add_location(footer, file$5, 7, 0, 187);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6905,7 +7518,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$7.name,
+    		id: create_fragment$8.name,
     		type: "component",
     		source: "",
     		ctx
@@ -6914,7 +7527,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$7($$self, $$props, $$invalidate) {
+    function instance$8($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('UHCFooter', slots, []);
     	let { theme = getContext('theme') } = $$props;
@@ -6944,13 +7557,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class UHCFooter extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$7, create_fragment$7, safe_not_equal, { theme: 0 });
+    		init(this, options, instance$8, create_fragment$8, safe_not_equal, { theme: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "UHCFooter",
     			options,
-    			id: create_fragment$7.name
+    			id: create_fragment$8.name
     		});
     	}
 
@@ -6964,9 +7577,9 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     /* src\layout\Header.svelte generated by Svelte v3.44.1 */
-    const file$5 = "src\\layout\\Header.svelte";
+    const file$6 = "src\\layout\\Header.svelte";
 
-    function create_fragment$8(ctx) {
+    function create_fragment$9(ctx) {
     	let header;
     	let div1;
     	let div0;
@@ -6982,12 +7595,12 @@ uniform `+P+" "+z+" u_"+k+`;
     			div0 = element("div");
     			if (default_slot) default_slot.c();
     			toggle_class(div0, "center", /*center*/ ctx[2]);
-    			add_location(div0, file$5, 36, 4, 816);
+    			add_location(div0, file$6, 36, 4, 816);
     			attr_dev(div1, "class", "v-padded col-wide middle svelte-d6gh7z");
     			set_style(div1, "position", "relative");
     			toggle_class(div1, "short", /*short*/ ctx[3]);
     			toggle_class(div1, "height-full", !/*short*/ ctx[3]);
-    			add_location(div1, file$5, 30, 2, 682);
+    			add_location(div1, file$6, 30, 2, 682);
 
     			attr_dev(header, "style", header_style_value = "color: " + themes[/*theme*/ ctx[0]]['text'] + "; background-color: " + (/*bgcolor*/ ctx[1]
     			? /*bgcolor*/ ctx[1]
@@ -6995,7 +7608,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     			attr_dev(header, "class", "svelte-d6gh7z");
     			toggle_class(header, "short", /*short*/ ctx[3]);
-    			add_location(header, file$5, 24, 0, 523);
+    			add_location(header, file$6, 24, 0, 523);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7066,7 +7679,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$8.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -7075,7 +7688,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$8($$self, $$props, $$invalidate) {
+    function instance$9($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Header', slots, ['default']);
     	let { theme = getContext('theme') } = $$props;
@@ -7145,7 +7758,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$8, create_fragment$8, safe_not_equal, {
+    		init(this, options, instance$9, create_fragment$9, safe_not_equal, {
     			theme: 0,
     			bgimage: 5,
     			bgcolor: 1,
@@ -7158,7 +7771,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			component: this,
     			tagName: "Header",
     			options,
-    			id: create_fragment$8.name
+    			id: create_fragment$9.name
     		});
     	}
 
@@ -7212,9 +7825,9 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     /* src\layout\Section.svelte generated by Svelte v3.44.1 */
-    const file$6 = "src\\layout\\Section.svelte";
+    const file$7 = "src\\layout\\Section.svelte";
 
-    function create_fragment$9(ctx) {
+    function create_fragment$a(ctx) {
     	let section;
     	let div;
     	let current;
@@ -7227,10 +7840,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			div = element("div");
     			if (default_slot) default_slot.c();
     			attr_dev(div, "class", "col-medium");
-    			add_location(div, file$6, 8, 1, 247);
+    			add_location(div, file$7, 8, 1, 247);
     			set_style(section, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(section, "background-color", themes[/*theme*/ ctx[0]]['background']);
-    			add_location(section, file$6, 7, 0, 147);
+    			add_location(section, file$7, 7, 0, 147);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7286,7 +7899,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$9.name,
+    		id: create_fragment$a.name,
     		type: "component",
     		source: "",
     		ctx
@@ -7295,7 +7908,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$9($$self, $$props, $$invalidate) {
+    function instance$a($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Section', slots, ['default']);
     	let { theme = getContext('theme') } = $$props;
@@ -7326,13 +7939,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class Section extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$9, create_fragment$9, safe_not_equal, { theme: 0 });
+    		init(this, options, instance$a, create_fragment$a, safe_not_equal, { theme: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Section",
     			options,
-    			id: create_fragment$9.name
+    			id: create_fragment$a.name
     		});
     	}
 
@@ -7415,7 +8028,7 @@ uniform `+P+" "+z+" u_"+k+`;
     var debounce_1 = debounce;
 
     /* src\layout\Media.svelte generated by Svelte v3.44.1 */
-    const file$7 = "src\\layout\\Media.svelte";
+    const file$8 = "src\\layout\\Media.svelte";
 
     // (95:0) {:else}
     function create_else_block$1(ctx) {
@@ -7437,12 +8050,12 @@ uniform `+P+" "+z+" u_"+k+`;
     			attr_dev(div0, "class", div0_class_value = "grid" + /*gridClass*/ ctx[5] + " svelte-15qq8ff");
     			set_style(div0, "grid-gap", /*gridGap*/ ctx[8]);
     			set_style(div0, "min-height", /*rowHeight*/ ctx[7]);
-    			add_location(div0, file$7, 97, 2, 2518);
+    			add_location(div0, file$8, 97, 2, 2518);
     			attr_dev(div1, "class", div1_class_value = "col-" + /*col*/ ctx[1] + " svelte-15qq8ff");
-    			add_location(div1, file$7, 96, 1, 2491);
+    			add_location(div1, file$8, 96, 1, 2491);
     			set_style(figure, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(figure, "background-color", themes[/*theme*/ ctx[0]]['background']);
-    			add_location(figure, file$7, 95, 0, 2391);
+    			add_location(figure, file$8, 95, 0, 2391);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, figure, anchor);
@@ -7528,12 +8141,12 @@ uniform `+P+" "+z+" u_"+k+`;
     			if (default_slot) default_slot.c();
     			attr_dev(div0, "class", "grid-ms svelte-15qq8ff");
     			add_render_callback(() => /*div0_elementresize_handler*/ ctx[15].call(div0));
-    			add_location(div0, file$7, 89, 2, 2267);
+    			add_location(div0, file$8, 89, 2, 2267);
     			attr_dev(div1, "class", div1_class_value = "col-" + /*col*/ ctx[1] + " svelte-15qq8ff");
-    			add_location(div1, file$7, 88, 1, 2240);
+    			add_location(div1, file$8, 88, 1, 2240);
     			set_style(figure, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(figure, "background-color", themes[/*theme*/ ctx[0]]['background']);
-    			add_location(figure, file$7, 87, 0, 2140);
+    			add_location(figure, file$8, 87, 0, 2140);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, figure, anchor);
@@ -7605,7 +8218,7 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     // (104:0) {#if caption}
-    function create_if_block$4(ctx) {
+    function create_if_block$5(ctx) {
     	let caption_1;
     	let div1;
     	let div0;
@@ -7616,12 +8229,12 @@ uniform `+P+" "+z+" u_"+k+`;
     			div1 = element("div");
     			div0 = element("div");
     			attr_dev(div0, "class", "caption");
-    			add_location(div0, file$7, 106, 3, 2805);
+    			add_location(div0, file$8, 106, 3, 2805);
     			attr_dev(div1, "class", "col-medium");
-    			add_location(div1, file$7, 105, 2, 2776);
+    			add_location(div1, file$8, 105, 2, 2776);
     			set_style(caption_1, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(caption_1, "background-color", themes[/*theme*/ ctx[0]]['background']);
-    			add_location(caption_1, file$7, 104, 1, 2674);
+    			add_location(caption_1, file$8, 104, 1, 2674);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, caption_1, anchor);
@@ -7646,7 +8259,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$4.name,
+    		id: create_if_block$5.name,
     		type: "if",
     		source: "(104:0) {#if caption}",
     		ctx
@@ -7655,7 +8268,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function create_fragment$a(ctx) {
+    function create_fragment$b(ctx) {
     	let current_block_type_index;
     	let if_block0;
     	let t;
@@ -7671,7 +8284,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	current_block_type_index = select_block_type(ctx);
     	if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
-    	let if_block1 = /*caption*/ ctx[2] && create_if_block$4(ctx);
+    	let if_block1 = /*caption*/ ctx[2] && create_if_block$5(ctx);
 
     	const block = {
     		c: function create() {
@@ -7697,7 +8310,7 @@ uniform `+P+" "+z+" u_"+k+`;
     				if (if_block1) {
     					if_block1.p(ctx, dirty);
     				} else {
-    					if_block1 = create_if_block$4(ctx);
+    					if_block1 = create_if_block$5(ctx);
     					if_block1.c();
     					if_block1.m(if_block1_anchor.parentNode, if_block1_anchor);
     				}
@@ -7725,7 +8338,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$a.name,
+    		id: create_fragment$b.name,
     		type: "component",
     		source: "",
     		ctx
@@ -7734,7 +8347,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$a($$self, $$props, $$invalidate) {
+    function instance$b($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Media', slots, ['default']);
     	const colWidths = { narrow: 200, medium: 300, wide: 500 };
@@ -7914,7 +8527,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	constructor(options) {
     		super(options);
 
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, {
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, {
     			theme: 0,
     			col: 1,
     			grid: 9,
@@ -7927,7 +8540,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			component: this,
     			tagName: "Media",
     			options,
-    			id: create_fragment$a.name
+    			id: create_fragment$b.name
     		});
     	}
 
@@ -7981,9 +8594,9 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     /* src\layout\Filler.svelte generated by Svelte v3.44.1 */
-    const file$8 = "src\\layout\\Filler.svelte";
+    const file$9 = "src\\layout\\Filler.svelte";
 
-    function create_fragment$b(ctx) {
+    function create_fragment$c(ctx) {
     	let section;
     	let div;
     	let current;
@@ -8001,11 +8614,11 @@ uniform `+P+" "+z+" u_"+k+`;
     			toggle_class(div, "col-wide", /*wide*/ ctx[2]);
     			toggle_class(div, "height-full", !/*short*/ ctx[3]);
     			toggle_class(div, "short", /*short*/ ctx[3]);
-    			add_location(div, file$8, 20, 1, 424);
+    			add_location(div, file$9, 20, 1, 424);
     			set_style(section, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(section, "background-color", themes[/*theme*/ ctx[0]]['background']);
     			attr_dev(section, "class", "svelte-1odf9sx");
-    			add_location(section, file$8, 19, 0, 323);
+    			add_location(section, file$9, 19, 0, 323);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8081,7 +8694,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$b.name,
+    		id: create_fragment$c.name,
     		type: "component",
     		source: "",
     		ctx
@@ -8090,7 +8703,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$b($$self, $$props, $$invalidate) {
+    function instance$c($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Filler', slots, ['default']);
     	let { theme = getContext('theme') } = $$props;
@@ -8137,13 +8750,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class Filler extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, { theme: 0, center: 1, wide: 2, short: 3 });
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { theme: 0, center: 1, wide: 2, short: 3 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Filler",
     			options,
-    			id: create_fragment$b.name
+    			id: create_fragment$c.name
     		});
     	}
 
@@ -8181,7 +8794,7 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     /* src\layout\Divider.svelte generated by Svelte v3.44.1 */
-    const file$9 = "src\\layout\\Divider.svelte";
+    const file$a = "src\\layout\\Divider.svelte";
 
     // (17:4) {:else}
     function create_else_block$2(ctx) {
@@ -8193,7 +8806,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			set_style(hr_1, "color", themes[/*theme*/ ctx[0]]['muted']);
     			set_style(hr_1, "border", "none");
     			attr_dev(hr_1, "class", "svelte-1l2to1w");
-    			add_location(hr_1, file$9, 17, 6, 405);
+    			add_location(hr_1, file$a, 17, 6, 405);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, hr_1, anchor);
@@ -8220,7 +8833,7 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     // (15:4) {#if hr}
-    function create_if_block$5(ctx) {
+    function create_if_block$6(ctx) {
     	let hr_1;
 
     	const block = {
@@ -8228,7 +8841,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			hr_1 = element("hr");
     			set_style(hr_1, "color", themes[/*theme*/ ctx[0]]['muted']);
     			attr_dev(hr_1, "class", "svelte-1l2to1w");
-    			add_location(hr_1, file$9, 15, 6, 338);
+    			add_location(hr_1, file$a, 15, 6, 338);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, hr_1, anchor);
@@ -8245,7 +8858,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$5.name,
+    		id: create_if_block$6.name,
     		type: "if",
     		source: "(15:4) {#if hr}",
     		ctx
@@ -8254,12 +8867,12 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function create_fragment$c(ctx) {
+    function create_fragment$d(ctx) {
     	let section;
     	let div;
 
     	function select_block_type(ctx, dirty) {
-    		if (/*hr*/ ctx[1]) return create_if_block$5;
+    		if (/*hr*/ ctx[1]) return create_if_block$6;
     		return create_else_block$2;
     	}
 
@@ -8272,10 +8885,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			div = element("div");
     			if_block.c();
     			attr_dev(div, "class", "col-medium");
-    			add_location(div, file$9, 13, 2, 292);
+    			add_location(div, file$a, 13, 2, 292);
     			set_style(section, "color", themes[/*theme*/ ctx[0]]['text']);
     			set_style(section, "background-color", themes[/*theme*/ ctx[0]]['background']);
-    			add_location(section, file$9, 8, 0, 175);
+    			add_location(section, file$a, 8, 0, 175);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8316,7 +8929,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$c.name,
+    		id: create_fragment$d.name,
     		type: "component",
     		source: "",
     		ctx
@@ -8325,7 +8938,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$c($$self, $$props, $$invalidate) {
+    function instance$d($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Divider', slots, []);
     	let { theme = getContext('theme') } = $$props;
@@ -8358,13 +8971,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class Divider extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$c, create_fragment$c, safe_not_equal, { theme: 0, hr: 1 });
+    		init(this, options, instance$d, create_fragment$d, safe_not_equal, { theme: 0, hr: 1 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Divider",
     			options,
-    			id: create_fragment$c.name
+    			id: create_fragment$d.name
     		});
     	}
 
@@ -8387,9 +9000,9 @@ uniform `+P+" "+z+" u_"+k+`;
 
     /* src\ui\Toggle.svelte generated by Svelte v3.44.1 */
 
-    const file$a = "src\\ui\\Toggle.svelte";
+    const file$b = "src\\ui\\Toggle.svelte";
 
-    function create_fragment$d(ctx) {
+    function create_fragment$e(ctx) {
     	let div;
     	let input;
     	let t0;
@@ -8409,13 +9022,13 @@ uniform `+P+" "+z+" u_"+k+`;
     			attr_dev(input, "type", "checkbox");
     			attr_dev(input, "class", "switch-input svelte-g1x8yy");
     			attr_dev(input, "tabindex", "0");
-    			add_location(input, file$a, 8, 2, 158);
+    			add_location(input, file$b, 8, 2, 158);
     			attr_dev(label_1, "for", /*id*/ ctx[1]);
     			attr_dev(label_1, "class", "switch-label svelte-g1x8yy");
     			toggle_class(label_1, "mono", /*mono*/ ctx[3]);
-    			add_location(label_1, file$a, 9, 2, 239);
+    			add_location(label_1, file$b, 9, 2, 239);
     			attr_dev(div, "class", "switch svelte-g1x8yy");
-    			add_location(div, file$a, 7, 0, 134);
+    			add_location(div, file$b, 7, 0, 134);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -8463,7 +9076,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$d.name,
+    		id: create_fragment$e.name,
     		type: "component",
     		source: "",
     		ctx
@@ -8472,7 +9085,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$d($$self, $$props, $$invalidate) {
+    function instance$e($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Toggle', slots, []);
     	let { id = "switch" } = $$props;
@@ -8516,13 +9129,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class Toggle extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$d, create_fragment$d, safe_not_equal, { id: 1, label: 2, mono: 3, checked: 0 });
+    		init(this, options, instance$e, create_fragment$e, safe_not_equal, { id: 1, label: 2, mono: 3, checked: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Toggle",
     			options,
-    			id: create_fragment$d.name
+    			id: create_fragment$e.name
     		});
 
     		const { ctx } = this.$$;
@@ -8568,7 +9181,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     /* src\ui\Arrow.svelte generated by Svelte v3.44.1 */
 
-    const file$b = "src\\ui\\Arrow.svelte";
+    const file$c = "src\\ui\\Arrow.svelte";
 
     // (14:0) {:else}
     function create_else_block$3(ctx) {
@@ -8587,7 +9200,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			attr_dev(img, "alt", "");
     			attr_dev(img, "aria-hidden", "true");
     			toggle_class(img, "bounce", /*animation*/ ctx[1]);
-    			add_location(img, file$b, 14, 0, 361);
+    			add_location(img, file$c, 14, 0, 361);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, img, anchor);
@@ -8649,7 +9262,7 @@ uniform `+P+" "+z+" u_"+k+`;
     }
 
     // (11:0) {#if center}
-    function create_if_block$6(ctx) {
+    function create_if_block$7(ctx) {
     	let br;
     	let t;
     	let img;
@@ -8664,13 +9277,13 @@ uniform `+P+" "+z+" u_"+k+`;
     			br = element("br");
     			t = space();
     			img = element("img");
-    			add_location(br, file$b, 11, 13, 236);
+    			add_location(br, file$c, 11, 13, 236);
     			if (!src_url_equal(img.src, img_src_value = "./img/scroll-down-" + /*color*/ ctx[0] + ".svg")) attr_dev(img, "src", img_src_value);
     			attr_dev(img, "class", "arrow svelte-1prdo3z");
     			attr_dev(img, "alt", "");
     			attr_dev(img, "aria-hidden", "true");
     			toggle_class(img, "bounce", /*animation*/ ctx[1]);
-    			add_location(img, file$b, 12, 0, 243);
+    			add_location(img, file$c, 12, 0, 243);
     		},
     		m: function mount(target, anchor) {
     			if (default_slot) {
@@ -8725,7 +9338,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_if_block$6.name,
+    		id: create_if_block$7.name,
     		type: "if",
     		source: "(11:0) {#if center}",
     		ctx
@@ -8734,12 +9347,12 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function create_fragment$e(ctx) {
+    function create_fragment$f(ctx) {
     	let current_block_type_index;
     	let if_block;
     	let if_block_anchor;
     	let current;
-    	const if_block_creators = [create_if_block$6, create_else_block$3];
+    	const if_block_creators = [create_if_block$7, create_else_block$3];
     	const if_blocks = [];
 
     	function select_block_type(ctx, dirty) {
@@ -8807,7 +9420,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$e.name,
+    		id: create_fragment$f.name,
     		type: "component",
     		source: "",
     		ctx
@@ -8816,7 +9429,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	return block;
     }
 
-    function instance$e($$self, $$props, $$invalidate) {
+    function instance$f($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Arrow', slots, ['default']);
     	let { color = "black" } = $$props;
@@ -8855,13 +9468,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class Arrow extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$e, create_fragment$e, safe_not_equal, { color: 0, animation: 1, center: 2 });
+    		init(this, options, instance$f, create_fragment$f, safe_not_equal, { color: 0, animation: 1, center: 2 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Arrow",
     			options,
-    			id: create_fragment$e.name
+    			id: create_fragment$f.name
     		});
     	}
 
@@ -8893,10 +9506,10 @@ uniform `+P+" "+z+" u_"+k+`;
     /* src\App.svelte generated by Svelte v3.44.1 */
 
     const { Object: Object_1$1 } = globals;
-    const file$c = "src\\App.svelte";
+    const file$d = "src\\App.svelte";
 
-    // (334:0) <Filler theme="lightblue" short={true} wide={true} center={false}>
-    function create_default_slot_8(ctx) {
+    // (394:0) <Filler theme="lightblue" short={true} wide={true} center={false}>
+    function create_default_slot_12(ctx) {
     	let h1;
     	let t1;
     	let p0;
@@ -8925,7 +9538,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			p1 = element("p");
     			t4 = text("Designed by: ");
     			span0 = element("span");
-    			span0.textContent = "Usama Bilal, Katie Idvik, Steve Melly, Kari Moore, Alex Quistberg, Ana V.\r\n      Diez Roux";
+    			span0.textContent = "Usama Bilal, Katie Indvik, Steve Melly, Andrea Bolinaga, Kari Moore, Alex\r\n      Quistberg, Ana V. Diez Roux";
     			t6 = space();
     			br0 = element("br");
     			t7 = text("\r\n    Engineered by:\r\n    ");
@@ -8934,18 +9547,18 @@ uniform `+P+" "+z+" u_"+k+`;
     			t9 = space();
     			br1 = element("br");
     			t10 = text("\r\n    August 22, 2023");
-    			add_location(h1, file$c, 334, 2, 8889);
+    			add_location(h1, file$d, 394, 2, 10209);
     			attr_dev(p0, "class", "text-big");
     			set_style(p0, "margin-top", "5px");
-    			add_location(p0, file$c, 335, 2, 8926);
+    			add_location(p0, file$d, 395, 2, 10246);
     			attr_dev(span0, "style", span0_style_value = 'font-weight: 900');
-    			add_location(span0, file$c, 340, 17, 9097);
-    			add_location(br0, file$c, 344, 4, 9247);
+    			add_location(span0, file$d, 400, 17, 10418);
+    			add_location(br0, file$d, 404, 4, 10586);
     			attr_dev(span1, "style", span1_style_value = 'font-weight: 900');
-    			add_location(span1, file$c, 346, 4, 9279);
-    			add_location(br1, file$c, 347, 4, 9345);
-    			attr_dev(p1, "class", "text-small");
-    			add_location(p1, file$c, 339, 2, 9056);
+    			add_location(span1, file$d, 406, 4, 10618);
+    			add_location(br1, file$d, 407, 4, 10684);
+    			attr_dev(p1, "class", "text-medium");
+    			add_location(p1, file$d, 399, 2, 10376);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -8974,18 +9587,18 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_default_slot_8.name,
+    		id: create_default_slot_12.name,
     		type: "slot",
-    		source: "(334:0) <Filler theme=\\\"lightblue\\\" short={true} wide={true} center={false}>",
+    		source: "(394:0) <Filler theme=\\\"lightblue\\\" short={true} wide={true} center={false}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (353:0) <Section>
-    function create_default_slot_7(ctx) {
-    	let h2;
+    // (413:0) <Section>
+    function create_default_slot_11(ctx) {
+    	let h3;
     	let t1;
     	let p0;
     	let t3;
@@ -8993,31 +9606,313 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	const block = {
     		c: function create() {
-    			h2 = element("h2");
-    			h2.textContent = "Introduction";
+    			h3 = element("h3");
+    			h3.textContent = "Introduction";
     			t1 = space();
     			p0 = element("p");
     			p0.textContent = "The SALURBAL team has developed a rigorous protocol for defining cities,\r\n    sub-cities, and neighborhoods. This process allows us to study and compare\r\n    urban environments and their health impacts across cities in 11 countries in\r\n    Latin America (Argentina, Brazil, Chile, Colombia, Costa Rica, El Salvador,\r\n    Guatemala, Mexico, Nicaragua, Panama, and Peru).";
     			t3 = space();
     			p1 = element("p");
     			p1.textContent = "We took several steps to identify and define SALURBAL cities. The approach\r\n    described below has guided the definition of geographic areas to which all\r\n    SALURBAL data is linked. You can read more about this process in “Building a\r\n    Data Platform for Cross-Country Urban Health Studies.”";
-    			add_location(h2, file$c, 353, 2, 9408);
-    			add_location(p0, file$c, 354, 2, 9433);
-    			add_location(p1, file$c, 361, 2, 9823);
+    			add_location(h3, file$d, 413, 2, 10747);
+    			attr_dev(p0, "class", "text-medium");
+    			add_location(p0, file$d, 414, 2, 10772);
+    			attr_dev(p1, "class", "text-medium");
+    			add_location(p1, file$d, 421, 2, 11182);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h2, anchor);
+    			insert_dev(target, h3, anchor);
     			insert_dev(target, t1, anchor);
     			insert_dev(target, p0, anchor);
     			insert_dev(target, t3, anchor);
     			insert_dev(target, p1, anchor);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(h3);
     			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(p0);
     			if (detaching) detach_dev(t3);
     			if (detaching) detach_dev(p1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_11.name,
+    		type: "slot",
+    		source: "(413:0) <Section>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (432:0) <Section>
+    function create_default_slot_10(ctx) {
+    	let h3;
+    	let t1;
+    	let p0;
+    	let t3;
+    	let p1;
+
+    	const block = {
+    		c: function create() {
+    			h3 = element("h3");
+    			h3.textContent = "Step 1. Identifying cities with a population of 100,000 or more.";
+    			t1 = space();
+    			p0 = element("p");
+    			p0.textContent = "The SALURBAL city universe was defined as all urban agglomerations with at\r\n    least 100,000 residents as of 2010.";
+    			t3 = space();
+    			p1 = element("p");
+    			p1.textContent = "We used the Atlas of Urban Expansion and country census data from\r\n    citypopulation.de to obtain a list of all cities (as defined in these\r\n    sources) with 100,000 residents or more in 2010. We combined both lists and\r\n    eliminated overlaps. Cities that were very close together and were therefore\r\n    part of the same urban agglomeration were combined. The name of the largest\r\n    city or a hyphenated name was assigned to that unit. SALURBAL team members\r\n    in each country helped create a final list of 371 cities. We will refer to\r\n    these as “SALURBAL cities.”";
+    			add_location(h3, file$d, 432, 2, 11559);
+    			attr_dev(p0, "class", "text-medium");
+    			add_location(p0, file$d, 433, 2, 11636);
+    			attr_dev(p1, "class", "text-medium");
+    			add_location(p1, file$d, 437, 2, 11792);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, h3, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, p0, anchor);
+    			insert_dev(target, t3, anchor);
+    			insert_dev(target, p1, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(h3);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(p0);
+    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(p1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_10.name,
+    		type: "slot",
+    		source: "(432:0) <Section>",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (467:6) <MapSource          map_id="static_map_1"          id="static_map_1-src"          type="geojson"          data={geojson_salurbal_centroid}          promoteId={'salurbal_centroids'}          maxzoom={13}        >
+    function create_default_slot_9(ctx) {
+    	let maplayer;
+    	let current;
+
+    	maplayer = new MapLayer({
+    			props: {
+    				map_id: "static_map_1",
+    				id: "static_map_1-circle",
+    				type: "circle",
+    				paint: {
+    					'circle-color': hex_warning,
+    					'circle-radius': 3,
+    					'circle-stroke-color': 'black',
+    					'circle-stroke-width': 1
+    				}
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(maplayer.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(maplayer, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(maplayer.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(maplayer.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(maplayer, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_9.name,
+    		type: "slot",
+    		source: "(467:6) <MapSource          map_id=\\\"static_map_1\\\"          id=\\\"static_map_1-src\\\"          type=\\\"geojson\\\"          data={geojson_salurbal_centroid}          promoteId={'salurbal_centroids'}          maxzoom={13}        >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (457:4) <StaticMap1        id="static_map_1"        style="./data/style-osm-grey.json"        location={{ bounds: bounds.southAmerica }}        controls={false}        scales={true}        bind:map        bind:zoom        bind:center      >
+    function create_default_slot_8(ctx) {
+    	let mapsource;
+    	let current;
+
+    	mapsource = new MapSource({
+    			props: {
+    				map_id: "static_map_1",
+    				id: "static_map_1-src",
+    				type: "geojson",
+    				data: /*geojson_salurbal_centroid*/ ctx[4],
+    				promoteId: 'salurbal_centroids',
+    				maxzoom: 13,
+    				$$slots: { default: [create_default_slot_9] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(mapsource.$$.fragment);
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(mapsource, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const mapsource_changes = {};
+    			if (dirty[0] & /*geojson_salurbal_centroid*/ 16) mapsource_changes.data = /*geojson_salurbal_centroid*/ ctx[4];
+
+    			if (dirty[1] & /*$$scope*/ 8) {
+    				mapsource_changes.$$scope = { dirty, ctx };
+    			}
+
+    			mapsource.$set(mapsource_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(mapsource.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(mapsource.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(mapsource, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot_8.name,
+    		type: "slot",
+    		source: "(457:4) <StaticMap1        id=\\\"static_map_1\\\"        style=\\\"./data/style-osm-grey.json\\\"        location={{ bounds: bounds.southAmerica }}        controls={false}        scales={true}        bind:map        bind:zoom        bind:center      >",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (455:0) <Media col="medium" caption="Map of all 371 SALURBAL cities">
+    function create_default_slot_7(ctx) {
+    	let div;
+    	let staticmap1;
+    	let updating_map;
+    	let updating_zoom;
+    	let updating_center;
+    	let current;
+
+    	function staticmap1_map_binding(value) {
+    		/*staticmap1_map_binding*/ ctx[16](value);
+    	}
+
+    	function staticmap1_zoom_binding(value) {
+    		/*staticmap1_zoom_binding*/ ctx[17](value);
+    	}
+
+    	function staticmap1_center_binding(value) {
+    		/*staticmap1_center_binding*/ ctx[18](value);
+    	}
+
+    	let staticmap1_props = {
+    		id: "static_map_1",
+    		style: "./data/style-osm-grey.json",
+    		location: { bounds: /*bounds*/ ctx[11].southAmerica },
+    		controls: false,
+    		scales: true,
+    		$$slots: { default: [create_default_slot_8] },
+    		$$scope: { ctx }
+    	};
+
+    	if (/*map*/ ctx[1] !== void 0) {
+    		staticmap1_props.map = /*map*/ ctx[1];
+    	}
+
+    	if (/*zoom*/ ctx[2] !== void 0) {
+    		staticmap1_props.zoom = /*zoom*/ ctx[2];
+    	}
+
+    	if (/*center*/ ctx[3] !== void 0) {
+    		staticmap1_props.center = /*center*/ ctx[3];
+    	}
+
+    	staticmap1 = new StaticMap1({ props: staticmap1_props, $$inline: true });
+    	binding_callbacks.push(() => bind(staticmap1, 'map', staticmap1_map_binding));
+    	binding_callbacks.push(() => bind(staticmap1, 'zoom', staticmap1_zoom_binding));
+    	binding_callbacks.push(() => bind(staticmap1, 'center', staticmap1_center_binding));
+
+    	const block = {
+    		c: function create() {
+    			div = element("div");
+    			create_component(staticmap1.$$.fragment);
+    			attr_dev(div, "class", "chart-sml svelte-48tosn");
+    			add_location(div, file$d, 455, 2, 12619);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div, anchor);
+    			mount_component(staticmap1, div, null);
+    			current = true;
+    		},
+    		p: function update(ctx, dirty) {
+    			const staticmap1_changes = {};
+
+    			if (dirty[0] & /*geojson_salurbal_centroid*/ 16 | dirty[1] & /*$$scope*/ 8) {
+    				staticmap1_changes.$$scope = { dirty, ctx };
+    			}
+
+    			if (!updating_map && dirty[0] & /*map*/ 2) {
+    				updating_map = true;
+    				staticmap1_changes.map = /*map*/ ctx[1];
+    				add_flush_callback(() => updating_map = false);
+    			}
+
+    			if (!updating_zoom && dirty[0] & /*zoom*/ 4) {
+    				updating_zoom = true;
+    				staticmap1_changes.zoom = /*zoom*/ ctx[2];
+    				add_flush_callback(() => updating_zoom = false);
+    			}
+
+    			if (!updating_center && dirty[0] & /*center*/ 8) {
+    				updating_center = true;
+    				staticmap1_changes.center = /*center*/ ctx[3];
+    				add_flush_callback(() => updating_center = false);
+    			}
+
+    			staticmap1.$set(staticmap1_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(staticmap1.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(staticmap1.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div);
+    			destroy_component(staticmap1);
     		}
     	};
 
@@ -9025,48 +9920,39 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(353:0) <Section>",
+    		source: "(455:0) <Media col=\\\"medium\\\" caption=\\\"Map of all 371 SALURBAL cities\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (369:0) <Section>
+    // (491:0) <Section>
     function create_default_slot_6(ctx) {
-    	let h2;
+    	let h3;
     	let t1;
-    	let p0;
-    	let t3;
-    	let p1;
+    	let p;
 
     	const block = {
     		c: function create() {
-    			h2 = element("h2");
-    			h2.textContent = "Step 1. Identifying cities with a population of 100,000 or more.";
+    			h3 = element("h3");
+    			h3.textContent = "Step 2: Defining the geographic boundaries of each city.";
     			t1 = space();
-    			p0 = element("p");
-    			p0.textContent = "The SALURBAL city universe was defined as all urban agglomerations with at\r\n    least 100,000 residents as of 2010.";
-    			t3 = space();
-    			p1 = element("p");
-    			p1.textContent = "We used the Atlas of Urban Expansion and country census data from\r\n    citypopulation.de to obtain a list of all cities (as defined in these\r\n    sources) with 100,000 residents or more in 2010. We combined both lists and\r\n    eliminated overlaps. Cities that were very close together and were therefore\r\n    part of the same urban agglomeration were combined. The name of the largest\r\n    city or a hyphenated name was assigned to that unit. SALURBAL team members\r\n    in each country helped create a final list of 371 cities. We will refer to\r\n    these as “SALURBAL cities.”";
-    			add_location(h2, file$c, 369, 2, 10163);
-    			add_location(p0, file$c, 370, 2, 10240);
-    			add_location(p1, file$c, 374, 2, 10376);
+    			p = element("p");
+    			p.textContent = "We operationalized (or geographically defined) each SALURBAL city using\r\n    existing administrative units to which health and other data could be easily\r\n    linked. These administrative units included municipios, departamentos, or\r\n    similar units in each country.";
+    			add_location(h3, file$d, 491, 2, 13493);
+    			attr_dev(p, "class", "text-medium");
+    			add_location(p, file$d, 492, 2, 13562);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, h2, anchor);
+    			insert_dev(target, h3, anchor);
     			insert_dev(target, t1, anchor);
-    			insert_dev(target, p0, anchor);
-    			insert_dev(target, t3, anchor);
-    			insert_dev(target, p1, anchor);
+    			insert_dev(target, p, anchor);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(h2);
+    			if (detaching) detach_dev(h3);
     			if (detaching) detach_dev(t1);
-    			if (detaching) detach_dev(p0);
-    			if (detaching) detach_dev(t3);
-    			if (detaching) detach_dev(p1);
+    			if (detaching) detach_dev(p);
     		}
     	};
 
@@ -9074,22 +9960,23 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(369:0) <Section>",
+    		source: "(491:0) <Section>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (402:10) <MapSource              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
+    // (520:10) <MapSource              map_id="scrolly_map_1"              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
     function create_default_slot_5(ctx) {
     	let maplayer;
     	let current;
 
     	maplayer = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "municipio_centroid",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "circle"
     			},
     			$$inline: true
@@ -9105,7 +9992,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const maplayer_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer_changes.custom = /*custom*/ ctx[10];
     			maplayer.$set(maplayer_changes);
     		},
     		i: function intro(local) {
@@ -9126,22 +10013,23 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(402:10) <MapSource              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
+    		source: "(520:10) <MapSource              map_id=\\\"scrolly_map_1\\\"              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (411:10) <MapSource              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
+    // (535:10) <MapSource              map_id="scrolly_map_1"              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
     function create_default_slot_4(ctx) {
     	let maplayer;
     	let current;
 
     	maplayer = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "municipio",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "line"
     			},
     			$$inline: true
@@ -9157,7 +10045,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const maplayer_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer_changes.custom = /*custom*/ ctx[10];
     			maplayer.$set(maplayer_changes);
     		},
     		i: function intro(local) {
@@ -9178,14 +10066,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(411:10) <MapSource              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
+    		source: "(535:10) <MapSource              map_id=\\\"scrolly_map_1\\\"              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (421:10) <MapSource              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
+    // (551:10) <MapSource              map_id="scrolly_map_1"              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
     function create_default_slot_3(ctx) {
     	let maplayer0;
     	let t;
@@ -9194,8 +10082,9 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	maplayer0 = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l2_line",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "line"
     			},
     			$$inline: true
@@ -9203,8 +10092,9 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	maplayer1 = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l2_fill",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "fill"
     			},
     			$$inline: true
@@ -9224,10 +10114,10 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const maplayer0_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer0_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer0_changes.custom = /*custom*/ ctx[10];
     			maplayer0.$set(maplayer0_changes);
     			const maplayer1_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer1_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer1_changes.custom = /*custom*/ ctx[10];
     			maplayer1.$set(maplayer1_changes);
     		},
     		i: function intro(local) {
@@ -9252,22 +10142,23 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(421:10) <MapSource              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
+    		source: "(551:10) <MapSource              map_id=\\\"scrolly_map_1\\\"              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (431:10) <MapSource              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
+    // (572:10) <MapSource              map_id="scrolly_map_1"              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
     function create_default_slot_2(ctx) {
     	let maplayer;
     	let current;
 
     	maplayer = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l1ux",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "line"
     			},
     			$$inline: true
@@ -9283,7 +10174,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const maplayer_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer_changes.custom = /*custom*/ ctx[10];
     			maplayer.$set(maplayer_changes);
     		},
     		i: function intro(local) {
@@ -9304,22 +10195,23 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(431:10) <MapSource              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
+    		source: "(572:10) <MapSource              map_id=\\\"scrolly_map_1\\\"              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (440:10) <MapSource              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
+    // (582:10) <MapSource              map_id="scrolly_map_1"              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
     function create_default_slot_1(ctx) {
     	let maplayer;
     	let current;
 
     	maplayer = new MapLayer({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l1ad_line",
-    				custom: /*custom*/ ctx[9],
+    				custom: /*custom*/ ctx[10],
     				type: "line"
     			},
     			$$inline: true
@@ -9335,7 +10227,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const maplayer_changes = {};
-    			if (dirty & /*custom*/ 512) maplayer_changes.custom = /*custom*/ ctx[9];
+    			if (dirty[0] & /*custom*/ 1024) maplayer_changes.custom = /*custom*/ ctx[10];
     			maplayer.$set(maplayer_changes);
     		},
     		i: function intro(local) {
@@ -9356,14 +10248,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(440:10) <MapSource              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
+    		source: "(582:10) <MapSource              map_id=\\\"scrolly_map_1\\\"              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (392:8) <Map            id="map"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            bind:map            bind:zoom            bind:center          >
+    // (510:8) <Map            id="scrolly_map_1"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            bind:map            bind:zoom            bind:center          >
     function create_default_slot(ctx) {
     	let mapsource0;
     	let t0;
@@ -9378,9 +10270,10 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	mapsource0 = new MapSource({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "municipio_centroid",
     				type: "geojson",
-    				data: /*geojson_municipio_centroid*/ ctx[4],
+    				data: /*geojson_municipio_centroid*/ ctx[5],
     				promoteId: 'municipio_centroid',
     				maxzoom: 13,
     				$$slots: { default: [create_default_slot_5] },
@@ -9391,10 +10284,11 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	mapsource1 = new MapSource({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "municipio",
     				type: "geojson",
-    				data: /*geojson_municipio*/ ctx[5],
-    				promoteId: /*src_municipio*/ ctx[11].code,
+    				data: /*geojson_municipio*/ ctx[6],
+    				promoteId: /*src_municipio*/ ctx[12].code,
     				maxzoom: 13,
     				$$slots: { default: [create_default_slot_4] },
     				$$scope: { ctx }
@@ -9404,10 +10298,11 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	mapsource2 = new MapSource({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l2",
     				type: "geojson",
-    				data: /*geojson_l2*/ ctx[8],
-    				promoteId: /*src_l2*/ ctx[14].code,
+    				data: /*geojson_l2*/ ctx[9],
+    				promoteId: /*src_l2*/ ctx[15].code,
     				maxzoom: 13,
     				$$slots: { default: [create_default_slot_3] },
     				$$scope: { ctx }
@@ -9417,10 +10312,11 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	mapsource3 = new MapSource({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l1ux",
     				type: "geojson",
-    				data: /*geojson_l1ux*/ ctx[6],
-    				promoteId: /*src_l1ux*/ ctx[12].code,
+    				data: /*geojson_l1ux*/ ctx[7],
+    				promoteId: /*src_l1ux*/ ctx[13].code,
     				maxzoom: 13,
     				$$slots: { default: [create_default_slot_2] },
     				$$scope: { ctx }
@@ -9430,10 +10326,11 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	mapsource4 = new MapSource({
     			props: {
+    				map_id: "scrolly_map_1",
     				id: "l1ad",
     				type: "geojson",
-    				data: /*geojson_l1ad*/ ctx[7],
-    				promoteId: /*src_l1ad*/ ctx[13].code,
+    				data: /*geojson_l1ad*/ ctx[8],
+    				promoteId: /*src_l1ad*/ ctx[14].code,
     				maxzoom: 13,
     				$$slots: { default: [create_default_slot_1] },
     				$$scope: { ctx }
@@ -9467,41 +10364,41 @@ uniform `+P+" "+z+" u_"+k+`;
     		},
     		p: function update(ctx, dirty) {
     			const mapsource0_changes = {};
-    			if (dirty & /*geojson_municipio_centroid*/ 16) mapsource0_changes.data = /*geojson_municipio_centroid*/ ctx[4];
+    			if (dirty[0] & /*geojson_municipio_centroid*/ 32) mapsource0_changes.data = /*geojson_municipio_centroid*/ ctx[5];
 
-    			if (dirty & /*$$scope, custom*/ 1073742336) {
+    			if (dirty[0] & /*custom*/ 1024 | dirty[1] & /*$$scope*/ 8) {
     				mapsource0_changes.$$scope = { dirty, ctx };
     			}
 
     			mapsource0.$set(mapsource0_changes);
     			const mapsource1_changes = {};
-    			if (dirty & /*geojson_municipio*/ 32) mapsource1_changes.data = /*geojson_municipio*/ ctx[5];
+    			if (dirty[0] & /*geojson_municipio*/ 64) mapsource1_changes.data = /*geojson_municipio*/ ctx[6];
 
-    			if (dirty & /*$$scope, custom*/ 1073742336) {
+    			if (dirty[0] & /*custom*/ 1024 | dirty[1] & /*$$scope*/ 8) {
     				mapsource1_changes.$$scope = { dirty, ctx };
     			}
 
     			mapsource1.$set(mapsource1_changes);
     			const mapsource2_changes = {};
-    			if (dirty & /*geojson_l2*/ 256) mapsource2_changes.data = /*geojson_l2*/ ctx[8];
+    			if (dirty[0] & /*geojson_l2*/ 512) mapsource2_changes.data = /*geojson_l2*/ ctx[9];
 
-    			if (dirty & /*$$scope, custom*/ 1073742336) {
+    			if (dirty[0] & /*custom*/ 1024 | dirty[1] & /*$$scope*/ 8) {
     				mapsource2_changes.$$scope = { dirty, ctx };
     			}
 
     			mapsource2.$set(mapsource2_changes);
     			const mapsource3_changes = {};
-    			if (dirty & /*geojson_l1ux*/ 64) mapsource3_changes.data = /*geojson_l1ux*/ ctx[6];
+    			if (dirty[0] & /*geojson_l1ux*/ 128) mapsource3_changes.data = /*geojson_l1ux*/ ctx[7];
 
-    			if (dirty & /*$$scope, custom*/ 1073742336) {
+    			if (dirty[0] & /*custom*/ 1024 | dirty[1] & /*$$scope*/ 8) {
     				mapsource3_changes.$$scope = { dirty, ctx };
     			}
 
     			mapsource3.$set(mapsource3_changes);
     			const mapsource4_changes = {};
-    			if (dirty & /*geojson_l1ad*/ 128) mapsource4_changes.data = /*geojson_l1ad*/ ctx[7];
+    			if (dirty[0] & /*geojson_l1ad*/ 256) mapsource4_changes.data = /*geojson_l1ad*/ ctx[8];
 
-    			if (dirty & /*$$scope, custom*/ 1073742336) {
+    			if (dirty[0] & /*custom*/ 1024 | dirty[1] & /*$$scope*/ 8) {
     				mapsource4_changes.$$scope = { dirty, ctx };
     			}
 
@@ -9541,14 +10438,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(392:8) <Map            id=\\\"map\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            bind:map            bind:zoom            bind:center          >",
+    		source: "(510:8) <Map            id=\\\"scrolly_map_1\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            bind:map            bind:zoom            bind:center          >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (389:2) 
+    // (507:2) 
     function create_background_slot(ctx) {
     	let div1;
     	let figure;
@@ -9560,21 +10457,21 @@ uniform `+P+" "+z+" u_"+k+`;
     	let current;
 
     	function map_1_map_binding(value) {
-    		/*map_1_map_binding*/ ctx[15](value);
+    		/*map_1_map_binding*/ ctx[19](value);
     	}
 
     	function map_1_zoom_binding(value) {
-    		/*map_1_zoom_binding*/ ctx[16](value);
+    		/*map_1_zoom_binding*/ ctx[20](value);
     	}
 
     	function map_1_center_binding(value) {
-    		/*map_1_center_binding*/ ctx[17](value);
+    		/*map_1_center_binding*/ ctx[21](value);
     	}
 
     	let map_1_props = {
-    		id: "map",
+    		id: "scrolly_map_1",
     		style: "./data/style-esri-world-imagery.json",
-    		location: { bounds: /*bounds*/ ctx[10].southAmerica },
+    		location: { bounds: /*bounds*/ ctx[11].southAmerica },
     		controls: false,
     		scales: true,
     		$$slots: { default: [create_default_slot] },
@@ -9605,10 +10502,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			div0 = element("div");
     			create_component(map_1.$$.fragment);
     			attr_dev(div0, "class", "col-full height-full");
-    			add_location(div0, file$c, 390, 6, 11109);
-    			add_location(figure, file$c, 389, 4, 11093);
+    			add_location(div0, file$d, 508, 6, 14160);
+    			add_location(figure, file$d, 507, 4, 14144);
     			attr_dev(div1, "slot", "background");
-    			add_location(div1, file$c, 388, 2, 11064);
+    			add_location(div1, file$d, 506, 2, 14115);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -9620,23 +10517,23 @@ uniform `+P+" "+z+" u_"+k+`;
     		p: function update(ctx, dirty) {
     			const map_1_changes = {};
 
-    			if (dirty & /*$$scope, geojson_l1ad, custom, geojson_l1ux, geojson_l2, geojson_municipio, geojson_municipio_centroid*/ 1073742832) {
+    			if (dirty[0] & /*geojson_l1ad, custom, geojson_l1ux, geojson_l2, geojson_municipio, geojson_municipio_centroid*/ 2016 | dirty[1] & /*$$scope*/ 8) {
     				map_1_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_map && dirty & /*map*/ 2) {
+    			if (!updating_map && dirty[0] & /*map*/ 2) {
     				updating_map = true;
     				map_1_changes.map = /*map*/ ctx[1];
     				add_flush_callback(() => updating_map = false);
     			}
 
-    			if (!updating_zoom && dirty & /*zoom*/ 4) {
+    			if (!updating_zoom && dirty[0] & /*zoom*/ 4) {
     				updating_zoom = true;
     				map_1_changes.zoom = /*zoom*/ ctx[2];
     				add_flush_callback(() => updating_zoom = false);
     			}
 
-    			if (!updating_center && dirty & /*center*/ 8) {
+    			if (!updating_center && dirty[0] & /*center*/ 8) {
     				updating_center = true;
     				map_1_changes.center = /*center*/ ctx[3];
     				add_flush_callback(() => updating_center = false);
@@ -9663,16 +10560,16 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_background_slot.name,
     		type: "slot",
-    		source: "(389:2) ",
+    		source: "(507:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (457:2) 
+    // (605:2) 
     function create_foreground_slot(ctx) {
-    	let div5;
+    	let div8;
     	let section0;
     	let div0;
     	let p0;
@@ -9716,10 +10613,22 @@ uniform `+P+" "+z+" u_"+k+`;
     	let span3;
     	let t15;
     	let span3_style_value;
+    	let t16;
+    	let section5;
+    	let div5;
+    	let p5;
+    	let t18;
+    	let section6;
+    	let div6;
+    	let p6;
+    	let t20;
+    	let section7;
+    	let div7;
+    	let p7;
 
     	const block = {
     		c: function create() {
-    			div5 = element("div");
+    			div8 = element("div");
     			section0 = element("section");
     			div0 = element("div");
     			p0 = element("p");
@@ -9760,55 +10669,85 @@ uniform `+P+" "+z+" u_"+k+`;
     			t14 = text("The combination of these administrative units is considered a\r\n            ");
     			span3 = element("span");
     			t15 = text("SALURBAL city.");
-    			add_location(strong0, file$c, 459, 11, 13112);
-    			add_location(p0, file$c, 459, 8, 13109);
+    			t16 = space();
+    			section5 = element("section");
+    			div5 = element("div");
+    			p5 = element("p");
+    			p5.textContent = "In cases where the administrative units that compose a city are very\r\n          large, a SALURBAL city may include some areas that are not built-up or\r\n          urbanized. This is because any administrative unit that included even\r\n          a small portion of the built-up area was included in the geographic\r\n          definition of the city.";
+    			t18 = space();
+    			section6 = element("section");
+    			div6 = element("div");
+    			p6 = element("p");
+    			p6.textContent = "While some cities are composed of many of these units, nearly half of\r\n          SALURBAL cities include only one administrative unit.";
+    			t20 = space();
+    			section7 = element("section");
+    			div7 = element("div");
+    			p7 = element("p");
+    			p7.textContent = "It is important to note that SALURBAL cities may not coincide with\r\n          administrative or political definitions used to define cities within\r\n          each country. Our boundaries intentionally reflect urban\r\n          agglomerations that often extend beyond city cores.";
+    			add_location(strong0, file$d, 607, 11, 16856);
+    			add_location(p0, file$d, 607, 8, 16853);
     			attr_dev(div0, "class", "col-medium");
-    			add_location(div0, file$c, 458, 6, 13075);
+    			add_location(div0, file$d, 606, 6, 16819);
     			attr_dev(section0, "data-id", "map01");
-    			add_location(section0, file$c, 457, 4, 13042);
+    			add_location(section0, file$d, 605, 4, 16786);
     			attr_dev(span0, "style", span0_style_value = `color: ${hex_primary};`);
-    			add_location(span0, file$c, 466, 27, 13330);
-    			add_location(strong1, file$c, 465, 10, 13294);
-    			add_location(p1, file$c, 464, 8, 13279);
+    			add_location(span0, file$d, 614, 27, 17074);
+    			add_location(strong1, file$d, 613, 10, 17038);
+    			add_location(p1, file$d, 612, 8, 17023);
     			attr_dev(div1, "class", "col-medium");
-    			add_location(div1, file$c, 463, 6, 13245);
+    			add_location(div1, file$d, 611, 6, 16989);
     			attr_dev(section1, "data-id", "map02");
-    			add_location(section1, file$c, 462, 4, 13212);
+    			add_location(section1, file$d, 610, 4, 16956);
     			attr_dev(span1, "style", span1_style_value = `color: ${hex_warning};`);
-    			add_location(span1, file$c, 477, 25, 13651);
-    			add_location(strong2, file$c, 476, 10, 13617);
-    			add_location(p2, file$c, 475, 8, 13602);
+    			add_location(span1, file$d, 625, 25, 17395);
+    			add_location(strong2, file$d, 624, 10, 17361);
+    			add_location(p2, file$d, 623, 8, 17346);
     			attr_dev(div2, "class", "col-medium");
-    			add_location(div2, file$c, 474, 6, 13568);
+    			add_location(div2, file$d, 622, 6, 17312);
     			attr_dev(section2, "data-id", "map03");
-    			add_location(section2, file$c, 473, 4, 13535);
+    			add_location(section2, file$d, 621, 4, 17279);
     			attr_dev(span2, "style", span2_style_value = `color: ${hex_warning};`);
-    			add_location(span2, file$c, 488, 75, 14014);
-    			add_location(strong3, file$c, 487, 10, 13930);
-    			add_location(p3, file$c, 486, 8, 13915);
+    			add_location(span2, file$d, 636, 75, 17758);
+    			add_location(strong3, file$d, 635, 10, 17674);
+    			add_location(p3, file$d, 634, 8, 17659);
     			attr_dev(div3, "class", "col-medium");
-    			add_location(div3, file$c, 485, 6, 13881);
+    			add_location(div3, file$d, 633, 6, 17625);
     			attr_dev(section3, "data-id", "map04");
-    			add_location(section3, file$c, 484, 4, 13848);
+    			add_location(section3, file$d, 632, 4, 17592);
     			attr_dev(span3, "style", span3_style_value = `color: ${hex_error};`);
-    			add_location(span3, file$c, 503, 12, 14478);
-    			add_location(strong4, file$c, 501, 10, 14381);
-    			add_location(p4, file$c, 500, 8, 14366);
+    			add_location(span3, file$d, 651, 12, 18222);
+    			add_location(strong4, file$d, 649, 10, 18125);
+    			add_location(p4, file$d, 648, 8, 18110);
     			attr_dev(div4, "class", "col-medium");
-    			add_location(div4, file$c, 499, 6, 14332);
+    			add_location(div4, file$d, 647, 6, 18076);
     			attr_dev(section4, "data-id", "map05");
-    			add_location(section4, file$c, 498, 4, 14299);
-    			attr_dev(div5, "slot", "foreground");
-    			add_location(div5, file$c, 456, 2, 13013);
+    			add_location(section4, file$d, 646, 4, 18043);
+    			add_location(p5, file$d, 658, 8, 18418);
+    			attr_dev(div5, "class", "col-medium");
+    			add_location(div5, file$d, 657, 6, 18384);
+    			attr_dev(section5, "data-id", "map06");
+    			add_location(section5, file$d, 656, 4, 18351);
+    			add_location(p6, file$d, 669, 8, 18895);
+    			attr_dev(div6, "class", "col-medium");
+    			add_location(div6, file$d, 668, 6, 18861);
+    			attr_dev(section6, "data-id", "map07");
+    			add_location(section6, file$d, 667, 4, 18828);
+    			add_location(p7, file$d, 677, 8, 19161);
+    			attr_dev(div7, "class", "col-medium");
+    			add_location(div7, file$d, 676, 6, 19127);
+    			attr_dev(section7, "data-id", "map08");
+    			add_location(section7, file$d, 675, 4, 19094);
+    			attr_dev(div8, "slot", "foreground");
+    			add_location(div8, file$d, 604, 2, 16757);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div5, anchor);
-    			append_dev(div5, section0);
+    			insert_dev(target, div8, anchor);
+    			append_dev(div8, section0);
     			append_dev(section0, div0);
     			append_dev(div0, p0);
     			append_dev(p0, strong0);
-    			append_dev(div5, t1);
-    			append_dev(div5, section1);
+    			append_dev(div8, t1);
+    			append_dev(div8, section1);
     			append_dev(section1, div1);
     			append_dev(div1, p1);
     			append_dev(p1, strong1);
@@ -9816,8 +10755,8 @@ uniform `+P+" "+z+" u_"+k+`;
     			append_dev(strong1, span0);
     			append_dev(span0, t3);
     			append_dev(strong1, t4);
-    			append_dev(div5, t5);
-    			append_dev(div5, section2);
+    			append_dev(div8, t5);
+    			append_dev(div8, section2);
     			append_dev(section2, div2);
     			append_dev(div2, p2);
     			append_dev(p2, strong2);
@@ -9825,8 +10764,8 @@ uniform `+P+" "+z+" u_"+k+`;
     			append_dev(strong2, span1);
     			append_dev(span1, t7);
     			append_dev(strong2, t8);
-    			append_dev(div5, t9);
-    			append_dev(div5, section3);
+    			append_dev(div8, t9);
+    			append_dev(div8, section3);
     			append_dev(section3, div3);
     			append_dev(div3, p3);
     			append_dev(p3, strong3);
@@ -9834,18 +10773,30 @@ uniform `+P+" "+z+" u_"+k+`;
     			append_dev(strong3, span2);
     			append_dev(span2, t11);
     			append_dev(strong3, t12);
-    			append_dev(div5, t13);
-    			append_dev(div5, section4);
+    			append_dev(div8, t13);
+    			append_dev(div8, section4);
     			append_dev(section4, div4);
     			append_dev(div4, p4);
     			append_dev(p4, strong4);
     			append_dev(strong4, t14);
     			append_dev(strong4, span3);
     			append_dev(span3, t15);
+    			append_dev(div8, t16);
+    			append_dev(div8, section5);
+    			append_dev(section5, div5);
+    			append_dev(div5, p5);
+    			append_dev(div8, t18);
+    			append_dev(div8, section6);
+    			append_dev(section6, div6);
+    			append_dev(div6, p6);
+    			append_dev(div8, t20);
+    			append_dev(div8, section7);
+    			append_dev(section7, div7);
+    			append_dev(div7, p7);
     		},
     		p: noop,
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div5);
+    			if (detaching) detach_dev(div8);
     		}
     	};
 
@@ -9853,24 +10804,30 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_foreground_slot.name,
     		type: "slot",
-    		source: "(457:2) ",
+    		source: "(605:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    function create_fragment$f(ctx) {
+    function create_fragment$g(ctx) {
     	let uhcheader;
     	let t0;
     	let filler;
     	let t1;
     	let section0;
     	let t2;
-    	let section1;
-    	let t3;
     	let divider;
+    	let t3;
+    	let section1;
     	let t4;
+    	let media;
+    	let t5;
+    	let section2;
+    	let t6;
+    	let div;
+    	let t7;
     	let scroller;
     	let updating_id;
     	let current;
@@ -9886,7 +10843,7 @@ uniform `+P+" "+z+" u_"+k+`;
     				short: true,
     				wide: true,
     				center: false,
-    				$$slots: { default: [create_default_slot_8] },
+    				$$slots: { default: [create_default_slot_12] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -9894,15 +10851,7 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	section0 = new Section({
     			props: {
-    				$$slots: { default: [create_default_slot_7] },
-    				$$scope: { ctx }
-    			},
-    			$$inline: true
-    		});
-
-    	section1 = new Section({
-    			props: {
-    				$$slots: { default: [create_default_slot_6] },
+    				$$slots: { default: [create_default_slot_11] },
     				$$scope: { ctx }
     			},
     			$$inline: true
@@ -9910,8 +10859,34 @@ uniform `+P+" "+z+" u_"+k+`;
 
     	divider = new Divider({ $$inline: true });
 
+    	section1 = new Section({
+    			props: {
+    				$$slots: { default: [create_default_slot_10] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	media = new Media({
+    			props: {
+    				col: "medium",
+    				caption: "Map of all 371 SALURBAL cities",
+    				$$slots: { default: [create_default_slot_7] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	section2 = new Section({
+    			props: {
+    				$$slots: { default: [create_default_slot_6] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
     	function scroller_id_binding(value) {
-    		/*scroller_id_binding*/ ctx[18](value);
+    		/*scroller_id_binding*/ ctx[22](value);
     	}
 
     	let scroller_props = {
@@ -9939,11 +10914,19 @@ uniform `+P+" "+z+" u_"+k+`;
     			t1 = space();
     			create_component(section0.$$.fragment);
     			t2 = space();
-    			create_component(section1.$$.fragment);
-    			t3 = space();
     			create_component(divider.$$.fragment);
+    			t3 = space();
+    			create_component(section1.$$.fragment);
     			t4 = space();
+    			create_component(media.$$.fragment);
+    			t5 = space();
+    			create_component(section2.$$.fragment);
+    			t6 = space();
+    			div = element("div");
+    			t7 = space();
     			create_component(scroller.$$.fragment);
+    			set_style(div, "height", "3rem");
+    			add_location(div, file$d, 499, 0, 13881);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -9955,42 +10938,62 @@ uniform `+P+" "+z+" u_"+k+`;
     			insert_dev(target, t1, anchor);
     			mount_component(section0, target, anchor);
     			insert_dev(target, t2, anchor);
-    			mount_component(section1, target, anchor);
-    			insert_dev(target, t3, anchor);
     			mount_component(divider, target, anchor);
+    			insert_dev(target, t3, anchor);
+    			mount_component(section1, target, anchor);
     			insert_dev(target, t4, anchor);
+    			mount_component(media, target, anchor);
+    			insert_dev(target, t5, anchor);
+    			mount_component(section2, target, anchor);
+    			insert_dev(target, t6, anchor);
+    			insert_dev(target, div, anchor);
+    			insert_dev(target, t7, anchor);
     			mount_component(scroller, target, anchor);
     			current = true;
     		},
-    		p: function update(ctx, [dirty]) {
+    		p: function update(ctx, dirty) {
     			const filler_changes = {};
 
-    			if (dirty & /*$$scope*/ 1073741824) {
+    			if (dirty[1] & /*$$scope*/ 8) {
     				filler_changes.$$scope = { dirty, ctx };
     			}
 
     			filler.$set(filler_changes);
     			const section0_changes = {};
 
-    			if (dirty & /*$$scope*/ 1073741824) {
+    			if (dirty[1] & /*$$scope*/ 8) {
     				section0_changes.$$scope = { dirty, ctx };
     			}
 
     			section0.$set(section0_changes);
     			const section1_changes = {};
 
-    			if (dirty & /*$$scope*/ 1073741824) {
+    			if (dirty[1] & /*$$scope*/ 8) {
     				section1_changes.$$scope = { dirty, ctx };
     			}
 
     			section1.$set(section1_changes);
+    			const media_changes = {};
+
+    			if (dirty[0] & /*map, zoom, center, geojson_salurbal_centroid*/ 30 | dirty[1] & /*$$scope*/ 8) {
+    				media_changes.$$scope = { dirty, ctx };
+    			}
+
+    			media.$set(media_changes);
+    			const section2_changes = {};
+
+    			if (dirty[1] & /*$$scope*/ 8) {
+    				section2_changes.$$scope = { dirty, ctx };
+    			}
+
+    			section2.$set(section2_changes);
     			const scroller_changes = {};
 
-    			if (dirty & /*$$scope, map, zoom, center, geojson_l1ad, custom, geojson_l1ux, geojson_l2, geojson_municipio, geojson_municipio_centroid*/ 1073742846) {
+    			if (dirty[0] & /*map, zoom, center, geojson_l1ad, custom, geojson_l1ux, geojson_l2, geojson_municipio, geojson_municipio_centroid*/ 2030 | dirty[1] & /*$$scope*/ 8) {
     				scroller_changes.$$scope = { dirty, ctx };
     			}
 
-    			if (!updating_id && dirty & /*id*/ 1) {
+    			if (!updating_id && dirty[0] & /*id*/ 1) {
     				updating_id = true;
     				scroller_changes.id = /*id*/ ctx[0]['map'];
     				add_flush_callback(() => updating_id = false);
@@ -10003,8 +11006,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			transition_in(uhcheader.$$.fragment, local);
     			transition_in(filler.$$.fragment, local);
     			transition_in(section0.$$.fragment, local);
-    			transition_in(section1.$$.fragment, local);
     			transition_in(divider.$$.fragment, local);
+    			transition_in(section1.$$.fragment, local);
+    			transition_in(media.$$.fragment, local);
+    			transition_in(section2.$$.fragment, local);
     			transition_in(scroller.$$.fragment, local);
     			current = true;
     		},
@@ -10012,8 +11017,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			transition_out(uhcheader.$$.fragment, local);
     			transition_out(filler.$$.fragment, local);
     			transition_out(section0.$$.fragment, local);
-    			transition_out(section1.$$.fragment, local);
     			transition_out(divider.$$.fragment, local);
+    			transition_out(section1.$$.fragment, local);
+    			transition_out(media.$$.fragment, local);
+    			transition_out(section2.$$.fragment, local);
     			transition_out(scroller.$$.fragment, local);
     			current = false;
     		},
@@ -10024,17 +11031,23 @@ uniform `+P+" "+z+" u_"+k+`;
     			if (detaching) detach_dev(t1);
     			destroy_component(section0, detaching);
     			if (detaching) detach_dev(t2);
-    			destroy_component(section1, detaching);
-    			if (detaching) detach_dev(t3);
     			destroy_component(divider, detaching);
+    			if (detaching) detach_dev(t3);
+    			destroy_component(section1, detaching);
     			if (detaching) detach_dev(t4);
+    			destroy_component(media, detaching);
+    			if (detaching) detach_dev(t5);
+    			destroy_component(section2, detaching);
+    			if (detaching) detach_dev(t6);
+    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(t7);
     			destroy_component(scroller, detaching);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$f.name,
+    		id: create_fragment$g.name,
     		type: "component",
     		source: "",
     		ctx
@@ -10048,11 +11061,10 @@ uniform `+P+" "+z+" u_"+k+`;
     const hex_error = '#BC3B2F';
     const hex_warning = '#BC812F';
 
-    // # ============================================================================ #
     // # Scroller Setup
     const threshold = 0.65;
 
-    function instance$f($$self, $$props, $$invalidate) {
+    function instance$g($$self, $$props, $$invalidate) {
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('App', slots, []);
     	let theme = 'light';
@@ -10060,8 +11072,8 @@ uniform `+P+" "+z+" u_"+k+`;
     	setColors(themes, theme);
 
     	const bounds = {
-    		southAmerica: [[-81.35, -56.54], [-32.39, 13.39]], // Southwest corner: min longitude, min latitude
-    		// Northeast corner: max longitude, max latitude
+    		southAmerica: [[-117.157278, -55.058347], [-66.273339, 34]], // Southwest coordinates
+    		// Northeast coordinates
     		municipio: [[-46.826191, -24.008374], [-46.365357, -23.357529]],
     		l1ad: [[-47.084742, -24.008374], [-46.051954, -23.183419]]
     	};
@@ -10077,11 +11089,19 @@ uniform `+P+" "+z+" u_"+k+`;
     	let hovered, selected;
 
     	// # ============================================================================ #
-    	// # Get Sao Paolo data
+    	// Import Data
     	// All Salurbal L1 centroids
-    	let salurbal_centroids;
+    	const src__salurbal_centroid = {
+    		url: './data/salurbal_l1ad_centroid.json',
+    		layer: 'geog',
+    		code: 'salid2'
+    	};
 
-    	getJson('./data/centroids.json').then(res => salurbal_centroids = res);
+    	let geojson_salurbal_centroid;
+
+    	getTopo(src__salurbal_centroid.url, src__salurbal_centroid.layer).then(res => {
+    		$$invalidate(4, geojson_salurbal_centroid = res);
+    	});
 
     	// municipio centroid
     	const src__municipio_centroid = {
@@ -10093,7 +11113,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let geojson_municipio_centroid;
 
     	getTopo(src__municipio_centroid.url, src__municipio_centroid.layer).then(res => {
-    		$$invalidate(4, geojson_municipio_centroid = res);
+    		$$invalidate(5, geojson_municipio_centroid = res);
     	});
 
     	// L1AD centroid
@@ -10113,7 +11133,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let geojson_municipio;
 
     	getTopo(src_municipio.url, src_municipio.layer).then(res => {
-    		$$invalidate(5, geojson_municipio = res);
+    		$$invalidate(6, geojson_municipio = res);
     	});
 
     	// L1UX boundaries
@@ -10126,7 +11146,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let geojson_l1ux;
 
     	getTopo(src_l1ux.url, src_l1ux.layer).then(res => {
-    		$$invalidate(6, geojson_l1ux = res);
+    		$$invalidate(7, geojson_l1ux = res);
     	});
 
     	// L1AD boundaries
@@ -10139,7 +11159,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let geojson_l1ad;
 
     	getTopo(src_l1ad.url, src_l1ad.layer).then(res => {
-    		$$invalidate(7, geojson_l1ad = res);
+    		$$invalidate(8, geojson_l1ad = res);
     	});
 
     	// L2 boundaries
@@ -10152,7 +11172,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	let geojson_l2;
 
     	getTopo(src_l2.url, src_l2.layer).then(res => {
-    		$$invalidate(8, geojson_l2 = res);
+    		$$invalidate(9, geojson_l2 = res);
     	});
 
     	// Functions for map component
@@ -10192,12 +11212,12 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	// # ============================================================================ #
-    	// #### Scroller Action
+    	// Scroller Action
     	let custom = {
     		mapid: 'map01',
     		layers: {
     			municipio_centroid: {
-    				'circle-color': hex_secondary,
+    				'circle-color': hex_error,
     				'circle-radius': 8,
     				'circle-stroke-color': hex_error,
     				'circle-stroke-width': 2
@@ -10213,11 +11233,11 @@ uniform `+P+" "+z+" u_"+k+`;
     			map01: () => {
     				fitBounds(bounds.southAmerica);
 
-    				$$invalidate(9, custom = {
+    				$$invalidate(10, custom = {
     					mapid: 'map01',
     					layers: {
     						municipio_centroid: {
-    							'circle-color': hex_secondary,
+    							'circle-color': hex_error,
     							'circle-radius': 7,
     							'circle-stroke-color': hex_error,
     							'circle-stroke-width': 1
@@ -10231,7 +11251,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			map02: () => {
     				fitBounds(bounds.l1ad);
 
-    				$$invalidate(9, custom = {
+    				$$invalidate(10, custom = {
     					mapid: 'map02',
     					layers: {
     						municipio_centroid: false,
@@ -10247,7 +11267,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			map03: () => {
     				fitBounds(bounds.l1ad);
 
-    				$$invalidate(9, custom = {
+    				$$invalidate(10, custom = {
     					mapid: 'map03',
     					layers: {
     						municipio_centroid: false,
@@ -10267,7 +11287,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			map04: () => {
     				fitBounds(bounds.l1ad);
 
-    				$$invalidate(9, custom = {
+    				$$invalidate(10, custom = {
     					mapid: 'map04',
     					layers: {
     						municipio_centroid: false,
@@ -10291,7 +11311,73 @@ uniform `+P+" "+z+" u_"+k+`;
     			map05: () => {
     				fitBounds(bounds.l1ad);
 
-    				$$invalidate(9, custom = {
+    				$$invalidate(10, custom = {
+    					mapid: 'map05',
+    					layers: {
+    						municipio_centroid: false,
+    						municipio: false,
+    						l1ux: false,
+    						l2_line: {
+    							'line-color': hex_primary,
+    							'line-width': 2,
+    							'line-opacity': 1
+    						},
+    						l2_fill: {
+    							'fill-color': hex_error,
+    							'fill-opacity': 0.5
+    						},
+    						l1ad_line: { 'line-color': hex_error, 'line-width': 5 }
+    					}
+    				});
+    			},
+    			map06: () => {
+    				fitBounds(bounds.l1ad);
+
+    				$$invalidate(10, custom = {
+    					mapid: 'map05',
+    					layers: {
+    						municipio_centroid: false,
+    						municipio: false,
+    						l1ux: false,
+    						l2_line: {
+    							'line-color': hex_primary,
+    							'line-width': 2,
+    							'line-opacity': 1
+    						},
+    						l2_fill: {
+    							'fill-color': hex_error,
+    							'fill-opacity': 0.5
+    						},
+    						l1ad_line: { 'line-color': hex_error, 'line-width': 5 }
+    					}
+    				});
+    			},
+    			map07: () => {
+    				fitBounds(bounds.l1ad);
+
+    				$$invalidate(10, custom = {
+    					mapid: 'map05',
+    					layers: {
+    						municipio_centroid: false,
+    						municipio: false,
+    						l1ux: false,
+    						l2_line: {
+    							'line-color': hex_primary,
+    							'line-width': 2,
+    							'line-opacity': 1
+    						},
+    						l2_fill: {
+    							'fill-color': hex_error,
+    							'fill-opacity': 0.5
+    						},
+    						l1ad_line: { 'line-color': hex_error, 'line-width': 5 }
+    					}
+    				});
+    			},
+    			map08: () => {
+    				fitBounds(bounds.l1ad);
+
+    				$$invalidate(10, custom = {
     					mapid: 'map05',
     					layers: {
     						municipio_centroid: false,
@@ -10319,6 +11405,21 @@ uniform `+P+" "+z+" u_"+k+`;
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
     	});
 
+    	function staticmap1_map_binding(value) {
+    		map = value;
+    		$$invalidate(1, map);
+    	}
+
+    	function staticmap1_zoom_binding(value) {
+    		zoom = value;
+    		$$invalidate(2, zoom);
+    	}
+
+    	function staticmap1_center_binding(value) {
+    		center = value;
+    		$$invalidate(3, center);
+    	}
+
     	function map_1_map_binding(value) {
     		map = value;
     		$$invalidate(1, map);
@@ -10345,6 +11446,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		onMount,
     		Scroller,
     		Map: Map$1,
+    		StaticMap1,
     		MapSource,
     		MapLayer,
     		MapTooltip,
@@ -10377,7 +11479,8 @@ uniform `+P+" "+z+" u_"+k+`;
     		center,
     		hovered,
     		selected,
-    		salurbal_centroids,
+    		src__salurbal_centroid,
+    		geojson_salurbal_centroid,
     		src__municipio_centroid,
     		geojson_municipio_centroid,
     		sao_paolo_l1ad_centroid,
@@ -10406,17 +11509,17 @@ uniform `+P+" "+z+" u_"+k+`;
     		if ('center' in $$props) $$invalidate(3, center = $$props.center);
     		if ('hovered' in $$props) hovered = $$props.hovered;
     		if ('selected' in $$props) selected = $$props.selected;
-    		if ('salurbal_centroids' in $$props) salurbal_centroids = $$props.salurbal_centroids;
-    		if ('geojson_municipio_centroid' in $$props) $$invalidate(4, geojson_municipio_centroid = $$props.geojson_municipio_centroid);
+    		if ('geojson_salurbal_centroid' in $$props) $$invalidate(4, geojson_salurbal_centroid = $$props.geojson_salurbal_centroid);
+    		if ('geojson_municipio_centroid' in $$props) $$invalidate(5, geojson_municipio_centroid = $$props.geojson_municipio_centroid);
     		if ('sao_paolo_l1ad_centroid' in $$props) sao_paolo_l1ad_centroid = $$props.sao_paolo_l1ad_centroid;
-    		if ('geojson_municipio' in $$props) $$invalidate(5, geojson_municipio = $$props.geojson_municipio);
-    		if ('geojson_l1ux' in $$props) $$invalidate(6, geojson_l1ux = $$props.geojson_l1ux);
-    		if ('geojson_l1ad' in $$props) $$invalidate(7, geojson_l1ad = $$props.geojson_l1ad);
-    		if ('geojson_l2' in $$props) $$invalidate(8, geojson_l2 = $$props.geojson_l2);
+    		if ('geojson_municipio' in $$props) $$invalidate(6, geojson_municipio = $$props.geojson_municipio);
+    		if ('geojson_l1ux' in $$props) $$invalidate(7, geojson_l1ux = $$props.geojson_l1ux);
+    		if ('geojson_l1ad' in $$props) $$invalidate(8, geojson_l1ad = $$props.geojson_l1ad);
+    		if ('geojson_l2' in $$props) $$invalidate(9, geojson_l2 = $$props.geojson_l2);
     		if ('id' in $$props) $$invalidate(0, id = $$props.id);
     		if ('idPrev' in $$props) idPrev = $$props.idPrev;
-    		if ('custom' in $$props) $$invalidate(9, custom = $$props.custom);
-    		if ('actions' in $$props) $$invalidate(29, actions = $$props.actions);
+    		if ('custom' in $$props) $$invalidate(10, custom = $$props.custom);
+    		if ('actions' in $$props) $$invalidate(33, actions = $$props.actions);
     	};
 
     	if ($$props && "$$inject" in $$props) {
@@ -10424,7 +11527,7 @@ uniform `+P+" "+z+" u_"+k+`;
     	}
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*id*/ 1) {
+    		if ($$self.$$.dirty[0] & /*id*/ 1) {
     			 {
     				// Run above code when 'id' object changes
     				if (id) {
@@ -10439,6 +11542,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		map,
     		zoom,
     		center,
+    		geojson_salurbal_centroid,
     		geojson_municipio_centroid,
     		geojson_municipio,
     		geojson_l1ux,
@@ -10450,6 +11554,9 @@ uniform `+P+" "+z+" u_"+k+`;
     		src_l1ux,
     		src_l1ad,
     		src_l2,
+    		staticmap1_map_binding,
+    		staticmap1_zoom_binding,
+    		staticmap1_center_binding,
     		map_1_map_binding,
     		map_1_zoom_binding,
     		map_1_center_binding,
@@ -10460,13 +11567,13 @@ uniform `+P+" "+z+" u_"+k+`;
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$f, create_fragment$f, safe_not_equal, {});
+    		init(this, options, instance$g, create_fragment$g, safe_not_equal, {}, null, [-1, -1]);
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "App",
     			options,
-    			id: create_fragment$f.name
+    			id: create_fragment$g.name
     		});
     	}
     }

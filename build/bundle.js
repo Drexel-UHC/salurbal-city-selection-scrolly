@@ -9288,7 +9288,7 @@ uniform `+P+" "+z+" u_"+k+`;
     const { Object: Object_1$1 } = globals;
     const file$c = "src\\App.svelte";
 
-    // (702:0) <Filler theme="lightblue" short={true} wide={true} center={false}>
+    // (685:0) <Filler theme="lightblue" short={true} wide={true} center={false}>
     function create_default_slot_34(ctx) {
     	let h1;
     	let t1;
@@ -9321,17 +9321,17 @@ uniform `+P+" "+z+" u_"+k+`;
     			t7 = text("\r\n    Engineered by:\r\n    ");
     			span1 = element("span");
     			span1.textContent = "Anuj Tanwar, Ran Li";
-    			add_location(h1, file$c, 702, 2, 18655);
+    			add_location(h1, file$c, 685, 2, 18166);
     			attr_dev(p0, "class", "text-big");
     			set_style(p0, "margin-top", "5px");
-    			add_location(p0, file$c, 703, 2, 18692);
+    			add_location(p0, file$c, 686, 2, 18203);
     			attr_dev(span0, "style", span0_style_value = 'font-weight: 900');
-    			add_location(span0, file$c, 708, 17, 18864);
-    			add_location(br, file$c, 712, 4, 19031);
+    			add_location(span0, file$c, 691, 17, 18375);
+    			add_location(br, file$c, 695, 4, 18542);
     			attr_dev(span1, "style", span1_style_value = 'font-weight: 900');
-    			add_location(span1, file$c, 714, 4, 19063);
+    			add_location(span1, file$c, 697, 4, 18574);
     			attr_dev(p1, "class", "text-medium");
-    			add_location(p1, file$c, 707, 2, 18822);
+    			add_location(p1, file$c, 690, 2, 18333);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -9359,14 +9359,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_34.name,
     		type: "slot",
-    		source: "(702:0) <Filler theme=\\\"lightblue\\\" short={true} wide={true} center={false}>",
+    		source: "(685:0) <Filler theme=\\\"lightblue\\\" short={true} wide={true} center={false}>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (719:0) <Section>
+    // (702:0) <Section>
     function create_default_slot_33(ctx) {
     	let h2;
     	let t1;
@@ -9388,14 +9388,14 @@ uniform `+P+" "+z+" u_"+k+`;
     			t4 = text("We took several steps to identify and define SALURBAL cities. The approach\r\n    described below has guided the definition of geographic areas to which all\r\n    SALURBAL data is linked. You can read more about this process in ");
     			a = element("a");
     			a.textContent = "“Building a Data Platform for Cross-Country Urban Health Studies.”";
-    			add_location(h2, file$c, 719, 2, 19159);
+    			add_location(h2, file$c, 702, 2, 18670);
     			attr_dev(p0, "class", "text-medium");
-    			add_location(p0, file$c, 720, 2, 19184);
+    			add_location(p0, file$c, 703, 2, 18695);
     			attr_dev(a, "href", "https://link.springer.com/article/10.1007/s11524-018-00326-0");
     			attr_dev(a, "target", "_blank");
-    			add_location(a, file$c, 730, 69, 19847);
+    			add_location(a, file$c, 713, 69, 19358);
     			attr_dev(p1, "class", "text-medium");
-    			add_location(p1, file$c, 727, 2, 19593);
+    			add_location(p1, file$c, 710, 2, 19104);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -9419,14 +9419,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_33.name,
     		type: "slot",
-    		source: "(719:0) <Section>",
+    		source: "(702:0) <Section>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (788:14) <MapLayer                  map_id="static_map_1"                  id="static_map_1-circle"                  type="circle"                  paint={{                    'circle-color': hex_warning,                    'circle-radius': 2.5,                    'circle-stroke-color': 'black',                    'circle-stroke-width': 0.1,                  }}                  hover={true}                  bind:hovered                >
+    // (771:14) <MapLayer                  map_id="static_map_1"                  id="static_map_1-circle"                  type="circle"                  paint={{                    'circle-color': hex_warning,                    'circle-radius': 2.5,                    'circle-stroke-color': 'black',                    'circle-stroke-width': 0.1,                  }}                  hover={true}                  bind:hovered                >
     function create_default_slot_32(ctx) {
     	let maptooltip;
     	let current;
@@ -9470,14 +9470,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_32.name,
     		type: "slot",
-    		source: "(788:14) <MapLayer                  map_id=\\\"static_map_1\\\"                  id=\\\"static_map_1-circle\\\"                  type=\\\"circle\\\"                  paint={{                    'circle-color': hex_warning,                    'circle-radius': 2.5,                    'circle-stroke-color': 'black',                    'circle-stroke-width': 0.1,                  }}                  hover={true}                  bind:hovered                >",
+    		source: "(771:14) <MapLayer                  map_id=\\\"static_map_1\\\"                  id=\\\"static_map_1-circle\\\"                  type=\\\"circle\\\"                  paint={{                    'circle-color': hex_warning,                    'circle-radius': 2.5,                    'circle-stroke-color': 'black',                    'circle-stroke-width': 0.1,                  }}                  hover={true}                  bind:hovered                >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (780:12) <MapSource                map_id="static_map_1"                id="static_map_1-src"                type="geojson"                data={geojson_salurbal_centroid}                promoteId={'l1_label'}                maxzoom={13}              >
+    // (763:12) <MapSource                map_id="static_map_1"                id="static_map_1-src"                type="geojson"                data={geojson_salurbal_centroid}                promoteId={'l1_label'}                maxzoom={13}              >
     function create_default_slot_31(ctx) {
     	let maplayer;
     	let updating_hovered;
@@ -9550,14 +9550,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_31.name,
     		type: "slot",
-    		source: "(780:12) <MapSource                map_id=\\\"static_map_1\\\"                id=\\\"static_map_1-src\\\"                type=\\\"geojson\\\"                data={geojson_salurbal_centroid}                promoteId={'l1_label'}                maxzoom={13}              >",
+    		source: "(763:12) <MapSource                map_id=\\\"static_map_1\\\"                id=\\\"static_map_1-src\\\"                type=\\\"geojson\\\"                data={geojson_salurbal_centroid}                promoteId={'l1_label'}                maxzoom={13}              >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (771:10) <Map              id="static_map_1"              style="./data/style-osm-grey.json"              location={{ bounds: bounds.southAmericaShifted }}              controls={true}              scales={false}              bind:map_static_1              bind:center            >
+    // (754:10) <Map              id="static_map_1"              style="./data/style-osm-grey.json"              location={{ bounds: bounds.southAmericaShifted }}              controls={true}              scales={false}              bind:map_static_1              bind:center            >
     function create_default_slot_30(ctx) {
     	let mapsource;
     	let current;
@@ -9612,14 +9612,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_30.name,
     		type: "slot",
-    		source: "(771:10) <Map              id=\\\"static_map_1\\\"              style=\\\"./data/style-osm-grey.json\\\"              location={{ bounds: bounds.southAmericaShifted }}              controls={true}              scales={false}              bind:map_static_1              bind:center            >",
+    		source: "(754:10) <Map              id=\\\"static_map_1\\\"              style=\\\"./data/style-osm-grey.json\\\"              location={{ bounds: bounds.southAmericaShifted }}              controls={true}              scales={false}              bind:map_static_1              bind:center            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (769:6) <Media col="medium" caption="Map of all 371 SALURBAL cities">
+    // (752:6) <Media col="medium" caption="Map of all 371 SALURBAL cities">
     function create_default_slot_29(ctx) {
     	let div;
     	let map;
@@ -9664,7 +9664,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			div = element("div");
     			create_component(map.$$.fragment);
     			attr_dev(div, "class", "chart-sml svelte-dcf2fl");
-    			add_location(div, file$c, 769, 8, 21469);
+    			add_location(div, file$c, 752, 8, 20980);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div, anchor);
@@ -9711,14 +9711,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_29.name,
     		type: "slot",
-    		source: "(769:6) <Media col=\\\"medium\\\" caption=\\\"Map of all 371 SALURBAL cities\\\">",
+    		source: "(752:6) <Media col=\\\"medium\\\" caption=\\\"Map of all 371 SALURBAL cities\\\">",
     		ctx
     	});
 
     	return block;
     }
 
-    // (741:0) <Section>
+    // (724:0) <Section>
     function create_default_slot_28(ctx) {
     	let h3;
     	let t1;
@@ -9768,23 +9768,23 @@ uniform `+P+" "+z+" u_"+k+`;
     			t9 = space();
     			div1 = element("div");
     			create_component(media.$$.fragment);
-    			add_location(h3, file$c, 741, 2, 20084);
+    			add_location(h3, file$c, 724, 2, 19595);
     			attr_dev(p0, "class", "text-medium");
-    			add_location(p0, file$c, 744, 6, 20228);
+    			add_location(p0, file$c, 727, 6, 19739);
     			attr_dev(a0, "href", "http://atlasofurbanexpansion.org/");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$c, 749, 20, 20445);
+    			add_location(a0, file$c, 732, 20, 19956);
     			attr_dev(a1, "href", "https://citypopulation.de/");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$c, 753, 8, 20603);
+    			add_location(a1, file$c, 736, 8, 20114);
     			attr_dev(p1, "class", "text-medium");
-    			add_location(p1, file$c, 748, 6, 20400);
+    			add_location(p1, file$c, 731, 6, 19911);
     			attr_dev(div0, "class", "left-col svelte-dcf2fl");
-    			add_location(div0, file$c, 743, 4, 20198);
+    			add_location(div0, file$c, 726, 4, 19709);
     			attr_dev(div1, "class", "right-col svelte-dcf2fl");
-    			add_location(div1, file$c, 767, 4, 21367);
+    			add_location(div1, file$c, 750, 4, 20878);
     			attr_dev(div2, "class", "two-col-container svelte-dcf2fl");
-    			add_location(div2, file$c, 742, 2, 20161);
+    			add_location(div2, file$c, 725, 2, 19672);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -9834,14 +9834,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_28.name,
     		type: "slot",
-    		source: "(741:0) <Section>",
+    		source: "(724:0) <Section>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (811:0) <Section>
+    // (794:0) <Section>
     function create_default_slot_27(ctx) {
     	let h3;
     	let t1;
@@ -9877,15 +9877,15 @@ uniform `+P+" "+z+" u_"+k+`;
     			t7 = space();
     			div = element("div");
     			create_component(arrow.$$.fragment);
-    			add_location(h3, file$c, 811, 2, 22711);
-    			add_location(em0, file$c, 815, 48, 23014);
-    			add_location(em1, file$c, 816, 4, 23040);
+    			add_location(h3, file$c, 794, 2, 22222);
+    			add_location(em0, file$c, 798, 48, 22525);
+    			add_location(em1, file$c, 799, 4, 22551);
     			attr_dev(p, "class", "text-medium");
-    			add_location(p, file$c, 812, 2, 22780);
+    			add_location(p, file$c, 795, 2, 22291);
     			set_style(div, "display", "flex");
     			set_style(div, "justify-content", "center");
     			set_style(div, "align-items", "center");
-    			add_location(div, file$c, 818, 2, 23109);
+    			add_location(div, file$c, 801, 2, 22620);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -9925,14 +9925,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_27.name,
     		type: "slot",
-    		source: "(811:0) <Section>",
+    		source: "(794:0) <Section>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (845:10) <MapSource              map_id="map_scrolly_1"              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
+    // (828:10) <MapSource              map_id="map_scrolly_1"              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
     function create_default_slot_26(ctx) {
     	let maplayer;
     	let t;
@@ -9999,14 +9999,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_26.name,
     		type: "slot",
-    		source: "(845:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
+    		source: "(828:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (861:10) <MapSource              map_id="map_scrolly_1"              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
+    // (844:10) <MapSource              map_id="map_scrolly_1"              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
     function create_default_slot_25(ctx) {
     	let maplayer;
     	let current;
@@ -10052,14 +10052,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_25.name,
     		type: "slot",
-    		source: "(861:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
+    		source: "(844:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (877:10) <MapSource              map_id="map_scrolly_1"              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
+    // (860:10) <MapSource              map_id="map_scrolly_1"              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
     function create_default_slot_24(ctx) {
     	let maplayer0;
     	let t;
@@ -10128,14 +10128,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_24.name,
     		type: "slot",
-    		source: "(877:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
+    		source: "(860:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (898:10) <MapSource              map_id="map_scrolly_1"              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
+    // (881:10) <MapSource              map_id="map_scrolly_1"              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
     function create_default_slot_23(ctx) {
     	let maplayer;
     	let current;
@@ -10181,14 +10181,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_23.name,
     		type: "slot",
-    		source: "(898:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
+    		source: "(881:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (913:10) <MapSource              map_id="map_scrolly_1"              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
+    // (896:10) <MapSource              map_id="map_scrolly_1"              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
     function create_default_slot_22(ctx) {
     	let maplayer0;
     	let t;
@@ -10257,14 +10257,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_22.name,
     		type: "slot",
-    		source: "(913:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
+    		source: "(896:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (934:10) <MapSource              map_id="map_scrolly_1"              id="metro"              type="geojson"              data={geojson_metro}              promoteId={src_metro.code}              maxzoom={13}            >
+    // (917:10) <MapSource              map_id="map_scrolly_1"              id="metro"              type="geojson"              data={geojson_metro}              promoteId={src_metro.code}              maxzoom={13}            >
     function create_default_slot_21(ctx) {
     	let maplayer;
     	let current;
@@ -10310,14 +10310,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_21.name,
     		type: "slot",
-    		source: "(934:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"metro\\\"              type=\\\"geojson\\\"              data={geojson_metro}              promoteId={src_metro.code}              maxzoom={13}            >",
+    		source: "(917:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"metro\\\"              type=\\\"geojson\\\"              data={geojson_metro}              promoteId={src_metro.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (949:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l2"              type="geojson"              data={geojson_monterrey_l2}              promoteId={src_monterrey_l2.code}              maxzoom={13}            >
+    // (932:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l2"              type="geojson"              data={geojson_monterrey_l2}              promoteId={src_monterrey_l2.code}              maxzoom={13}            >
     function create_default_slot_20(ctx) {
     	let maplayer;
     	let current;
@@ -10363,14 +10363,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_20.name,
     		type: "slot",
-    		source: "(949:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l2\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l2}              promoteId={src_monterrey_l2.code}              maxzoom={13}            >",
+    		source: "(932:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l2\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l2}              promoteId={src_monterrey_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (964:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_unbuilt"              type="geojson"              data={geojson_monterrey_unbuilt}              promoteId={src_monterrey_unbuilt.code}              maxzoom={13}            >
+    // (947:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_unbuilt"              type="geojson"              data={geojson_monterrey_unbuilt}              promoteId={src_monterrey_unbuilt.code}              maxzoom={13}            >
     function create_default_slot_19(ctx) {
     	let maplayer;
     	let current;
@@ -10416,14 +10416,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_19.name,
     		type: "slot",
-    		source: "(964:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_unbuilt\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_unbuilt}              promoteId={src_monterrey_unbuilt.code}              maxzoom={13}            >",
+    		source: "(947:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_unbuilt\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_unbuilt}              promoteId={src_monterrey_unbuilt.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (980:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l1ux"              type="geojson"              data={geojson_monterrey_l1ux}              promoteId={src_monterrey_l1ux.code}              maxzoom={13}            >
+    // (963:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l1ux"              type="geojson"              data={geojson_monterrey_l1ux}              promoteId={src_monterrey_l1ux.code}              maxzoom={13}            >
     function create_default_slot_18(ctx) {
     	let maplayer;
     	let current;
@@ -10469,14 +10469,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_18.name,
     		type: "slot",
-    		source: "(980:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l1ux\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l1ux}              promoteId={src_monterrey_l1ux.code}              maxzoom={13}            >",
+    		source: "(963:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l1ux\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l1ux}              promoteId={src_monterrey_l1ux.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (995:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l1ad"              type="geojson"              data={geojson_monterrey_l1ad}              promoteId={src_monterrey_l1ad.code}              maxzoom={13}            >
+    // (978:10) <MapSource              map_id="map_scrolly_1"              id="monterrey_l1ad"              type="geojson"              data={geojson_monterrey_l1ad}              promoteId={src_monterrey_l1ad.code}              maxzoom={13}            >
     function create_default_slot_17(ctx) {
     	let maplayer;
     	let current;
@@ -10522,14 +10522,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_17.name,
     		type: "slot",
-    		source: "(995:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l1ad\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l1ad}              promoteId={src_monterrey_l1ad.code}              maxzoom={13}            >",
+    		source: "(978:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"monterrey_l1ad\\\"              type=\\\"geojson\\\"              data={geojson_monterrey_l1ad}              promoteId={src_monterrey_l1ad.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1010:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l1ad"              type="geojson"              data={geojson_rio_cuarto_l1ad}              promoteId={src_rio_cuarto_l1ad.code}              maxzoom={13}            >
+    // (993:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l1ad"              type="geojson"              data={geojson_rio_cuarto_l1ad}              promoteId={src_rio_cuarto_l1ad.code}              maxzoom={13}            >
     function create_default_slot_16(ctx) {
     	let maplayer0;
     	let t;
@@ -10598,14 +10598,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_16.name,
     		type: "slot",
-    		source: "(1010:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l1ad\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l1ad}              promoteId={src_rio_cuarto_l1ad.code}              maxzoom={13}            >",
+    		source: "(993:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l1ad\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l1ad}              promoteId={src_rio_cuarto_l1ad.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1031:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l2"              type="geojson"              data={geojson_rio_cuarto_l2}              promoteId={src_rio_cuarto_l2.code}              maxzoom={13}            >
+    // (1014:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l2"              type="geojson"              data={geojson_rio_cuarto_l2}              promoteId={src_rio_cuarto_l2.code}              maxzoom={13}            >
     function create_default_slot_15(ctx) {
     	let maplayer;
     	let current;
@@ -10651,14 +10651,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_15.name,
     		type: "slot",
-    		source: "(1031:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l2\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l2}              promoteId={src_rio_cuarto_l2.code}              maxzoom={13}            >",
+    		source: "(1014:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l2\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l2}              promoteId={src_rio_cuarto_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1046:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l1ux"              type="geojson"              data={geojson_rio_cuarto_l1ux}              promoteId={src_rio_cuarto_l1ux.code}              maxzoom={13}            >
+    // (1029:10) <MapSource              map_id="map_scrolly_1"              id="rio_cuarto_l1ux"              type="geojson"              data={geojson_rio_cuarto_l1ux}              promoteId={src_rio_cuarto_l1ux.code}              maxzoom={13}            >
     function create_default_slot_14(ctx) {
     	let maplayer;
     	let current;
@@ -10704,14 +10704,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_14.name,
     		type: "slot",
-    		source: "(1046:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l1ux\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l1ux}              promoteId={src_rio_cuarto_l1ux.code}              maxzoom={13}            >",
+    		source: "(1029:10) <MapSource              map_id=\\\"map_scrolly_1\\\"              id=\\\"rio_cuarto_l1ux\\\"              type=\\\"geojson\\\"              data={geojson_rio_cuarto_l1ux}              promoteId={src_rio_cuarto_l1ux.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (833:8) <Map            id="map_scrolly_1"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            hover={true}            bind:hovered            bind:map={map_scrolly_1}            bind:zoom            bind:center          >
+    // (816:8) <Map            id="map_scrolly_1"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            hover={true}            bind:hovered            bind:map={map_scrolly_1}            bind:zoom            bind:center          >
     function create_default_slot_13(ctx) {
     	let mapsource0;
     	let t0;
@@ -11150,14 +11150,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_13.name,
     		type: "slot",
-    		source: "(833:8) <Map            id=\\\"map_scrolly_1\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            hover={true}            bind:hovered            bind:map={map_scrolly_1}            bind:zoom            bind:center          >",
+    		source: "(816:8) <Map            id=\\\"map_scrolly_1\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.southAmerica }}            controls={false}            scales={true}            hover={true}            bind:hovered            bind:map={map_scrolly_1}            bind:zoom            bind:center          >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (830:2) 
+    // (813:2) 
     function create_background_slot_1(ctx) {
     	let div1;
     	let figure;
@@ -11225,10 +11225,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			div0 = element("div");
     			create_component(map.$$.fragment);
     			attr_dev(div0, "class", "col-full height-full");
-    			add_location(div0, file$c, 831, 6, 23542);
-    			add_location(figure, file$c, 830, 4, 23526);
+    			add_location(div0, file$c, 814, 6, 23053);
+    			add_location(figure, file$c, 813, 4, 23037);
     			attr_dev(div1, "slot", "background");
-    			add_location(div1, file$c, 829, 2, 23497);
+    			add_location(div1, file$c, 812, 2, 23008);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -11289,14 +11289,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_background_slot_1.name,
     		type: "slot",
-    		source: "(830:2) ",
+    		source: "(813:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1066:2) 
+    // (1049:2) 
     function create_foreground_slot_1(ctx) {
     	let div7;
     	let section0;
@@ -11387,7 +11387,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			t3 = text("administrative units");
     			t4 = text("\r\n          (");
     			em = element("em");
-    			em.textContent = "municipios";
+    			em.textContent = "muncipalidade";
     			t6 = text(") in São Paulo, Brazil.");
     			t7 = space();
     			section2 = element("section");
@@ -11449,68 +11449,68 @@ uniform `+P+" "+z+" u_"+k+`;
     			span10 = element("span");
     			t38 = text("political boundaries or definitions");
     			t39 = text(" that\r\n          may be more familiar to public officials and local residents. Our boundaries\r\n          intentionally reflect urban agglomerations that often extend beyond city\r\n          cores. This is the case for São Paulo, Brazil.");
-    			add_location(p0, file$c, 1068, 8, 30341);
+    			add_location(p0, file$c, 1051, 8, 29852);
     			attr_dev(div0, "class", "col-medium");
-    			add_location(div0, file$c, 1067, 6, 30307);
+    			add_location(div0, file$c, 1050, 6, 29818);
     			attr_dev(section0, "data-id", "map01");
-    			add_location(section0, file$c, 1066, 4, 30274);
+    			add_location(section0, file$c, 1049, 4, 29785);
     			attr_dev(span0, "style", /*style_l2*/ ctx[47]);
-    			add_location(span0, file$c, 1074, 24, 30522);
-    			add_location(em, file$c, 1075, 11, 30585);
-    			add_location(p1, file$c, 1073, 8, 30493);
+    			add_location(span0, file$c, 1057, 24, 30033);
+    			add_location(em, file$c, 1058, 11, 30096);
+    			add_location(p1, file$c, 1056, 8, 30004);
     			attr_dev(div1, "class", "col-medium");
-    			add_location(div1, file$c, 1072, 6, 30459);
+    			add_location(div1, file$c, 1055, 6, 29970);
     			attr_dev(section1, "data-id", "map02");
-    			add_location(section1, file$c, 1071, 4, 30426);
+    			add_location(section1, file$c, 1054, 4, 29937);
     			attr_dev(span1, "style", /*style_ux*/ ctx[49]);
-    			add_location(span1, file$c, 1090, 72, 31060);
-    			add_location(p2, file$c, 1089, 8, 30983);
+    			add_location(span1, file$c, 1073, 72, 30574);
+    			add_location(p2, file$c, 1072, 8, 30497);
     			attr_dev(div2, "class", "col-medium");
-    			add_location(div2, file$c, 1088, 6, 30949);
+    			add_location(div2, file$c, 1071, 6, 30463);
     			attr_dev(section2, "data-id", "map04");
-    			add_location(section2, file$c, 1087, 4, 30916);
+    			add_location(section2, file$c, 1070, 4, 30430);
     			attr_dev(span2, "style", /*style_l2*/ ctx[47]);
-    			add_location(span2, file$c, 1102, 35, 31405);
+    			add_location(span2, file$c, 1085, 35, 30919);
     			attr_dev(span3, "style", /*style_l1*/ ctx[50]);
-    			add_location(span3, file$c, 1107, 10, 31522);
-    			add_location(p3, file$c, 1101, 8, 31365);
+    			add_location(span3, file$c, 1090, 10, 31036);
+    			add_location(p3, file$c, 1084, 8, 30879);
     			attr_dev(div3, "class", "col-medium");
-    			add_location(div3, file$c, 1100, 6, 31331);
+    			add_location(div3, file$c, 1083, 6, 30845);
     			attr_dev(section3, "data-id", "map05");
-    			add_location(section3, file$c, 1099, 4, 31298);
+    			add_location(section3, file$c, 1082, 4, 30812);
     			attr_dev(span4, "style", /*style_l2*/ ctx[47]);
-    			add_location(span4, file$c, 1114, 29, 31717);
+    			add_location(span4, file$c, 1097, 29, 31231);
     			attr_dev(span5, "style", /*style_l1*/ ctx[50]);
-    			add_location(span5, file$c, 1116, 10, 31829);
+    			add_location(span5, file$c, 1099, 10, 31343);
     			attr_dev(span6, "style", /*style_unurban*/ ctx[51]);
-    			add_location(span6, file$c, 1118, 10, 31927);
-    			add_location(p4, file$c, 1113, 8, 31683);
-    			add_location(p5, file$c, 1122, 8, 32185);
+    			add_location(span6, file$c, 1101, 10, 31441);
+    			add_location(p4, file$c, 1096, 8, 31197);
+    			add_location(p5, file$c, 1105, 8, 31699);
     			attr_dev(div4, "class", "col-medium");
-    			add_location(div4, file$c, 1112, 6, 31649);
+    			add_location(div4, file$c, 1095, 6, 31163);
     			attr_dev(section4, "data-id", "map06");
-    			add_location(section4, file$c, 1111, 4, 31616);
+    			add_location(section4, file$c, 1094, 4, 31130);
     			attr_dev(span7, "style", /*style_l1*/ ctx[50]);
-    			add_location(span7, file$c, 1132, 10, 32516);
+    			add_location(span7, file$c, 1115, 10, 32030);
     			attr_dev(span8, "style", /*style_l2*/ ctx[47]);
-    			add_location(span8, file$c, 1134, 10, 32601);
-    			add_location(p6, file$c, 1130, 8, 32420);
-    			add_location(p7, file$c, 1136, 8, 32676);
+    			add_location(span8, file$c, 1117, 10, 32115);
+    			add_location(p6, file$c, 1113, 8, 31934);
+    			add_location(p7, file$c, 1119, 8, 32190);
     			attr_dev(div5, "class", "col-medium");
-    			add_location(div5, file$c, 1129, 6, 32386);
+    			add_location(div5, file$c, 1112, 6, 31900);
     			attr_dev(section5, "data-id", "map07");
-    			add_location(section5, file$c, 1128, 4, 32353);
+    			add_location(section5, file$c, 1111, 4, 31867);
     			attr_dev(span9, "style", /*style_l1*/ ctx[50]);
-    			add_location(span9, file$c, 1145, 39, 32957);
+    			add_location(span9, file$c, 1128, 39, 32471);
     			attr_dev(span10, "style", /*style_metro*/ ctx[52]);
-    			add_location(span10, file$c, 1149, 10, 33073);
-    			add_location(p8, file$c, 1144, 8, 32913);
+    			add_location(span10, file$c, 1132, 10, 32587);
+    			add_location(p8, file$c, 1127, 8, 32427);
     			attr_dev(div6, "class", "col-medium");
-    			add_location(div6, file$c, 1143, 6, 32879);
+    			add_location(div6, file$c, 1126, 6, 32393);
     			attr_dev(section6, "data-id", "map08");
-    			add_location(section6, file$c, 1142, 4, 32846);
+    			add_location(section6, file$c, 1125, 4, 32360);
     			attr_dev(div7, "slot", "foreground");
-    			add_location(div7, file$c, 1065, 2, 30245);
+    			add_location(div7, file$c, 1048, 2, 29756);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div7, anchor);
@@ -11596,14 +11596,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_foreground_slot_1.name,
     		type: "slot",
-    		source: "(1066:2) ",
+    		source: "(1049:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1160:0) <Section>
+    // (1143:0) <Section>
     function create_default_slot_12(ctx) {
     	let h3;
     	let t1;
@@ -11643,20 +11643,20 @@ uniform `+P+" "+z+" u_"+k+`;
     			t9 = space();
     			div = element("div");
     			create_component(arrow.$$.fragment);
-    			add_location(h3, file$c, 1160, 2, 33460);
+    			add_location(h3, file$c, 1143, 2, 32974);
     			attr_dev(p0, "class", "text-medium");
-    			add_location(p0, file$c, 1163, 2, 33557);
+    			add_location(p0, file$c, 1146, 2, 33071);
     			attr_dev(p1, "class", "text-medium");
-    			add_location(p1, file$c, 1168, 2, 33765);
+    			add_location(p1, file$c, 1151, 2, 33279);
     			attr_dev(p2, "class", "text-medium");
-    			add_location(p2, file$c, 1175, 2, 34134);
+    			add_location(p2, file$c, 1158, 2, 33648);
     			attr_dev(p3, "class", "text-medium");
-    			add_location(p3, file$c, 1181, 2, 34465);
+    			add_location(p3, file$c, 1164, 2, 33979);
     			set_style(div, "display", "flex");
     			set_style(div, "justify-content", "center");
     			set_style(div, "align-items", "center");
     			set_style(div, "margin-top", "1rem");
-    			add_location(div, file$c, 1185, 2, 34604);
+    			add_location(div, file$c, 1168, 2, 34118);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h3, anchor);
@@ -11703,14 +11703,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_12.name,
     		type: "slot",
-    		source: "(1160:0) <Section>",
+    		source: "(1143:0) <Section>",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1212:10) <MapSource              map_id="map_scrolly_2"              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
+    // (1195:10) <MapSource              map_id="map_scrolly_2"              id="municipio_centroid"              type="geojson"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >
     function create_default_slot_11(ctx) {
     	let maplayer;
     	let current;
@@ -11756,14 +11756,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_11.name,
     		type: "slot",
-    		source: "(1212:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
+    		source: "(1195:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"municipio_centroid\\\"              type=\\\"geojson\\\"              data={geojson_municipio_centroid}              promoteId={'municipio_centroid'}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1227:10) <MapSource              map_id="map_scrolly_2"              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
+    // (1210:10) <MapSource              map_id="map_scrolly_2"              id="municipio"              type="geojson"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >
     function create_default_slot_10(ctx) {
     	let maplayer;
     	let current;
@@ -11809,14 +11809,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_10.name,
     		type: "slot",
-    		source: "(1227:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
+    		source: "(1210:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"municipio\\\"              type=\\\"geojson\\\"              data={geojson_municipio}              promoteId={src_municipio.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1242:10) <MapSource              map_id="map_scrolly_2"              id="l3"              type="geojson"              data={geojson_l3}              promoteId={src_l3.code}              maxzoom={13}            >
+    // (1225:10) <MapSource              map_id="map_scrolly_2"              id="l3"              type="geojson"              data={geojson_l3}              promoteId={src_l3.code}              maxzoom={13}            >
     function create_default_slot_9(ctx) {
     	let maplayer;
     	let current;
@@ -11862,14 +11862,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_9.name,
     		type: "slot",
-    		source: "(1242:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l3\\\"              type=\\\"geojson\\\"              data={geojson_l3}              promoteId={src_l3.code}              maxzoom={13}            >",
+    		source: "(1225:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l3\\\"              type=\\\"geojson\\\"              data={geojson_l3}              promoteId={src_l3.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1257:10) <MapSource              map_id="map_scrolly_2"              id="l25"              type="geojson"              data={geojson_l25}              promoteId={src_l25.code}              maxzoom={13}            >
+    // (1240:10) <MapSource              map_id="map_scrolly_2"              id="l25"              type="geojson"              data={geojson_l25}              promoteId={src_l25.code}              maxzoom={13}            >
     function create_default_slot_8(ctx) {
     	let maplayer;
     	let current;
@@ -11915,14 +11915,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_8.name,
     		type: "slot",
-    		source: "(1257:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l25\\\"              type=\\\"geojson\\\"              data={geojson_l25}              promoteId={src_l25.code}              maxzoom={13}            >",
+    		source: "(1240:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l25\\\"              type=\\\"geojson\\\"              data={geojson_l25}              promoteId={src_l25.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1272:10) <MapSource              map_id="map_scrolly_2"              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
+    // (1255:10) <MapSource              map_id="map_scrolly_2"              id="l2"              type="geojson"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >
     function create_default_slot_7(ctx) {
     	let maplayer0;
     	let t;
@@ -11991,14 +11991,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_7.name,
     		type: "slot",
-    		source: "(1272:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
+    		source: "(1255:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l2\\\"              type=\\\"geojson\\\"              data={geojson_l2}              promoteId={src_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1293:10) <MapSource              map_id="map_scrolly_2"              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
+    // (1276:10) <MapSource              map_id="map_scrolly_2"              id="l1ux"              type="geojson"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >
     function create_default_slot_6(ctx) {
     	let maplayer;
     	let current;
@@ -12044,14 +12044,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_6.name,
     		type: "slot",
-    		source: "(1293:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
+    		source: "(1276:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l1ux\\\"              type=\\\"geojson\\\"              data={geojson_l1ux}              promoteId={src_l1ux.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1308:10) <MapSource              map_id="map_scrolly_2"              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
+    // (1291:10) <MapSource              map_id="map_scrolly_2"              id="l1ad"              type="geojson"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >
     function create_default_slot_5(ctx) {
     	let maplayer0;
     	let t;
@@ -12120,14 +12120,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_5.name,
     		type: "slot",
-    		source: "(1308:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
+    		source: "(1291:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"l1ad\\\"              type=\\\"geojson\\\"              data={geojson_l1ad}              promoteId={src_l1ad.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1329:10) <MapSource              map_id="map_scrolly_2"              id="ex_l3"              type="geojson"              data={geojson_ex_l3}              promoteId={src_ex_l3.code}              maxzoom={13}            >
+    // (1312:10) <MapSource              map_id="map_scrolly_2"              id="ex_l3"              type="geojson"              data={geojson_ex_l3}              promoteId={src_ex_l3.code}              maxzoom={13}            >
     function create_default_slot_4(ctx) {
     	let maplayer;
     	let current;
@@ -12173,14 +12173,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_4.name,
     		type: "slot",
-    		source: "(1329:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l3\\\"              type=\\\"geojson\\\"              data={geojson_ex_l3}              promoteId={src_ex_l3.code}              maxzoom={13}            >",
+    		source: "(1312:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l3\\\"              type=\\\"geojson\\\"              data={geojson_ex_l3}              promoteId={src_ex_l3.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1344:10) <MapSource              map_id="map_scrolly_2"              id="ex_l25"              type="geojson"              data={geojson_ex_l25}              promoteId={src_ex_l25.code}              maxzoom={13}            >
+    // (1327:10) <MapSource              map_id="map_scrolly_2"              id="ex_l25"              type="geojson"              data={geojson_ex_l25}              promoteId={src_ex_l25.code}              maxzoom={13}            >
     function create_default_slot_3(ctx) {
     	let maplayer;
     	let current;
@@ -12226,14 +12226,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_3.name,
     		type: "slot",
-    		source: "(1344:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l25\\\"              type=\\\"geojson\\\"              data={geojson_ex_l25}              promoteId={src_ex_l25.code}              maxzoom={13}            >",
+    		source: "(1327:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l25\\\"              type=\\\"geojson\\\"              data={geojson_ex_l25}              promoteId={src_ex_l25.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1359:10) <MapSource              map_id="map_scrolly_2"              id="ex_l2"              type="geojson"              data={geojson_ex_l2}              promoteId={src_ex_l2.code}              maxzoom={13}            >
+    // (1342:10) <MapSource              map_id="map_scrolly_2"              id="ex_l2"              type="geojson"              data={geojson_ex_l2}              promoteId={src_ex_l2.code}              maxzoom={13}            >
     function create_default_slot_2(ctx) {
     	let maplayer;
     	let current;
@@ -12279,14 +12279,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_2.name,
     		type: "slot",
-    		source: "(1359:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l2\\\"              type=\\\"geojson\\\"              data={geojson_ex_l2}              promoteId={src_ex_l2.code}              maxzoom={13}            >",
+    		source: "(1342:10) <MapSource              map_id=\\\"map_scrolly_2\\\"              id=\\\"ex_l2\\\"              type=\\\"geojson\\\"              data={geojson_ex_l2}              promoteId={src_ex_l2.code}              maxzoom={13}            >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1202:8) <Map            id="map_scrolly_2"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.l1ad }}            controls={false}            scales={true}            bind:map={map_scrolly_2}            bind:zoom            bind:center          >
+    // (1185:8) <Map            id="map_scrolly_2"            style="./data/style-esri-world-imagery.json"            location={{ bounds: bounds.l1ad }}            controls={false}            scales={true}            bind:map={map_scrolly_2}            bind:zoom            bind:center          >
     function create_default_slot_1(ctx) {
     	let mapsource0;
     	let t0;
@@ -12629,14 +12629,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot_1.name,
     		type: "slot",
-    		source: "(1202:8) <Map            id=\\\"map_scrolly_2\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.l1ad }}            controls={false}            scales={true}            bind:map={map_scrolly_2}            bind:zoom            bind:center          >",
+    		source: "(1185:8) <Map            id=\\\"map_scrolly_2\\\"            style=\\\"./data/style-esri-world-imagery.json\\\"            location={{ bounds: bounds.l1ad }}            controls={false}            scales={true}            bind:map={map_scrolly_2}            bind:zoom            bind:center          >",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1199:2) 
+    // (1182:2) 
     function create_background_slot(ctx) {
     	let div1;
     	let figure;
@@ -12693,10 +12693,10 @@ uniform `+P+" "+z+" u_"+k+`;
     			div0 = element("div");
     			create_component(map.$$.fragment);
     			attr_dev(div0, "class", "col-full height-full");
-    			add_location(div0, file$c, 1200, 6, 35058);
-    			add_location(figure, file$c, 1199, 4, 35042);
+    			add_location(div0, file$c, 1183, 6, 34572);
+    			add_location(figure, file$c, 1182, 4, 34556);
     			attr_dev(div1, "slot", "background");
-    			add_location(div1, file$c, 1198, 2, 35013);
+    			add_location(div1, file$c, 1181, 2, 34527);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
@@ -12751,14 +12751,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_background_slot.name,
     		type: "slot",
-    		source: "(1199:2) ",
+    		source: "(1182:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1379:2) 
+    // (1362:2) 
     function create_foreground_slot(ctx) {
     	let div6;
     	let section0;
@@ -12848,8 +12848,8 @@ uniform `+P+" "+z+" u_"+k+`;
     			t3 = text("Level 1");
     			t4 = text(" for São Paulo\r\n          encompasses all administrative units or\r\n          ");
     			em0 = element("em");
-    			em0.textContent = "municipios";
-    			t6 = text(" that have any overlap with the visually apparent built-up\r\n          urban area in and around the core city of São Paulo.");
+    			em0.textContent = "muncipalidade";
+    			t6 = text(" that have any overlap with the visually apparent\r\n          built-up urban area in and around the core city of São Paulo.");
     			t7 = space();
     			section1 = element("section");
     			div1 = element("div");
@@ -12862,7 +12862,7 @@ uniform `+P+" "+z+" u_"+k+`;
     			t11 = text("(São Paulo L1)");
     			t12 = text(", we defined sub-city units as each of the\r\n          ");
     			em1 = element("em");
-    			em1.textContent = "municipios";
+    			em1.textContent = "muncipalidade";
     			t14 = text(" that compose the São Paulo urban agglomeration.\r\n          These are\r\n          ");
     			span2 = element("span");
     			t15 = text("L2s");
@@ -12898,9 +12898,9 @@ uniform `+P+" "+z+" u_"+k+`;
     			t31 = text("These ");
     			span5 = element("span");
     			t32 = text("L3 units");
-    			t33 = text(" were too small to\r\n          support meaningful neighborhood-level analysis. To address this issue,\r\n          we identified the larger geographic units used by Brazil's census\r\n          agency. We labeled these units\r\n          ");
+    			t33 = text(" were too small to\r\n          support meaningful neighborhood-level analysis. To address this issue,\r\n          we used larger Brazil census geographic units and labeled them\r\n          ");
     			span6 = element("span");
-    			t34 = text("L2.5's'");
+    			t34 = text("L2.5's");
     			t35 = text(".");
     			t36 = space();
     			section5 = element("section");
@@ -12916,65 +12916,65 @@ uniform `+P+" "+z+" u_"+k+`;
     			span9 = element("span");
     			t42 = text("L1 city unit");
     			t43 = text(".");
-    			add_location(strong0, file$c, 1381, 8, 40016);
+    			add_location(strong0, file$c, 1364, 8, 39530);
     			attr_dev(span0, "style", /*style_l1*/ ctx[50]);
-    			add_location(span0, file$c, 1383, 23, 40088);
-    			add_location(em0, file$c, 1385, 10, 40202);
-    			add_location(p0, file$c, 1382, 8, 40060);
+    			add_location(span0, file$c, 1366, 23, 39602);
+    			add_location(em0, file$c, 1368, 10, 39716);
+    			add_location(p0, file$c, 1365, 8, 39574);
     			attr_dev(div0, "class", "col-medium");
-    			add_location(div0, file$c, 1380, 6, 39982);
+    			add_location(div0, file$c, 1363, 6, 39496);
     			attr_dev(section0, "data-id", "map01");
-    			add_location(section0, file$c, 1379, 4, 39949);
-    			add_location(strong1, file$c, 1392, 8, 40460);
+    			add_location(section0, file$c, 1362, 4, 39463);
+    			add_location(strong1, file$c, 1375, 8, 39977);
     			attr_dev(span1, "style", /*style_l1*/ ctx[50]);
-    			add_location(span1, file$c, 1394, 45, 40558);
-    			add_location(em1, file$c, 1397, 10, 40682);
+    			add_location(span1, file$c, 1377, 45, 40075);
+    			add_location(em1, file$c, 1380, 10, 40199);
     			attr_dev(span2, "style", /*style_l2*/ ctx[47]);
-    			add_location(span2, file$c, 1399, 10, 40783);
-    			add_location(p1, file$c, 1393, 8, 40508);
+    			add_location(span2, file$c, 1382, 10, 40302);
+    			add_location(p1, file$c, 1376, 8, 40025);
     			attr_dev(div1, "class", "col-medium");
-    			add_location(div1, file$c, 1391, 6, 40426);
+    			add_location(div1, file$c, 1374, 6, 39943);
     			attr_dev(section1, "data-id", "map02");
-    			add_location(section1, file$c, 1390, 4, 40393);
-    			add_location(strong2, file$c, 1405, 8, 40934);
+    			add_location(section1, file$c, 1373, 4, 39910);
+    			add_location(strong2, file$c, 1388, 8, 40453);
     			attr_dev(span3, "style", /*style_l3*/ ctx[46]);
-    			add_location(span3, file$c, 1407, 10, 41000);
-    			add_location(p2, file$c, 1406, 8, 40985);
+    			add_location(span3, file$c, 1390, 10, 40519);
+    			add_location(p2, file$c, 1389, 8, 40504);
     			attr_dev(div2, "class", "col-medium");
-    			add_location(div2, file$c, 1404, 6, 40900);
+    			add_location(div2, file$c, 1387, 6, 40419);
     			attr_dev(section2, "data-id", "map03");
-    			add_location(section2, file$c, 1403, 4, 40867);
-    			add_location(strong3, file$c, 1414, 8, 41278);
+    			add_location(section2, file$c, 1386, 4, 40386);
+    			add_location(strong3, file$c, 1397, 8, 40797);
     			attr_dev(span4, "style", /*style_l3*/ ctx[46]);
-    			add_location(span4, file$c, 1416, 30, 41364);
-    			add_location(em2, file$c, 1418, 10, 41476);
-    			add_location(p3, file$c, 1415, 8, 41329);
+    			add_location(span4, file$c, 1399, 30, 40883);
+    			add_location(em2, file$c, 1401, 10, 40995);
+    			add_location(p3, file$c, 1398, 8, 40848);
     			attr_dev(div3, "class", "col-medium");
-    			add_location(div3, file$c, 1413, 6, 41244);
+    			add_location(div3, file$c, 1396, 6, 40763);
     			attr_dev(section3, "data-id", "map04");
-    			add_location(section3, file$c, 1412, 4, 41211);
+    			add_location(section3, file$c, 1395, 4, 40730);
     			attr_dev(span5, "style", /*style_l3*/ ctx[46]);
-    			add_location(span5, file$c, 1425, 16, 41640);
+    			add_location(span5, file$c, 1408, 16, 41159);
     			attr_dev(span6, "style", /*style_l25*/ ctx[48]);
-    			add_location(span6, file$c, 1429, 10, 41910);
-    			add_location(p4, file$c, 1424, 8, 41619);
+    			add_location(span6, file$c, 1411, 10, 41384);
+    			add_location(p4, file$c, 1407, 8, 41138);
     			attr_dev(div4, "class", "col-medium");
-    			add_location(div4, file$c, 1423, 6, 41585);
+    			add_location(div4, file$c, 1406, 6, 41104);
     			attr_dev(section4, "data-id", "map05");
-    			add_location(section4, file$c, 1422, 4, 41552);
+    			add_location(section4, file$c, 1405, 4, 41071);
     			attr_dev(span7, "style", /*style_l25*/ ctx[48]);
-    			add_location(span7, file$c, 1437, 26, 42178);
+    			add_location(span7, file$c, 1419, 26, 41651);
     			attr_dev(span8, "style", /*style_l2*/ ctx[47]);
-    			add_location(span8, file$c, 1439, 23, 42270);
+    			add_location(span8, file$c, 1421, 23, 41743);
     			attr_dev(span9, "style", /*style_l1*/ ctx[50]);
-    			add_location(span9, file$c, 1440, 19, 42347);
-    			add_location(p5, file$c, 1435, 8, 42067);
+    			add_location(span9, file$c, 1422, 19, 41820);
+    			add_location(p5, file$c, 1417, 8, 41540);
     			attr_dev(div5, "class", "col-medium");
-    			add_location(div5, file$c, 1434, 6, 42033);
+    			add_location(div5, file$c, 1416, 6, 41506);
     			attr_dev(section5, "data-id", "map06");
-    			add_location(section5, file$c, 1433, 4, 42000);
+    			add_location(section5, file$c, 1415, 4, 41473);
     			attr_dev(div6, "slot", "foreground");
-    			add_location(div6, file$c, 1378, 2, 39920);
+    			add_location(div6, file$c, 1361, 2, 39434);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div6, anchor);
@@ -13061,14 +13061,14 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_foreground_slot.name,
     		type: "slot",
-    		source: "(1379:2) ",
+    		source: "(1362:2) ",
     		ctx
     	});
 
     	return block;
     }
 
-    // (1450:0) <Section>
+    // (1432:0) <Section>
     function create_default_slot(ctx) {
     	let h2;
     	let t1;
@@ -13108,22 +13108,22 @@ uniform `+P+" "+z+" u_"+k+`;
     			a2 = element("a");
     			a2.textContent = "SALURBAL data portal";
     			t12 = text(".");
-    			add_location(h2, file$c, 1450, 2, 42490);
+    			add_location(h2, file$c, 1432, 2, 41963);
     			attr_dev(p0, "class", "text-medium");
-    			add_location(p0, file$c, 1451, 2, 42550);
+    			add_location(p0, file$c, 1433, 2, 42023);
     			attr_dev(a0, "href", "https://link.springer.com/article/10.1007/s11524-018-00326-0");
     			attr_dev(a0, "target", "_blank");
-    			add_location(a0, file$c, 1459, 27, 42988);
+    			add_location(a0, file$c, 1441, 27, 42461);
     			attr_dev(p1, "class", "text-medium");
-    			add_location(p1, file$c, 1457, 2, 42857);
+    			add_location(p1, file$c, 1439, 2, 42330);
     			attr_dev(a1, "href", "https://data.lacurbanhealth.org/");
     			attr_dev(a1, "target", "_blank");
-    			add_location(a1, file$c, 1466, 4, 43232);
+    			add_location(a1, file$c, 1448, 4, 42705);
     			attr_dev(a2, "href", "https://data.lacurbanhealth.org/");
     			attr_dev(a2, "target", "_blank");
-    			add_location(a2, file$c, 1470, 4, 43350);
+    			add_location(a2, file$c, 1452, 4, 42823);
     			attr_dev(p2, "class", "text-medium");
-    			add_location(p2, file$c, 1464, 2, 43135);
+    			add_location(p2, file$c, 1446, 2, 42608);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h2, anchor);
@@ -13157,7 +13157,7 @@ uniform `+P+" "+z+" u_"+k+`;
     		block,
     		id: create_default_slot.name,
     		type: "slot",
-    		source: "(1450:0) <Section>",
+    		source: "(1432:0) <Section>",
     		ctx
     	});
 
@@ -13330,9 +13330,9 @@ uniform `+P+" "+z+" u_"+k+`;
     			t12 = space();
     			create_component(uhcfooter.$$.fragment);
     			set_style(div0, "height", "3rem");
-    			add_location(div0, file$c, 822, 0, 23253);
+    			add_location(div0, file$c, 805, 0, 22764);
     			set_style(div1, "height", "3rem");
-    			add_location(div1, file$c, 1196, 0, 34908);
+    			add_location(div1, file$c, 1179, 0, 34422);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -13907,23 +13907,6 @@ uniform `+P+" "+z+" u_"+k+`;
     					}
     				});
     			},
-    			// map03: () => {
-    			//   fitBounds(map_scrolly_1, bounds.l1ad);
-    			//   custom_1 = {
-    			//     mapid: 'map03',
-    			//     layers: {
-    			//       l1ux: {
-    			//         'line-color': hex_warning,
-    			//         'line-width': 8,
-    			//       },
-    			//       l2_line: {
-    			//         'line-color': hex_primary,
-    			//         'line-width': 2,
-    			//         'line-opacity': 0.75,
-    			//       },
-    			//     },
-    			//   };
-    			// },
     			map04: () => {
     				fitBounds(map_scrolly_1, bounds.l1ad);
 

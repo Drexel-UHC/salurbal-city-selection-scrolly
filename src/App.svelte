@@ -1082,7 +1082,7 @@
       <div class="col-medium">
         <p>
           These are the <span style={style_l2}>administrative units</span>
-          (<em>muncipalidade</em>) in São Paulo, Brazil.
+          (<em>municípios</em>) in São Paulo, Brazil.
         </p>
       </div>
     </section>
@@ -1409,8 +1409,8 @@
         <p>
           The SALURBAL <span style={style_l1}>Level 1</span> for São Paulo
           encompasses all administrative units or
-          <em>muncipalidades</em> that have any overlap with the visually apparent
-          built-up urban area in and around the core city of São Paulo.
+          <em>municípios</em> that have any overlap with the visually apparent built-up
+          urban area in and around the core city of São Paulo.
         </p>
       </div>
     </section>
@@ -1421,8 +1421,8 @@
           Within the São Paulo SALURBAL city <span style={style_l1}
             >(São Paulo L1)</span
           >, we defined sub-city units as each of the
-          <em>muncipalidades</em> that compose the São Paulo urban
-          agglomeration. These are the
+          <em>municípios</em> that compose the São Paulo urban agglomeration.
+          These are the
           <span style={style_l2}>L2s</span>.
         </p>
       </div>
